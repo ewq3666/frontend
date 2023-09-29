@@ -1,0 +1,51 @@
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #0070f3, #0000a0);
+  }
+  
+  .registration-box {
+    background: rgba(255, 255, 255, 0.8);
+    width: 400px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    h1 {
+      margin-bottom: 20px;
+    }
+    form {
+      input {
+        margin-bottom: 15px;
+      }
+    }
+    a {
+      color: #0070f3;
+    }
+  }
+
+  .input-icon {
+    font-size: 16px; // Set the icon size as needed
+    margin-right: 8px; // Adjust the spacing between the icon and input
+    color: #c1c1c1; // Set the initial color for the icon (matching the placeholder)
+  
+    // Style the input to match the placeholder color and change it when text is entered
+    input {
+      color: #000; // Set the text color when text is entered
+    }
+  
+    // Style the icon when the input is focused (clicked)
+    input:focus + & {
+      color: #000; // Set the focused color for the icon
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .registration-box {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+  

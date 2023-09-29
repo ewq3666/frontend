@@ -1,9 +1,11 @@
 import './App.css';
+import { Router } from "./Routers/Router";
 
 function App() {
   return (
     <div>
-      welcome
+      <Router />
+      <>{console.log("www",window.location)}</>
     </div>
   );
 }

@@ -18,7 +18,7 @@ const Protected = (props) => {
         // else {
             navigate("/login")
         // }
-    }, [currentUser])
+    }, [])
     useEffect(() => {
         let token = getCookie('token')
         if (!token) {
