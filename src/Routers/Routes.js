@@ -17,18 +17,10 @@ export const routes = [
         childRoutes: [
             {
                 index: true,
-                element: <Home />,
-                // element:<Protected Component={Home} />,
+                // element: <Home />,
+                element:<Protected Component={Home} />,
             },
-            {
-                path: "login",
-                element: <Login />
-            },
-            {
-                path: "signup",
-                element: <Signup />
-
-            },
+            
             {
                 path: "forgotpassword",
                 element: <ForgotPassword />
@@ -38,10 +30,6 @@ export const routes = [
                 path: "myprofile",
                 element: <Protected Component={MyProfile} />
 
-            },
-            {
-                path: "setting",
-                element: <Protected Component={Setting} />
             },
             {
                 path: "editprofile",
@@ -60,5 +48,19 @@ export const routes = [
     {
         path: "*",
         element: <PageNotFound />
-    }
+    },
+    {
+        path: "setting",
+        // element: <Protected Component={Setting} />
+        element: <Setting />
+    },
+    {
+        path: "login",
+        element: <Login />
+    },
+    {
+        path: "signup",
+        element: <Signup />
+
+    },
 ]

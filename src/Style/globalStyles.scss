@@ -4,3 +4,12 @@
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
 }
+
+.ant-form-item-explain-error {
+    color: #ff4d4f;
+    text-align: left;
+    color: var(--is-danger-color);
+    font-weight: 400;
+    margin-left: 4px;
+    font-size: 14px;
+}

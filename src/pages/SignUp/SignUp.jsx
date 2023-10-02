@@ -1,18 +1,47 @@
-import React from 'react';
-import { Form, Input, Button, Row, Col } from 'antd';
+import React, { useState } from 'react';
+import axios from "axios";
+import { Form, Input, Button, Row, Col, notification } from 'antd';
 import { UserOutlined, MailOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
-import './styles.scss'; // Your SCSS file
+import { NavLink } from 'react-router-dom';
+import { END_POINTS } from '../../api/domain';
+import { useNavigate } from 'react-router-dom';
+import './styles.scss';
 
 const SignUp = () => {
-  const onFinish = (values) => {
+  const navigate = useNavigate();
+  const [isBtnLoading, setIsBtnLoading] = useState(false);
+
+  const onFinish = async (values) => {
     console.log('Received values:', values);
+    setIsBtnLoading(true);
+    try {
+      let res = await axios.post(END_POINTS.signup, values)
+      console.log(res.data);
+      if (res) {
+        notification.open({
+          message: res.data.message
+        })
+        setIsBtnLoading(false);
+        navigate('/login');
+      }
+    } catch (error) {
+      console.log(error.response.data);
+      if (error.response.data.msg) {
+        notification.error({ message: error.response.data.msg })
+        setIsBtnLoading(false);
+      }
+      else {
+        notification.error({ message: "something went wrong" })
+        setIsBtnLoading(false);
+      }
+    }
   };
 
   return (
     <div className="registration-container">
       <div className="registration-box">
-        <h1>Registration</h1>
-        <Form name="registration-form" onFinish={onFinish}>
+        <h1>Sign Up</h1>
+        <Form name="registration-form" onFinish={onFinish} className='Signup-form-wrapper'>
           <Row gutter={16}>
             <Col xs={24} sm={24} md={12}>
               <Form.Item
@@ -131,11 +160,14 @@ const SignUp = () => {
           </Row>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
-              Register
+            <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={isBtnLoading}>
+              Sign-Up
             </Button>
           </Form.Item>
         </Form>
+        <div className="signup-option">
+          <h3>You have an account ? <NavLink to="/login">Login Now!</NavLink></h3>
+        </div>
       </div>
     </div>
   );

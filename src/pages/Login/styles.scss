@@ -3,33 +3,89 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to bottom, #0070f3, #0000a0);
-  }
-  
-  .login-box {
-    background: rgba(255, 255, 255, 0.8);
-    width: 300px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    h1 {
-      margin-bottom: 20px;
-    }
-    form {
-      input {
-        margin-bottom: 15px;
+    background: var(--is-blue-gradient);
+
+    .login-box {
+      background: var(--is-primary-background-color);
+      width: 350px;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      h1 {
+        margin: 16px 0px 32px 0px;
       }
-    }
-    a {
-      color: #0070f3;
+      form {
+        input {
+          margin-bottom: 15px;
+        }
+      }
+      .login-form-wrapper {
+        .ant-form-item {
+          margin-bottom: 32px !important;
+          input {
+            margin-bottom: 0px !important;
+            padding: 7px 10px;
+          }
+          .ant-input-password {
+            input {
+              padding: 3px 0px !important;
+            }
+          }
+        }
+        button {
+          height: 36px !important;
+          background: var(--is-theme-color);
+          width: 100%;
+          span {
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--is-quaternary-text-color);
+          }
+        }
+      }
+      .forgot-password-option {
+        font-weight: 500;
+        color: var(--is-theme-color);
+        font-size: 14px;
+        text-align: right;
+        margin-top: -16px;
+        margin-bottom: 16px;
+      }
+      .signup-option {
+        h3 {
+          font-size: 14px;
+          color: var(--is-dark-black-color);
+          font-weight: 500;
+          a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--is-theme-color);
+          }
+        }
+      }
     }
   }
   
   @media (max-width: 768px) {
-    .login-box {
-      width: 100%;
-      padding: 10px;
+    .login-container {
+      .login-box {
+        width: 100%;
+        padding: 0px 16px;
+        height: 100%;
+        border-radius: 0px;
+        .login-form-wrapper {
+          margin-top: 100px;
+        }
+      }
+      .signup-option {
+        position: absolute;
+        bottom: 42px;
+        width: 90%;
+        h3 {
+          text-align: center;
+        }
+      }
     }
   }
   

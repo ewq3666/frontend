@@ -1,7 +1,7 @@
 :root {
     --is-theme-color: #0052FF;
   
-    --is-primary-background-color: #fafafa;;
+    --is-primary-background-color: rgba(255, 255, 255, 0.8);
     --is-secondary-background-color: #000000;
     --is-tertiary-background-color: rgba(255, 255, 255, 0.1);
     --is-quaternary-background-color: #ffffff;
@@ -21,4 +21,6 @@
     --is-red-color: #FF133D;
 
     --is-overlay: rgba(38, 31, 31, 0.8);
+
+    --is-blue-gradient: linear-gradient(to bottom, #0070f3, #0000a0);
 }
