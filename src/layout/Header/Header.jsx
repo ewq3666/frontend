@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Drawer, Menu } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
-import { FaRupeeSign } from "react-icons/fa";
+import { FaRupeeSign, FaUser } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
 import { IoMdClose, IoIosSettings, IoLogoGameControllerB, IoIosLogOut } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import logo from "../../assets/images/WhatsApp Image 2023-10-02 at 9.14.09 PM (1).jpeg";
 import "./styles.scss";
 
 const Header = () => {
@@ -43,7 +44,7 @@ const Header = () => {
                 </div>
             </div>
             <Drawer
-                title={<div className='menu-title'><div>Menu</div> <IoMdClose onClick={()=>setVisible(false)}/></div>}
+                title={<div className='menu-title'><div className='menu-logo'><img src={logo} alt="" /></div> <IoMdClose onClick={()=>setVisible(false)}/></div>}
                 placement="right"
                 // width={700}
                 onClose={()=>setVisible(false)}
@@ -53,6 +54,10 @@ const Header = () => {
             >  
                 <div className="drawer-content">
                 <Menu mode="vertical" theme="dark" onClick={onClick}>
+                    <Menu.Item key="myprofile">
+                        <span><FaUser/> My Profile</span>
+                        <span><AiOutlineRight/></span>
+                    </Menu.Item>
                     <Menu.Item key="setting">
                         <span><IoIosSettings/> Setting</span>
                         <span><AiOutlineRight/></span>

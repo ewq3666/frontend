@@ -13,3 +13,50 @@
     margin-left: 4px;
     font-size: 14px;
 }
+
+.common-input {
+    .ant-input-affix-wrapper {
+        height: 42px;
+        background: rgba(5, 5, 5, 0.06);
+        border-radius: 32px;
+        .ant-input-prefix {
+            svg {
+                color: var(--is-black-color);
+            }
+        }
+        input {
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            padding-left: 12px;
+        }
+    }
+}
+
+.button-box {
+    display: flex;
+    // justify-content: flex-end;
+    justify-content: center;
+    .common-blue-button {
+        background: var(--is-blue-gradient);
+        border-radius: 36px;
+        height: 42px;
+        width: 200px;
+        box-shadow: 5px 6px 16px rgba(52, 152, 219, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            color: var(--is-quaternary-text-color);
+            font-size: 16px;
+            font-weight: 700;
+            margin-right: 8px;
+            margin-top: -3px;
+        }
+        span {
+            color: var(--is-quaternary-text-color);
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+        }
+    }
+}

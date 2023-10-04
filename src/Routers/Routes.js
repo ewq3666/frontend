@@ -9,6 +9,7 @@ import PageNotFound from "../Components/PageNotFound/PageNotFound";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Layout from "../layout/Layout";
 import Protected from "./Protected";
+import Transaction from "../pages/Transaction/Transaction";
 
 export const routes = [
     {
@@ -21,38 +22,18 @@ export const routes = [
                 element:<Protected Component={Home} />,
             },
             
-            {
-                path: "forgotpassword",
-                element: <ForgotPassword />
+            // {
+            //     path: "forgotpassword",
+            //     element: <ForgotPassword />
 
-            },
+            // },
             {
                 path: "myprofile",
                 element: <Protected Component={MyProfile} />
 
             },
-            {
-                path: "editprofile",
-                // element: <Protected Component={EditProfile} />
-                element: <EditProfile />
-
-            },
-            {
-                path: "change-password",
-                // element: <Protected Component={ChangePassword} />
-                element: <ChangePassword />
-            },
 
         ]
-    },
-    {
-        path: "*",
-        element: <PageNotFound />
-    },
-    {
-        path: "setting",
-        // element: <Protected Component={Setting} />
-        element: <Setting />
     },
     {
         path: "login",
@@ -61,6 +42,28 @@ export const routes = [
     {
         path: "signup",
         element: <Signup />
+        
+    },
+    {
+        path: "transaction",
+        element: <Protected Component={Transaction} />
+    },
+    {
+        path: "setting",
+        element: <Protected Component={Setting} />
+    },
+    
+    {
+        path: "editprofile",
+        element: <Protected Component={EditProfile} />
 
+    },
+    {
+        path: "change-password",
+        element: <Protected Component={ChangePassword} />
+    },
+    {
+        path: "*",
+        element: <PageNotFound />
     },
 ]
