@@ -1,0 +1,38 @@
+.setting-container {
+    padding: 0px 8px 0px 16px;
+    .setting-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        font-size: 22px;
+        font-weight: 700;
+        svg {
+            color: var(--is-red-color);
+        }
+    }
+    .drawer-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        text-align: center;
+        .ant-menu {
+            background-color: transparent;
+        }
+        .ant-menu-item  {
+            border-radius: 0px;
+            background: aliceblue;
+            margin: 5px 0px;
+            padding: 0px;
+            span {
+                color: var(--is-theme-color);
+                font-size: 16px;
+                font-weight: 700;
+                display: flex;
+                align-items: center ;
+                justify-content: space-between ;
+                padding: 0px 12px;
+            }
+        }
+    }
+}

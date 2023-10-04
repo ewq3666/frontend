@@ -7,24 +7,13 @@ import { getCookie } from "../Helper/Cookie"
 
 const Protected = (props) => {
     const { Component } = props
-    // const { data: currentUser } = useGetUserByIdQuery();
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
-
+    let token = localStorage.getItem("token")
     useEffect(() => {
-        // if (currentUser) {
-        //     dispatch(storeUser(currentUser))
-        // }
-        // else {
-            navigate("/login")
-        // }
-    }, [currentUser])
-    useEffect(() => {
-        let token = getCookie('token')
         if (!token) {
-            navigate('/login')
+            navigate("/login")
         }
-    })
+    }, [token])
 
     return (
         <Component />

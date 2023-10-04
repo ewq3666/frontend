@@ -1,0 +1,86 @@
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--is-blue-gradient);
+    .registration-box {
+      background: var(--is-primary-background-color);
+      width: 400px;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      h1 {
+        margin: 16px 0px 32px 0px;
+      }
+      form {
+        input {
+          margin-bottom: 15px;
+        }
+      }
+      a {
+        color: #0070f3;
+      }
+      .input-icon {
+        font-size: 16px;
+        margin-right: 8px;
+        color: #c1c1c1;
+      
+        input {
+          color: #000;
+        }
+    
+        input:focus + & {
+          color: #000;
+        }
+      }
+      .Signup-form-wrapper {
+        .ant-form-item {
+          margin-bottom: 32px !important;
+          input {
+            margin-bottom: 0px !important;
+            padding: 3px 10px;
+          }
+          .ant-input-password {
+            input {
+              padding: 3px 0px !important;
+            }
+          }
+        }
+        button {
+          height: 36px !important;
+          background: var(--is-theme-color);
+          width: 100%;
+          span {
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--is-quaternary-text-color);
+          }
+        }
+      }
+      .signup-option {
+        h3 {
+          font-size: 14px;
+          color: var(--is-dark-black-color);
+          font-weight: 500;
+          a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--is-theme-color);
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .registration-container {
+      height: 100%;
+      .registration-box {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  }
+  
