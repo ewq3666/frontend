@@ -1,0 +1,132 @@
+.contest-card {
+    width: 30%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: auto;   
+    padding: 0.1rem 1rem;
+    &__header {
+        display: flex;
+        margin: 1rem;
+        justify-content: space-between;
+        flex-direction: row;
+        &-left {
+            display: flex;
+            flex-direction: column;
+        }
+        &-title {
+            color: rgb(173, 170, 170);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        &-amount {
+            font-size: 1.6rem;
+            font-weight: 600;
+            .icon {
+                margin: -0.3rem;
+            }
+        }
+        &-right {
+            button {
+                background: rgb(100, 100, 230);
+                color: white;
+                padding: 0.5rem 1.2rem;
+                border-radius: 10px;
+                border: none;
+                font-weight: 700;
+                font-size: 1.3rem;
+                box-shadow: 0 3px 3px rgba(66, 74, 218, 0.2);
+            }
+        }
+    }
+    &__mid {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 1rem;
+        &-category,
+        &-entryfee {
+            background: #ffecf4;
+            color: #ff0074;
+            padding: 0.5rem 1.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        &-entryfee {
+            background: #e8effd;
+            color: #2164e9;
+            .icon {
+                margin: -0.2rem;
+            }
+        }
+        &-test {
+            background: #f6eecb;
+            color: #efc509;
+            .icon {
+                margin: -0.2rem;
+            }
+        }
+    }
+    &__bottom {
+        margin: 0.8rem 1rem;
+        &-title {
+            display: flex;
+            justify-content: space-between;
+            margin-top: -0.5rem;
+            .title-first {
+                color: #ff0074;
+            }
+            .title-second {
+                color: black;
+            }
+        }
+    }
+}
+// Responsive
+@media (max-width: 480px) {
+    .contest-card {
+        width: fit-content;
+        margin: 1rem;
+        &__header {
+            margin: 0.2rem;
+            padding-top: 0.6rem;
+            &-title {
+                font-size: 0.9rem;
+            }
+            &-amount {
+                font-size: 1.3rem;
+                font-weight: 700;
+                .icon {
+                    margin: -0.1rem;
+                    font-size: 1.10rem;
+                }
+            }
+            &-right {
+                button {
+                    padding: 0.5rem 1rem;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+        &__mid {
+            margin: 1rem 0rem;
+            &-category,
+            &-entryfee {
+                margin: 0.2rem;
+                padding: 0.5rem 1rem;
+                font-weight: 600;
+            }
+        }
+        &__bottom {
+            margin: 0.5rem 0.4rem;
+            &-title {
+                padding: 0rem 0.1rem;
+                margin-top: -0.4rem;
+                .title-first {
+                    color: #ff0074;
+                }
+                .title-second {
+                    color: black;
+                }
+            }
+        }
+    }
+}

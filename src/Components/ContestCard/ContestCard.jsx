@@ -1,70 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'antd';
-import { ClockCircleOutlined, DollarCircleOutlined } from '@ant-design/icons';
-import './styles.scss';
+import { Card, Button, Progress } from 'antd';
+import './contestcard.scss';
+import { BsCurrencyRupee } from 'react-icons/bs';
 
 const ContestCard = () => {
-  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  const calculateCountdown = () => {
-    const targetDate = new Date('2023-01-10T00:00:00Z');
-    const now = new Date();
-    const timeDifference = targetDate - now;
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1;
+  const day = currentDate.getDate();
+  const formattedDate = `${day}-${month}-${year}`;
 
-    if (timeDifference > 0) {
-      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-      setCountdown({ days, hours, minutes, seconds });
-    }
-  };
-
-  useEffect(() => {
-    const interval = setInterval(calculateCountdown, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  const [progress, setProgress] = useState(80)
+  const twoColors = { '50%': '#108ee9', '100%': '#e31f77' };
 
   return (
-    <Card className="contest-card">
-      <div className="contest-card-header">
-        <div className="contest-card-date">
-          <p className="date-text">1/10/2023</p>
+    <div className="contest-card">
+      <div className="contest-card__header-time-container">
+        <p>{formattedDate}</p>
+      </div>
+      <div className="contest-card__header">
+        <div className="contest-card__header-left">
+          <span className='contest-card__header-title'>Prize Pool</span>
+          <span className='contest-card__header-amount'><BsCurrencyRupee className='icon' />1000</span>
         </div>
-        <div className="contest-card-category">
-          <p>Category: Neet</p>
+        <div className="contest-card__header-right">
+          <button >Join</button>
         </div>
       </div>
-      <div className="contest-card-content">
-        <h2 className="title-text">Contest Title</h2>
-        <p className="countdown-text">
-          <ClockCircleOutlined className="countdown-icon" />
-          <span className="countdown-value">
-            {countdown.days > 0 && `${countdown.days}d `}
-            {countdown.hours > 0 && `${countdown.hours}h `}
-            {countdown.minutes > 0 && `${countdown.minutes}m `}
-            {countdown.seconds > 0 && `${countdown.seconds}s`}
+      <div className="contest-card__mid">
+        <div className="contest-card__mid-category">
+          <span>
+            Category : NEET
           </span>
-        </p>
-        <p className="price-text">
-          <DollarCircleOutlined className="price-icon" />
-          Price: <span className="price-value">1000</span>
-        </p>
-      </div>
-      <div className="contest-card-footer">
-        <Button type="primary" className="join-button">
-          Join
-        </Button>
-        <div className="entry-fees">
-          <p className="fees-text">Entry Fees</p>
-          <p className="fees-value">100</p>
+        </div>
+        <div className="contest-card__mid-entryfee">
+          <span>
+            ENTRY FEE : <BsCurrencyRupee className='icon' />100
+          </span>
         </div>
       </div>
-    </Card>
+      <div className="contest-card__bottom">
+        <Progress
+          className='progress-bar'
+          percent={progress}
+          showInfo={false}
+          strokeColor={twoColors}
+        />
+        <div className="contest-card__bottom-title">
+          <span className='title-first'><b>40</b> student left</span>
+          <span className='title-second'><b>100</b> students</span>
+        </div>
+      </div>
+    </div>
   );
 };
 
