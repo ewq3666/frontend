@@ -1,34 +1,14 @@
 .setting-container {
+    padding: 0px 8px 0px 16px;
     .setting-title {
         display: flex;
-        position: relative;
         align-items: center;
-        justify-content: center;
-        padding: 12px 16px;
-        font-size: 12px;
+        justify-content: space-between;
+        padding: 12px;
+        font-size: 22px;
         font-weight: 700;
-        margin-bottom: 12px;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-        background: var(--is-yellow-background-color);
-        color: var(--is-warning-color);
-        .left-section {
-            position: absolute;
-            left: 12px;
-            svg {
-                width: 36px;
-                height: 26px;
-                // cursor: pointer;
-            }
-        }
-        .right-section {
-            position: absolute;
-            right: 12px;
-            svg {
-                width: 36px;
-                height: 26px;
-                cursor: pointer;
-                color: var(--is-red-color);
-            }
+        svg {
+            color: var(--is-red-color);
         }
     }
     .drawer-content {
@@ -36,7 +16,6 @@
         flex-direction: column;
         height: 100%;
         text-align: center;
-        margin: 0px 8px 0px 16px;
         .ant-menu {
             background-color: transparent;
         }

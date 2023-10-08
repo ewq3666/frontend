@@ -1,77 +1,60 @@
+/* ChangePassword.scss */
+
 .change-password-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-
-    .change-password-content {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 500px;
-      background-color: #ffffff;
-      // padding: 10px; 
-      // border-radius: 5px;
-      // box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      height: 100%;
-
-      .edit-profile-title {
-        display: flex;
-        position: relative;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 16px;
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 12px;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-        background: var(--is-yellow-background-color);
-        color: var(--is-warning-color);
-        .left-section {
-          position: absolute;
-          left: 12px;
-          svg {
-            width: 36px;
-            height: 26px;
-            cursor: pointer;
-            color: var(--is-red-color);
-          }
-        }
-        .right-section {
-          position: absolute;
-          right: 12px;
-          svg {
-            width: 36px;
-            height: 26px;
-          }
-        }
-      }
-
-      .change-password-form {
-        flex: 1;
-        padding: 10px; 
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-
-        .input-icon {
-          font-size: 16px;
-          margin-right: 8px;
-          color: #c1c1c1;
-        }
-        
-        .input-icon + input {
-          width: 100%;
-          padding: 8px; /* Adjust the spacing inside the input fields */
-          border: 1px solid #ccc;
-          border-radius: 5px;
-        }
-        
-        input:focus + .input-icon {
-          color: #000;
-        }
-      }
-    }
+    background-color: #f0f0f0; /* Background color for the entire page */
+  }
+  
+  .change-password-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* Limit the maximum width for the content */
+    background-color: #ffffff;
+    padding: 10px; /* Adjust the spacing from left and right */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .change-password-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Optional border line for the header */
+  }
+  
+  .change-password-header h1 {
+    margin: 0; /* Remove default margin from the title */
+    padding-bottom: 10px; /* Adjust the spacing from the title to the border */
+  }
+  
+  .change-password-form {
+    flex: 1;
+    padding: 10px; /* Adjust the spacing inside the content area */
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .input-icon {
+    font-size: 16px;
+    margin-right: 8px;
+    color: #c1c1c1;
+  }
+  
+  .input-icon + input {
+    width: 100%;
+    padding: 8px; /* Adjust the spacing inside the input fields */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input:focus + .input-icon {
+    color: #000;
   }
   

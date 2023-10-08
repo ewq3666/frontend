@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from "axios";
 import { Form, Input, Button, Row, Col, notification } from 'antd';
 import { UserOutlined, MailOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
@@ -6,12 +6,25 @@ import { NavLink } from 'react-router-dom';
 import { END_POINTS } from '../../api/domain';
 import { useNavigate } from 'react-router-dom';
 import './styles.scss';
+import emailjs from '@emailjs/browser';
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [isBtnLoading, setIsBtnLoading] = useState(false);
+  const form = useRef();
 
+  const [isBtnLoading, setIsBtnLoading] = useState(false);
+  const sendEmail = (e,values) => {
+    // e.preventDefault();
+
+    emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
   const onFinish = async (values) => {
+    sendEmail()
     console.log('Received values:', values);
     setIsBtnLoading(true);
     try {
@@ -37,11 +50,13 @@ const SignUp = () => {
     }
   };
 
+
+
   return (
     <div className="registration-container">
       <div className="registration-box">
         <h1>Sign Up</h1>
-        <Form name="registration-form" onFinish={onFinish} className='Signup-form-wrapper'>
+        <Form name="registration-form" ref={form} onFinish={onFinish} className='Signup-form-wrapper'>
           <Row gutter={16}>
             <Col xs={24} sm={24} md={12}>
               <Form.Item
@@ -159,6 +174,11 @@ const SignUp = () => {
             </Col>
           </Row>
 
+          <Form.Item>
+            <Button type="primary" style={{ width: '100%' }} onClick={sendEmail}>
+              Verify email
+            </Button>
+          </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={isBtnLoading}>
               Sign-Up

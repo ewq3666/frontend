@@ -54,10 +54,12 @@
 
 .menu-drawer {
     .ant-drawer-close {
+        width: 20px;
+        height: 20px;
+        margin: 0px;
+        color: var(--is-black-color);
+        cursor: pointer;
         display: none;
-    }
-    .ant-drawer-header {
-        padding: 0px !important;
     }
     .ant-drawer-title {
         text-align: center;
@@ -65,24 +67,12 @@
         font-size: 22px;
         font-weight: 700;
         .menu-title {
-            margin: 0px 22px 0px 32px;
+            margin: 0px 16px 0px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             svg {
                 color: var(--is-red-color);
-            }
-            .menu-logo {
-                width: 80%;
-                display: flex;
-                // justify-content: center;
-                align-items: center;
-                height: 100%;
-                img {
-                    width: 200px;
-                    height: 60px;
-                    margin-top: 10px;
-                }
             }
         }
     }
@@ -125,4 +115,13 @@
         }
     }
 }
+
+// .drawer-content {
+//     display: flex;
+//     flex-direction: column;
+//     // justify-content: center;
+//     height: 100%;
+//     text-align: center;
+//     // background-color: #f0f2f5; // Set your desired background color
+//   }
   
