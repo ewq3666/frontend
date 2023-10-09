@@ -13,7 +13,7 @@ import Transaction from "../pages/Transaction/Transaction";
 
 export const routes = [
     {
-        path: "/",
+        path: "",
         element: <Layout />,
         childRoutes: [
             {
