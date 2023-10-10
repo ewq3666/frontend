@@ -48,7 +48,7 @@ const Transaction = () => {
     return (
         <div className="transaction-container">
             <div className="transaction-content">
-                <div className="transaction-title">
+                <div className="common-title green-title">
                     <div className='left-section'> <BsBank2 /></div>
                     <h1>Transaction</h1>
                     <div className='right-section' onClick={goBack}> <IoMdClose /></div>

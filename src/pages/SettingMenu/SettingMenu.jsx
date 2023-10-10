@@ -14,7 +14,7 @@ const SettingMenu = () => {
 
     return (
         <div className="setting-container">
-            <div className="setting-title">
+            <div className="common-title yellow-title">
                 <div className='left-section'> <IoIosSettings /></div>
                 <h1>Setting</h1>
                 <div className='right-section' onClick={() => navigate('/')}> <IoMdClose /></div>
