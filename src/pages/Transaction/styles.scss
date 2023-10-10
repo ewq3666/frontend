@@ -49,5 +49,54 @@
                 }
             }
         }
+
+        .transaction-section-main-container {
+            .balence-box {
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                h3:last-child {
+                    color: var(--is-green-text-color);
+                    margin-top: 8px;
+                    svg {
+                        font-size: 15px;
+                    }
+                }
+            }
+            .transaction-history {
+                padding: 16px 12px;
+                h4 {
+                    font-size: 16px;
+                    font-weight: 700;
+                    text-align: left;
+                }
+                .transaction-table {
+                    .Transaction-row {
+                        background: #d4fefecf;
+                        padding: 8px 4px;
+                        margin: 12px 0px;
+                        p {
+                            display: flex;
+                            justify-content: space-between;
+                            font-size: 14px;
+                            font-weight: 700;
+                        }
+                        p:last-child {
+                            margin-top: 8px;
+                            .whithdrawal-amount {
+                                color: var(--is-red-color);
+                                font-weight: 800;
+                            }
+                            .deposite-amount {
+                                color: var(--is-green-text-color);
+                                font-weight: 800;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

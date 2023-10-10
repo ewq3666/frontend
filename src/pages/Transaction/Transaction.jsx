@@ -70,7 +70,7 @@ const Transaction = () => {
                                         </p>
                                         <p>
                                             <span>Total Amount: </span>
-                                            <span>{data.amount}</span>
+                                            <span className={data.type == "whithdrawal" ? "whithdrawal-amount" : "deposite-amount"}>{data.amount}</span>
                                         </p>
                                     </div>
                                 )
