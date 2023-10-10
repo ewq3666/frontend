@@ -4,6 +4,9 @@ import Signup from "../pages/SignUp/SignUp";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import Setting from "../pages/SettingMenu/SettingMenu";
+import Wallet from "../pages/Wallet/Wallet";
+import MyContest from "../pages/MyContest/MyContest";
+import ContactUs from "../pages/ContactUs/ContactUs";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import PageNotFound from "../Components/PageNotFound/PageNotFound";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
@@ -47,6 +50,18 @@ export const routes = [
     {
         path: "transaction",
         element: <Protected Component={Transaction} />
+    },
+    {
+        path: "wallet",
+        element: <Protected Component={Wallet} />
+    },
+    {
+        path: "mycontest",
+        element: <Protected Component={MyContest} />
+    },
+    {
+        path: "contactus",
+        element: <Protected Component={ContactUs} />
     },
     {
         path: "setting",
