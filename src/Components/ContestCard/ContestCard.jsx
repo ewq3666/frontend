@@ -14,7 +14,7 @@ const ContestCard = () => {
 
   console.log(result);
   const currentTime = moment();
-  const customTime = moment('8:00 PM', 'h:mm A');
+  const customTime = moment('11:00 PM', 'h:mm A');
   const duration = moment.duration(customTime.diff(currentTime));
   const hoursDiff = duration.hours();
   const minutesDiff = duration.minutes();
