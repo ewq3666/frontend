@@ -12,7 +12,7 @@ const ContestCard = () => {
   const [result, setResult] = useState({})
   const [showCount, setShowCount] = useState(false)
 
-  console.log(result);
+  // console.log(result);
   const currentTime = moment();
   const customTime = moment('11:50 PM', 'h:mm A');
   const duration = moment.duration(customTime.diff(currentTime));
