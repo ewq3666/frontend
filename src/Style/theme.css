@@ -19,8 +19,12 @@
     --is-warning-color: #e9bd24;
     --is-danger-color: #FA3665;
     --is-red-color: #FF133D;
+    --is-green-text-color: #0c7404;
 
     --is-overlay: rgba(38, 31, 31, 0.8);
 
     --is-blue-gradient: linear-gradient(to bottom, #0070f3, #0000a0);
+    /* --is-green-gradient: #d3f9d0; */
+    --is-green-gradient: #b4f3d7;;
+    --is-yellow-background-color: beige;
 }

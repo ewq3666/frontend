@@ -4,15 +4,19 @@ import Signup from "../pages/SignUp/SignUp";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import Setting from "../pages/SettingMenu/SettingMenu";
+import Wallet from "../pages/Wallet/Wallet";
+import MyContest from "../pages/MyContest/MyContest";
+import ContactUs from "../pages/ContactUs/ContactUs";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import PageNotFound from "../Components/PageNotFound/PageNotFound";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Layout from "../layout/Layout";
 import Protected from "./Protected";
+import Transaction from "../pages/Transaction/Transaction";
 
 export const routes = [
     {
-        path: "/",
+        path: "",
         element: <Layout />,
         childRoutes: [
             {
@@ -21,38 +25,18 @@ export const routes = [
                 element:<Protected Component={Home} />,
             },
             
-            {
-                path: "forgotpassword",
-                element: <ForgotPassword />
+            // {
+            //     path: "forgotpassword",
+            //     element: <ForgotPassword />
 
-            },
+            // },
             {
                 path: "myprofile",
                 element: <Protected Component={MyProfile} />
 
             },
-            {
-                path: "editprofile",
-                // element: <Protected Component={EditProfile} />
-                element: <EditProfile />
-
-            },
-            {
-                path: "change-password",
-                // element: <Protected Component={ChangePassword} />
-                element: <ChangePassword />
-            },
 
         ]
-    },
-    {
-        path: "*",
-        element: <PageNotFound />
-    },
-    {
-        path: "setting",
-        // element: <Protected Component={Setting} />
-        element: <Setting />
     },
     {
         path: "login",
@@ -61,6 +45,40 @@ export const routes = [
     {
         path: "signup",
         element: <Signup />
+        
+    },
+    {
+        path: "transaction",
+        element: <Protected Component={Transaction} />
+    },
+    {
+        path: "wallet",
+        element: <Protected Component={Wallet} />
+    },
+    {
+        path: "mycontest",
+        element: <Protected Component={MyContest} />
+    },
+    {
+        path: "contactus",
+        element: <Protected Component={ContactUs} />
+    },
+    {
+        path: "setting",
+        element: <Protected Component={Setting} />
+    },
+    
+    {
+        path: "editprofile",
+        element: <Protected Component={EditProfile} />
 
+    },
+    {
+        path: "change-password",
+        element: <Protected Component={ChangePassword} />
+    },
+    {
+        path: "*",
+        element: <PageNotFound />
     },
 ]

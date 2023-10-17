@@ -1,21 +1,10 @@
 .setting-container {
-    padding: 0px 8px 0px 16px;
-    .setting-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px;
-        font-size: 22px;
-        font-weight: 700;
-        svg {
-            color: var(--is-red-color);
-        }
-    }
     .drawer-content {
         display: flex;
         flex-direction: column;
         height: 100%;
         text-align: center;
+        margin: 0px 8px 0px 16px;
         .ant-menu {
             background-color: transparent;
         }
