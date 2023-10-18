@@ -47,6 +47,15 @@
             h3:nth-child(2) {
                 color: var(--is-warning-color);
             }
+            .plus-icon {
+                padding-right: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                svg {
+                    font-size: 12px;
+                }
+            }
             button {
                 background: var(--is-warning-color);
                 border: 1px solid var(--is-warning-color);
