@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { END_POINTS } from "../api/domain";
 
 function Payment() {
 	const [book, setBook] = useState({
@@ -20,7 +21,7 @@ function Payment() {
 			order_id: data.id,
 			handler: async (response) => {
 				try {
-					const verifyUrl = "http://localhost:5000/api/verify";
+					const verifyUrl = END_POINTS.verify;
 					const { data } = await axios.post(verifyUrl, response);
 					console.log(data);
 				} catch (error) {
@@ -37,7 +38,7 @@ function Payment() {
 
 	const handlePayment = async () => {
 		try {
-			const orderUrl = "http://localhost:5000/api/orders";
+			const orderUrl = END_POINTS.orders;
 			const { data } = await axios.post(orderUrl, { amount: book.price });
 			console.log(data);
 			initPayment(data.data);
