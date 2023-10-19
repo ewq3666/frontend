@@ -45,7 +45,7 @@ const Wallet = () => {
 
 	const handlePayment = async () => {
 		try {
-			const orderUrl = "http://localhost:5000/api/orders";
+			const orderUrl = "https://backendupdated.vercel.app/api/orders";
 			const { data } = await axios.post(orderUrl, { amount: book.price });
 			console.log(data);
 			initPayment(data.data);
