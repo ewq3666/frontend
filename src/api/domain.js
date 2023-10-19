@@ -6,4 +6,5 @@ export const END_POINTS={
      login  :`${api}/login`,
      verify  :`${api}/verify`,
      orders  :`${api}/orders`,
+     orders  :`${api}/admin/contest`,
 }
