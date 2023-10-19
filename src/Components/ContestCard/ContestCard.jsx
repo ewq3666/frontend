@@ -4,7 +4,7 @@ import './contestcard.scss';
 import { BsCurrencyRupee } from 'react-icons/bs';
 import moment from 'moment';
 import axios from 'axios';
-
+import { END_POINTS } from '../../api/domain';
 const ContestCard = () => {
 
   const [contestData, setContestData] = useState([{
@@ -16,20 +16,23 @@ const ContestCard = () => {
   }]);
 
   useEffect(() => {
-    axios.get('')
-      .then((response) => {
-        setContestData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching contestData:', error);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(END_POINTS.contest);
+        setContestData(response.data); 
+        console.log(response.data, "contest data");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   const [progress, setProgress] = useState(80)
   const [isDisabled, setIsDisabled] = useState(false);
   const [result, setResult] = useState({})
 
-  console.log(result);
   const currentTime = moment();
   const targetDateTime = moment('2023-10-19 11:30 PM', 'YYYY-MM-DD HH:mm A');
   const duration = moment.duration(targetDateTime.diff(currentTime));
@@ -65,7 +68,7 @@ const ContestCard = () => {
         <>
           {contestData.map((values, index) => {
             return (
-              <div className="contest-card">
+              <div className="contest-card" key={index}>
                 <div className="contest-card__header">
                   <div className="contest-card__header-left">
                     <span className='contest-card__header-left__title'>Prize Pool</span>

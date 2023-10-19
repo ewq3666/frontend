@@ -1,0 +1,68 @@
+.wallet-container {
+    .wallet-section-main-container {
+        .balence-box {
+            margin-top: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            h3:nth-child(2) {
+                color: var(--is-green-text-color);
+                margin-top: 8px;
+                svg {
+                    font-size: 15px;
+                }
+            }
+            button {
+                height: 36px;
+                margin-top: 16px;      
+                background: rgba(0, 128, 0, 0.85);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(12.2px);
+                -webkit-backdrop-filter: blur(12.2px);
+                box-shadow: 1px 3px 33px 4px rgba(0,128,0,0.57);
+                -webkit-box-shadow: 1px 3px 33px 4px rgba(0,128,0,0.57);
+                -moz-box-shadow: 1px 3px 33px 4px rgba(0,128,0,0.57);   
+                padding: 0px 22px;
+                border: 1px solid rgba(10, 181, 50, 0.96); 
+                display: flex;
+                align-items: center;
+                span {
+                    color: var(--is-quaternary-text-color);
+                    font-weight: 600;
+                }  
+                .plus-icon {
+                    padding-right: 12px;
+                    font-size: 22px;
+                    font-weight: 500;
+                }
+            }
+        }
+        .wallet-divider {
+            border-width: 2px 0 0 !important;
+            margin: 32px 0 !important;
+        }
+        .withdrawal-box {
+            h3:nth-child(2) {
+                color: var(--is-warning-color);
+            }
+            .plus-icon {
+                padding-right: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                svg {
+                    font-size: 12px;
+                }
+            }
+            button {
+                background: var(--is-warning-color);
+                border: 1px solid var(--is-warning-color);
+                box-shadow: 1px 3px 33px 4px rgba(233,189,36,0.57);
+                -webkit-box-shadow: 1px 3px 33px 4px rgba(233,189,36,0.57);
+                -moz-box-shadow: 1px 3px 33px 4px rgba(233,189,36,0.57);
+            }
+        }
+    }
+}
