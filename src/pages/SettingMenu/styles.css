@@ -1,0 +1,25 @@
+.setting-container .drawer-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+  margin: 0px 8px 0px 16px;
+}
+.setting-container .drawer-content .ant-menu {
+  background-color: transparent;
+}
+.setting-container .drawer-content .ant-menu-item {
+  border-radius: 0px;
+  background: aliceblue;
+  margin: 5px 0px;
+  padding: 0px;
+}
+.setting-container .drawer-content .ant-menu-item span {
+  color: var(--is-theme-color);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 12px;
+}/*# sourceMappingURL=styles.css.map */

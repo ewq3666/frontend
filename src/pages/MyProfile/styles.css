@@ -1,0 +1,74 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+.main-container .container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.main-container .container .profile-card {
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 2px soild rgb(43, 37, 37);
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #f7f4f4;
+}
+.main-container .container .profile-card__header {
+  display: flex;
+  align-items: center;
+}
+.main-container .container .profile-card__header-logo {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+  background: #877171;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main-container .container .profile-card__header-logo .name {
+  color: white;
+}
+.main-container .container .profile-card__header-title {
+  margin: 1rem 0rem 0rem 1rem;
+}
+.main-container .container .profile-card__header-title .username {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.main-container .container .awards-card {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 1rem;
+}
+.main-container .container .awards-card__wrapper {
+  margin-top: 1rem;
+  border-radius: 10px;
+  padding: 1.5rem 0rem;
+  background: #f7f4f4;
+  display: flex;
+  justify-content: space-between;
+}
+.main-container .container .awards-card__wrapper .box {
+  width: 4.8rem;
+  height: 4.5rem;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0rem 0.5rem;
+  box-shadow: -3px 8px 12px 4px rgba(159, 155, 155, 0.91);
+}
+.main-container .container .awards-card__wrapper .award-img {
+  width: 4rem;
+  height: 4rem;
+}
+.main-container .container .awards-card__title {
+  font-weight: 700;
+  margin: 0 0.5rem;
+}/*# sourceMappingURL=styles.css.map */

@@ -33,6 +33,7 @@
                 border-radius: 5px;
                 background: #fbeded;
                 color: rgb(225, 18, 18);
+                text-align: center;
             }
             .custom-time {
                 text-align: center;
@@ -104,7 +105,7 @@
 // Responsive
 @media (max-width: 480px) {
     .contest-card {
-        width: fit-content;
+        width: auto;
         margin: 1rem;
         &__header {
             margin: 0.2rem;

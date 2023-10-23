@@ -1,0 +1,142 @@
+.contest-card {
+  width: 30%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  padding: 0.1rem 1rem;
+  margin-top: 2rem;
+}
+.contest-card__header {
+  display: flex;
+  margin: 1rem;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.contest-card__header-left {
+  display: flex;
+  flex-direction: column;
+}
+.contest-card__header-left__title {
+  color: rgb(173, 170, 170);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.contest-card__header-left__amount {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.contest-card__header-left__amount .icon {
+  margin: -0.3rem;
+}
+.contest-card__header-mid {
+  margin: auto;
+}
+.contest-card__header-mid .countdown-box {
+  padding: 5px;
+  border-radius: 5px;
+  background: #fbeded;
+  color: rgb(225, 18, 18);
+}
+.contest-card__header-mid .custom-time {
+  text-align: center;
+  font-size: 12px;
+  margin: 5px;
+  color: rgb(171, 169, 169);
+}
+.contest-card__header-right .join-button {
+  background: rgb(100, 100, 230);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 1.3rem;
+  box-shadow: 0 3px 3px rgba(66, 74, 218, 0.2);
+  cursor: pointer;
+}
+.contest-card__header-right .join-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.contest-card__mid {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+.contest-card__mid-category, .contest-card__mid-entryfee {
+  background: #ffecf4;
+  color: #ff0074;
+  padding: 0.5rem 0.9rem;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.contest-card__mid-entryfee {
+  background: #e8effd;
+  color: #2164e9;
+}
+.contest-card__mid-entryfee .icon {
+  margin: -0.2rem;
+}
+.contest-card__mid-test {
+  background: #f6eecb;
+  color: #efc509;
+}
+.contest-card__mid-test .icon {
+  margin: -0.2rem;
+}
+.contest-card__bottom {
+  margin: 0.8rem 1rem;
+}
+.contest-card__bottom-title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -0.5rem;
+}
+.contest-card__bottom-title .title-first {
+  color: #ff0074;
+}
+.contest-card__bottom-title .title-second {
+  color: black;
+}
+
+@media (max-width: 480px) {
+  .contest-card {
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 1rem;
+  }
+  .contest-card__header {
+    margin: 0.2rem;
+    padding-top: 0.6rem;
+  }
+  .contest-card__header-title {
+    font-size: 0.9rem;
+  }
+  .contest-card__header-amount {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  .contest-card__header-amount .icon {
+    margin: -0.1rem;
+    font-size: 1.1rem;
+  }
+  .contest-card__header-right button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+  }
+  .contest-card__mid {
+    margin: 1rem 0rem;
+  }
+  .contest-card__mid-category, .contest-card__mid-entryfee {
+    margin: 0.2rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+  }
+  .contest-card__bottom {
+    margin: 0.5rem 0.4rem;
+  }
+  .contest-card__bottom-title {
+    padding: 0rem 0.1rem;
+    margin-top: -0.4rem;
+  }
+}/*# sourceMappingURL=contestcard.css.map */

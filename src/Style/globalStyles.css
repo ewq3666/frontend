@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+.ant-form-item-explain-error {
+  color: #ff4d4f;
+  text-align: left;
+  color: var(--is-danger-color);
+  font-weight: 400;
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+.common-input .ant-input-affix-wrapper {
+  height: 42px;
+  background: rgba(5, 5, 5, 0.06);
+  border-radius: 32px;
+}
+.common-input .ant-input-affix-wrapper .ant-input-prefix svg {
+  color: var(--is-black-color);
+}
+.common-input .ant-input-affix-wrapper input {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  padding-left: 12px;
+}
+
+.button-box {
+  display: flex;
+  justify-content: center;
+}
+.button-box .common-blue-button {
+  background: var(--is-blue-gradient);
+  border-radius: 36px;
+  height: 42px;
+  width: 200px;
+  box-shadow: 5px 6px 16px rgba(52, 152, 219, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-box .common-blue-button svg {
+  color: var(--is-quaternary-text-color);
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 8px;
+  margin-top: -3px;
+}
+.button-box .common-blue-button span {
+  color: var(--is-quaternary-text-color);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.common-title {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.common-title .left-section {
+  position: absolute;
+  left: 12px;
+}
+.common-title .left-section svg {
+  width: 36px;
+  height: 26px;
+}
+.common-title .right-section {
+  position: absolute;
+  right: 12px;
+}
+.common-title .right-section svg {
+  width: 36px;
+  height: 26px;
+  cursor: pointer;
+  color: var(--is-red-color);
+}
+
+.yellow-title {
+  background: var(--is-yellow-background-color);
+  color: var(--is-warning-color);
+}
+
+.green-title {
+  background: var(--is-green-gradient);
+  color: var(--is-green-text-color);
+}
+
+.red-title {
+  background: rgba(254, 236, 255, 0.9803921569);
+  color: #ff00b8;
+}/*# sourceMappingURL=globalStyles.css.map */

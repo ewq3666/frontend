@@ -7,25 +7,19 @@ import axios from 'axios';
 import { END_POINTS } from '../../api/domain';
 const ContestCard = () => {
 
-  const [contestData, setContestData] = useState([{
-    amount: 1000,
-    category: "NEET",
-    entryFee: 100,
-    students: 100,
-    joinStudents: 50
-  }]);
+  const [contestData, setContestData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(END_POINTS.contest);
-        setContestData(response.data); 
+        setContestData(response.data);
         console.log(response.data, "contest data");
       } catch (error) {
         console.error(error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -34,7 +28,7 @@ const ContestCard = () => {
   const [result, setResult] = useState({})
 
   const currentTime = moment();
-  const targetDateTime = moment('2023-10-19 11:30 PM', 'YYYY-MM-DD HH:mm A');
+  const targetDateTime = moment('2023-10-25 11:30 PM', 'YYYY-MM-DD HH:mm A');
   const duration = moment.duration(targetDateTime.diff(currentTime));
 
   const daysDiff = duration.days();
@@ -50,7 +44,7 @@ const ContestCard = () => {
         minutes: minutesDiff,
         seconds: secondsDiff
       });
-    }, 1000);
+    }, 10);
     return () => {
       clearInterval(timer);
     };
@@ -61,18 +55,17 @@ const ContestCard = () => {
     setIsDisabled(true);
   }
 
-
   return (
     <>
       {result.hours > 0 || result.minutes > 0 || result.seconds > 0 ? (
         <>
-          {contestData.map((values, index) => {
+          {contestData.result?.map((values, index) => {
             return (
               <div className="contest-card" key={index}>
                 <div className="contest-card__header">
                   <div className="contest-card__header-left">
                     <span className='contest-card__header-left__title'>Prize Pool</span>
-                    <span className='contest-card__header-left__amount'><BsCurrencyRupee className='icon' />{values.amount}</span>
+                    <span className='contest-card__header-left__amount'><BsCurrencyRupee className='icon' />{values.price}</span>
                   </div>
                   <div className="contest-card__header-mid">
                     <p className='countdown-box'>
@@ -93,15 +86,17 @@ const ContestCard = () => {
                   <div className="contest-card__header-right">
                     <button
                       onClick={handleCount}
-                      className={`join-button ${isDisabled ? 'disabled' : ''}`}
-                      disabled={isDisabled}>Join
+                      className="join-button"
+                    // className={`join-button ${isDisabled ? 'disabled' : ''}`}
+                    // disabled={isDisabled}
+                    >Join
                     </button>
                   </div>
                 </div>
                 <div className="contest-card__mid">
                   <div className="contest-card__mid-category">
                     <span>
-                      Category : {values.category}
+                      Category : {values.name}
                     </span>
                   </div>
                   <div className="contest-card__mid-entryfee">

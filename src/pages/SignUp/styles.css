@@ -1,0 +1,75 @@
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--is-blue-gradient);
+}
+.registration-container .registration-box {
+  background: var(--is-primary-background-color);
+  width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.registration-container .registration-box h1 {
+  margin: 16px 0px 32px 0px;
+}
+.registration-container .registration-box form input {
+  margin-bottom: 15px;
+}
+.registration-container .registration-box a {
+  color: #0070f3;
+}
+.registration-container .registration-box .input-icon {
+  font-size: 16px;
+  margin-right: 8px;
+  color: #c1c1c1;
+}
+.registration-container .registration-box .input-icon input {
+  color: #000;
+}
+input:focus + .registration-container .registration-box .input-icon {
+  color: #000;
+}
+.registration-container .registration-box .Signup-form-wrapper .ant-form-item {
+  margin-bottom: 32px !important;
+}
+.registration-container .registration-box .Signup-form-wrapper .ant-form-item input {
+  margin-bottom: 0px !important;
+  padding: 3px 10px;
+}
+.registration-container .registration-box .Signup-form-wrapper .ant-form-item .ant-input-password input {
+  padding: 3px 0px !important;
+}
+.registration-container .registration-box .Signup-form-wrapper button {
+  height: 36px !important;
+  background: var(--is-theme-color);
+  width: 100%;
+}
+.registration-container .registration-box .Signup-form-wrapper button span {
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--is-quaternary-text-color);
+}
+.registration-container .registration-box .signup-option h3 {
+  font-size: 14px;
+  color: var(--is-dark-black-color);
+  font-weight: 500;
+}
+.registration-container .registration-box .signup-option h3 a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--is-theme-color);
+}
+
+@media (max-width: 768px) {
+  .registration-container {
+    height: 100%;
+  }
+  .registration-container .registration-box {
+    width: 100%;
+    padding: 10px;
+  }
+}/*# sourceMappingURL=styles.css.map */
