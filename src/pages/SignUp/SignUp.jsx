@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from "axios";
-import { Form, Input, Button, Row, Col, notification } from 'antd';
+import { Form, Input, Button, Row, Col, notification, Drawer } from 'antd';
 import { UserOutlined, MailOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { END_POINTS } from '../../api/domain';
 import { useNavigate } from 'react-router-dom';
+import OtpInput from 'react-otp-input';
 import './styles.scss';
 import emailjs from '@emailjs/browser';
 
 const SignUp = () => {
+  const [signUpForm] = Form.useForm();
   const navigate = useNavigate();
   const form = useRef();
 
@@ -36,8 +38,8 @@ const SignUp = () => {
           console.log(error.text);
         });
     }
-    else{
-      notification.error({message:'please enter email'})
+    else {
+      notification.error({ message: 'please enter email' })
     }
   };
 
@@ -50,7 +52,7 @@ const SignUp = () => {
 
 
   useEffect(() => {
-    console.log(userOtp,otp);
+    console.log(userOtp, otp);
     if (userOtp == otp && emailSent) {
       registerUser()
     }
@@ -80,12 +82,11 @@ const SignUp = () => {
     }
   }
 
-
   return (
     <div className="registration-container">
       <div className="registration-box">
         <h1>Sign Up</h1>
-        <Form name="registration-form" onFinish={onFinish} className='Signup-form-wrapper'>
+        <Form name="registration-form" onFinish={onFinish} className='Signup-form-wrapper' form={signUpForm}>
           <Row gutter={16}>
             <Col xs={24} sm={24} md={12}>
               <Form.Item
@@ -205,18 +206,18 @@ const SignUp = () => {
           <Form.Item>
 
             <Button type="primary" onClick={sendEmail} htmlType="submit" style={{ width: '100%', margin: '1rem 0' }} loading={isBtnLoading}>
-              Verify email
+              Sign Up
             </Button>
             {
               emailSent &&
               <input type="number" placeholder='enter otp' onChange={(e) => setUserOtp(e.target.value)} />
             }
-            <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={isBtnLoading}>
+            {/* <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={isBtnLoading}>
               Sign-Up
-            </Button>
+            </Button> */}
           </Form.Item>
         </Form>
-        <form onSubmit={sendEmail} ref={form} >
+        <form onSubmit={sendEmail} ref={form} className='hide-form'>
           <div>
             <label htmlFor="user_email">Email:</label>
             <input
@@ -242,6 +243,35 @@ const SignUp = () => {
         <div className="signup-option">
           <h3>You have an account ? <NavLink to="/login">Login Now!</NavLink></h3>
         </div>
+
+        {/* Enter OTP drawer */}
+        <Drawer
+          title="Verify Your Account"
+          placement="bottom"
+          width={500}
+          open={emailSent}
+          className="Otp-drawer"
+        >
+          <OtpInput
+            containerStyle="otp-box"
+            value={userOtp}
+            onChange={setUserOtp}
+            numInputs={6}
+            // renderSeparator={<span>-</span>}
+            renderInput={(props) => <input {...props} />}
+          />
+          <div className="button-box">
+          <Button loading={isBtnLoading} className='common-blue-button' onClick={() => signUpForm.submit()}>
+            Verify email
+          </Button>
+          </div>
+
+          <div className="button-box">
+          <Button className='common-empty-button' onClick={() => setemailSent(false)}>
+            Cancel
+          </Button>
+          </div>
+        </Drawer>
       </div>
     </div>
   );
