@@ -18,6 +18,15 @@
         input {
           margin-bottom: 15px;
         }
+        .ant-input-affix-wrapper  {
+          padding: 4px 6px !important;
+          .ant-input-prefix {
+            margin-inline-end: 2px !important;
+            // input {
+            //   padding: 4px 4px 4px 0px !important;
+            // }
+          }
+        }
       }
       a {
         color: #0070f3;
@@ -40,11 +49,11 @@
           margin-bottom: 32px !important;
           input {
             margin-bottom: 0px !important;
-            padding: 3px 10px;
+            padding: 4px 4px 4px 0px !important;
           }
           .ant-input-password {
             input {
-              padding: 3px 0px !important;
+              padding: 4px 4px 4px 0px !important;
             }
           }
         }
@@ -71,6 +80,9 @@
           }
         }
       }
+      .hide-form {
+        display: none;
+      }
     }
   }
   
@@ -83,4 +95,12 @@
       }
     }
   }
+
+.Otp-drawer {
+  max-width: 480px;
+  width: 100%;
+  .anticon-close {
+    display: none !important;
+  }
+}
   

@@ -38,7 +38,6 @@ const MyProfile = () => {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

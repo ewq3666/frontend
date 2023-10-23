@@ -32,6 +32,21 @@
         }
     }
 }
+
+.otp-box {
+    justify-content: center;
+    margin: 12px 0px 32px 0px;
+    input {
+        text-align: center;
+        width: 36px !important;
+        height: 42px;
+        font-size: 23px;
+        border-radius: 12px;
+        border: none;
+        background: #edeaea;
+        margin-right: 22px;
+    }
+}
 // ############################# Input End #############################
 
 // ############################# Buttons start #############################
@@ -60,6 +75,18 @@
             font-size: 14px;
             font-weight: 700;
             text-align: center;
+        }
+    }
+
+    .common-empty-button {
+        order: none !important;
+        box-shadow: none !important;
+        margin: 18px;
+        span {
+            color: var(--is-danger-color);
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: underline;
         }
     }
 }
@@ -111,3 +138,14 @@
     color: #ff00b8;
 }
 // ############################# Titles End #############################
+
+// ############################# Drawer Start #############################
+.ant-drawer-content-wrapper {
+    display: flex;
+    justify-content: center;
+    .ant-drawer-header-title {
+        text-align: center;
+    }
+}
+// ############################# Drawer End #############################
+
