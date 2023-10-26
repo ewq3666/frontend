@@ -149,3 +149,22 @@
 }
 // ############################# Drawer End #############################
 
+
+// ############################# Success notification css Start #############################
+.success-notification {
+    padding: 16px !important;
+    .ant-notification-notice-icon {
+        margin-top: 6px;
+    }
+    .ant-notification-notice-message {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 0px !important;
+    }
+    .ant-notification-notice-description {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+// ############################# Success notification css End #############################
+

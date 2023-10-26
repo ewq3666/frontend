@@ -1,32 +1,36 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, notification } from 'antd';
 import { NavLink } from 'react-router-dom';
-import './styles.scss';
-import axios from "axios";
 import { END_POINTS } from '../../api/domain';
+import { Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
+import { CheckCircleOutlined } from '@ant-design/icons';
+import { Form, Input, Button, notification } from 'antd';
+import * as Notifications from "../../assets/messages.js"; 
+import axios from "axios";
+import './styles.scss';
 
 const Login = () => {
   const navigate = useNavigate();
   const [isBtnLoading, setIsBtnLoading] = useState(false);
 
-  const onFinish = async(values) => {
+  const onFinish = async (values) => {
     console.log('Received values:', values);
     try {
       setIsBtnLoading(true);
       let res = await axios.post(END_POINTS.login, values)
       console.log(res?.data.result.token);
       if (res) {
-        localStorage.setItem("token",res?.data.result.token)
-        notification.open({
-          message: res.data.msg
-        })
+        localStorage.setItem("token", res?.data.result.token)
+        Notifications.loginSuccessMessage();
+        console.log("res", res)
+        let userInfo = await axios.get(END_POINTS.userInfo, res?.data.result.token)
         setIsBtnLoading(false);
-        navigate('/')
+        console.log("userInfo",userInfo)
+        // navigate('/')
       }
     } catch (error) {
       console.log(error);
-      if (error.response.data.msg) {
+      if (error?.response?.data.msg) {
         notification.error({ message: error.response.data.msg })
         setIsBtnLoading(false);
       }
@@ -39,6 +43,11 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <Helmet>
+        <meta name="robots" content="noindex" />
+        <title>Login to Your Account | EWQ </title>
+        <meta name="description" content="Explore EWQ, the ultimate destination for paid quizzes and rewarding knowledge seekers. Participate in engaging quizzes, earn rewards, and enrich your learning experience. Join EWQ today!"></meta>
+      </Helmet>
       <div className="login-box">
         <h1>Login</h1>
         <Form name="login-form" onFinish={onFinish} className='login-form-wrapper'>
