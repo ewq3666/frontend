@@ -28,9 +28,9 @@ const Wallet = () => {
 			order_id: data.id,
 			handler: async (response) => {
 				try {
-					const verifyUrl = "http://localhost:5000/api/verify";
+					const verifyUrl = "https://backendupdated.vercel.app/api/verify";
 					const { data } = await axios.post(verifyUrl, response);
-					console.log(data);
+					console.log("payment",data);
 				} catch (error) {
 					console.log(error);
 				}
@@ -47,7 +47,7 @@ const Wallet = () => {
 		try {
 			const orderUrl = "https://backendupdated.vercel.app/api/orders";
 			const { data } = await axios.post(orderUrl, { amount: book.price });
-			console.log(data);
+			console.log("order",data);
 			initPayment(data.data);
 		} catch (error) {
 			console.log(error);
