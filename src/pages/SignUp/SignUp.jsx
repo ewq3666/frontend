@@ -20,17 +20,19 @@ const SignUp = () => {
   const [emailVerified, setemailVerified] = useState(false)
   const [otp, setotp] = useState()
   const [userOtp, setUserOtp] = useState()
+  const formref = useRef()
   function generateRandomSixDigitNumber() {
     return Math.floor(100000 + Math.random() * 900000);
   }
-  const handleEmail = async(e) => {
+
+  const sendEmail = async (e) => {
     try {
       console.log(form.current);
       const userEmail = signUpForm.getFieldValue('user_email');
       // console.log("email",email)
-      let res = await axios.post(END_POINTS.handleDuplicateEmail,{"email": userEmail})
-      console.log("res",res)
-      if(data.registered) {
+      let res = await axios.post(END_POINTS.handleDuplicateEmail, { "email": userEmail })
+      console.log("res", res.data.registered)
+      if (!res.data?.registered) {
         if (userEmail) {
           console.log("otp send")
           let cotp = generateRandomSixDigitNumber()
@@ -38,64 +40,33 @@ const SignUp = () => {
           setotp(cotp)
           emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
             .then((result) => {
-              console.log(result.text);
+              console.log("aa:", result.text);
               setemailSent(true)
               notification.open({ message: 'otp sent' })
             }, (error) => {
-              console.log(error.text);
+              console.log("error", error.text);
             });
         }
         else {
           notification.error({ message: 'please enter email' })
         }
       }
-      
+
     } catch (error) {
-      
-    }
-  };
-  const sendEmail = async(e) => {
-    try {
-      console.log(form.current);
-      const userEmail = signUpForm.getFieldValue('user_email');
-      // console.log("email",email)
-      let res = await axios.post(END_POINTS.handleDuplicateEmail,{"email": userEmail})
-      console.log("res",res.data.registered)
-      if(!res.data?.registered) {
-        if (userEmail) {
-          console.log("otp send")
-          let cotp = generateRandomSixDigitNumber()
-          document.getElementById('message').innerHTML = cotp
-          setotp(cotp)
-          emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
-            .then((result) => {
-              console.log("aa:",result.text);
-              setemailSent(true)
-              notification.open({ message: 'otp sent' })
-            }, (error) => {
-              console.log("error",error.text);
-            });
-        }
-        else {
-          notification.error({ message: 'please enter email' })
-        }
-      }
-      
-    } catch (error) {
-      
+
     }
   };
 
 
 
   const onFinish = async (values) => {
-    // setdata(values)
+    setdata(values)
     console.log('Received values:', values);
   };
 
 
   useEffect(() => {
-    console.log("emailSent",emailSent,userOtp, otp);
+    console.log("emailSent", emailSent, userOtp, otp);
     if (userOtp == otp && emailSent) {
       registerUser()
     }
@@ -103,7 +74,7 @@ const SignUp = () => {
 
   const registerUser = async () => {
     try {
-      const payload =  {
+      const payload = {
         name: signUpForm.getFieldValue('name'),
         user_email: signUpForm.getFieldValue('user_email'),
         upi: signUpForm.getFieldValue('upi'),
@@ -135,6 +106,7 @@ const SignUp = () => {
     }
   }
 
+  // console.log(formref.current.input.value);
   return (
     <div className="registration-container">
       <div className="registration-box">
@@ -161,7 +133,7 @@ const SignUp = () => {
                 ]}
               >
                 <Input
-                  prefix={<MailOutlined className="input-icon" />}
+                  ref={formref} prefix={<MailOutlined className="input-icon" />}
                   placeholder="Email"
                 />
               </Form.Item>
@@ -270,14 +242,14 @@ const SignUp = () => {
             </Button> */}
           </Form.Item>
         </Form>
-        <form onSubmit={sendEmail} ref={form} className='hide-form'>
+        <form onSubmit={sendEmail} ref={form} className='hide-for'>
           <div>
             <label htmlFor="user_email">Email:</label>
             <input
               type="email"
               id="user_email"
               name="user_email"
-              value={signUpForm.getFieldValue('user_email')}
+              value={data?.user_email}
               required
             />
           </div>
@@ -286,7 +258,7 @@ const SignUp = () => {
             <textarea
               id="message"
               name="message"
-              value="aaaa"
+              value={data?.message}
               required
             />
           </div>
@@ -314,15 +286,15 @@ const SignUp = () => {
             renderInput={(props) => <input {...props} />}
           />
           <div className="button-box">
-          <Button loading={isBtnLoading} className='common-blue-button' onClick={() => signUpForm.submit()}>
-            Verify email
-          </Button>
+            <Button loading={isBtnLoading} className='common-blue-button' onClick={() => signUpForm.submit()}>
+              Verify email
+            </Button>
           </div>
 
           <div className="button-box">
-          <Button className='common-empty-button' onClick={() => setemailSent(false)}>
-            Cancel
-          </Button>
+            <Button className='common-empty-button' onClick={() => setemailSent(false)}>
+              Cancel
+            </Button>
           </div>
         </Drawer>
       </div>
