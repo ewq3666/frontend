@@ -43,7 +43,7 @@ const Login = () => {
         <h1>Login</h1>
         <Form name="login-form" onFinish={onFinish} className='login-form-wrapper'>
           <Form.Item
-            name="email"
+            name="user_email"
             rules={[
               { required: true, message: 'Please enter your email.' },
               { type: 'email', message: 'Invalid email address.' },

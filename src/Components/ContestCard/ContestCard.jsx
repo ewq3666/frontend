@@ -5,10 +5,13 @@ import { BsCurrencyRupee } from 'react-icons/bs';
 import moment from 'moment';
 import axios from 'axios';
 import { END_POINTS } from '../../api/domain';
+import { useNavigate } from "react-router-dom";
+
 const ContestCard = () => {
 
+  const navigate = useNavigate();
   const [contestData, setContestData] = useState([]);
-
+  console.log(contestData, "data is this");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,7 +31,9 @@ const ContestCard = () => {
   const [result, setResult] = useState({})
 
   const currentTime = moment();
-  const targetDateTime = moment('2023-10-25 11:30 PM', 'YYYY-MM-DD HH:mm A');
+  const targetDateTime = moment('2023-10-28 11:30 PM', 'YYYY-MM-DD HH:mm A');
+  // const targetDateTime = moment(`${contestData.date} ${contestData.time}`, 'YYYY-MM-DD HH:mm A');
+
   const duration = moment.duration(targetDateTime.diff(currentTime));
 
   const daysDiff = duration.days();
@@ -44,16 +49,19 @@ const ContestCard = () => {
         minutes: minutesDiff,
         seconds: secondsDiff
       });
-    }, 10);
+    }, 1000);
     return () => {
       clearInterval(timer);
     };
   }, [targetDateTime]);
 
+  const handleJoinBtn = () => {
 
-  const handleCount = () => {
-    setIsDisabled(true);
-  }
+    const token = localStorage.getItem('token');
+    console.log(token, "hey iam toekn");
+    if (!token) navigate('/login');
+
+  };
 
   return (
     <>
@@ -85,7 +93,7 @@ const ContestCard = () => {
                   </div>
                   <div className="contest-card__header-right">
                     <button
-                      onClick={handleCount}
+                      onClick={handleJoinBtn}
                       className="join-button"
                     // className={`join-button ${isDisabled ? 'disabled' : ''}`}
                     // disabled={isDisabled}
@@ -113,8 +121,8 @@ const ContestCard = () => {
                     strokeColor={{ '50%': '#108ee9', '100%': '#e31f77' }}
                   />
                   <div className="contest-card__bottom-title">
-                    <span className='title-first'><b>{values.joinStudents}</b> student left</span>
-                    <span className='title-second'><b>{values.students}</b>  students</span>
+                    <span className='title-first'><b>{values.joinStudents} student left</b> </span>
+                    <span className='title-second'><b>{values.students} students</b></span>
                   </div>
                 </div>
               </div>
