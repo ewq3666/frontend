@@ -23,36 +23,79 @@ const SignUp = () => {
   function generateRandomSixDigitNumber() {
     return Math.floor(100000 + Math.random() * 900000);
   }
-  const sendEmail = (e) => {
-    console.log(form.current);
-    if (data?.user_email) {
-      let cotp = generateRandomSixDigitNumber()
-      document.getElementById('message').innerHTML = cotp
-      setotp(cotp)
-      emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
-        .then((result) => {
-          console.log(result.text);
-          setemailSent(true)
-          notification.open({ message: 'otp sent' })
-        }, (error) => {
-          console.log(error.text);
-        });
+  const handleEmail = async(e) => {
+    try {
+      console.log(form.current);
+      const userEmail = signUpForm.getFieldValue('user_email');
+      // console.log("email",email)
+      let res = await axios.post(END_POINTS.handleDuplicateEmail,{"email": userEmail})
+      console.log("res",res)
+      if(data.registered) {
+        if (userEmail) {
+          console.log("otp send")
+          let cotp = generateRandomSixDigitNumber()
+          document.getElementById('message').innerHTML = cotp
+          setotp(cotp)
+          emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
+            .then((result) => {
+              console.log(result.text);
+              setemailSent(true)
+              notification.open({ message: 'otp sent' })
+            }, (error) => {
+              console.log(error.text);
+            });
+        }
+        else {
+          notification.error({ message: 'please enter email' })
+        }
+      }
+      
+    } catch (error) {
+      
     }
-    else {
-      notification.error({ message: 'please enter email' })
+  };
+  const sendEmail = async(e) => {
+    try {
+      console.log(form.current);
+      const userEmail = signUpForm.getFieldValue('user_email');
+      // console.log("email",email)
+      let res = await axios.post(END_POINTS.handleDuplicateEmail,{"email": userEmail})
+      console.log("res",res.data.registered)
+      if(!res.data?.registered) {
+        if (userEmail) {
+          console.log("otp send")
+          let cotp = generateRandomSixDigitNumber()
+          document.getElementById('message').innerHTML = cotp
+          setotp(cotp)
+          emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
+            .then((result) => {
+              console.log("aa:",result.text);
+              setemailSent(true)
+              notification.open({ message: 'otp sent' })
+            }, (error) => {
+              console.log("error",error.text);
+            });
+        }
+        else {
+          notification.error({ message: 'please enter email' })
+        }
+      }
+      
+    } catch (error) {
+      
     }
   };
 
 
 
   const onFinish = async (values) => {
-    setdata(values)
+    // setdata(values)
     console.log('Received values:', values);
   };
 
 
   useEffect(() => {
-    console.log(userOtp, otp);
+    console.log("emailSent",emailSent,userOtp, otp);
     if (userOtp == otp && emailSent) {
       registerUser()
     }
@@ -60,7 +103,17 @@ const SignUp = () => {
 
   const registerUser = async () => {
     try {
-      let res = await axios.post(END_POINTS.signup, data)
+      const payload =  {
+        name: signUpForm.getFieldValue('name'),
+        user_email: signUpForm.getFieldValue('user_email'),
+        upi: signUpForm.getFieldValue('upi'),
+        mobile: signUpForm.getFieldValue('phone'),
+        password: signUpForm.getFieldValue('password'),
+        refaral: signUpForm.getFieldValue('referal') ? signUpForm.getFieldValue('referal') : "",
+        yourstate: signUpForm.getFieldValue('state'),
+        district: signUpForm.getFieldValue('district') ? signUpForm.getFieldValue('district') : ""
+      }
+      let res = await axios.post(END_POINTS.signup, payload)
       console.log(res.data);
       if (res) {
         notification.open({
@@ -224,7 +277,7 @@ const SignUp = () => {
               type="email"
               id="user_email"
               name="user_email"
-              value={data?.user_email}
+              value={signUpForm.getFieldValue('user_email')}
               required
             />
           </div>
@@ -233,7 +286,7 @@ const SignUp = () => {
             <textarea
               id="message"
               name="message"
-              value={data?.message}
+              value="aaaa"
               required
             />
           </div>
