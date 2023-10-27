@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { END_POINTS } from '../../api/domain';
 import { Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button, notification } from 'antd';
-import * as Notifications from "../../assets/messages.js"; 
+import * as Notifications from "../../assets/messages.js";
 import axios from "axios";
 import './styles.scss';
 
 const Login = () => {
+
   const navigate = useNavigate();
   const [isBtnLoading, setIsBtnLoading] = useState(false);
 
@@ -25,8 +26,8 @@ const Login = () => {
         console.log("res", res)
         let userInfo = await axios.get(END_POINTS.userInfo, res?.data.result.token)
         setIsBtnLoading(false);
-        console.log("userInfo",userInfo)
-        // navigate('/')
+        console.log("userInfo", userInfo)
+        navigate('/')
       }
     } catch (error) {
       console.log(error);
@@ -41,6 +42,18 @@ const Login = () => {
     }
   };
 
+  // const setUserData = async () => {
+  //   try {
+  //     const res = await axios.get('https://backendupdated.vercel.app/api/user');
+  //     dispatch(res.data.result);
+  //   }
+  //   catch (error) {
+  //     console.log(error, "failed to get data")
+  //   }
+  // }
+  // useEffect(() => {
+  //   setUserData()
+  // }, []);
   return (
     <div className="login-container">
       <Helmet>

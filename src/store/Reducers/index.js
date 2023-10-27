@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import ReducerFc from "./ReducersFc";
+import { ReducerFc } from "./ReducersFc";
 
 const rootReducer = combineReducers({
-  counter: ReducerFc,
+  ReducerFc,
   // Add more reducers here if needed
 });
 

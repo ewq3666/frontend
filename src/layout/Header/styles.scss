@@ -37,6 +37,17 @@
                     }
                 }
             }
+            .login-button {
+                background: #ffffff;
+                color: rgb(5, 5, 5);
+                padding: 0.5rem;
+                border-radius: 8px;
+                border: none;
+                font-weight: 700;
+                font-size: 1.3rem;
+                box-shadow: 0 3px 3px rgba(66, 74, 218, 0.2);
+                cursor: pointer;
+            }
             .hamburger-menu {
                 .hamburger-option {
                     svg {
@@ -48,7 +59,7 @@
         }
     }
 }
-.ant-drawer-content-wrapper{
+.ant-drawer-content-wrapper {
     width: 100% !important;
 }
 
@@ -96,7 +107,7 @@
             .ant-menu {
                 background-color: transparent;
             }
-            .ant-menu-item  {
+            .ant-menu-item {
                 border-radius: 0px;
                 background: aliceblue;
                 margin: 5px 0px;
@@ -117,7 +128,7 @@
                     }
                 }
             }
-            .ant-menu-item:last-child  {
+            .ant-menu-item:last-child {
                 background: beige;
                 span {
                     color: var(--is-red-color);
@@ -126,4 +137,3 @@
         }
     }
 }
-  

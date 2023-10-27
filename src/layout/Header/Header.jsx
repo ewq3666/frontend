@@ -12,23 +12,9 @@ import logo from "../../assets/images/WhatsApp Image 2023-10-02 at 9.14.09 PM (1
 import "./styles.scss";
 
 const Header = () => {
+
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
-
-    const showDrawer = () => {
-        setVisible(true);
-    };
-
-    const onClick = (e) => {
-        console.log('click ', e);
-        if (e.key == "logout") {
-            localStorage.removeItem("token")
-        } else {
-            navigate('/' + e.key);
-        }
-        setVisible(false);
-    };
-
     const menuArr = [
         {
             key: "myprofile",
@@ -65,8 +51,27 @@ const Header = () => {
             name: "Logout",
             icon: <IoIosLogOut />
         },
-    ]
+    ];
 
+    //check for token
+    const token = localStorage.getItem('token');
+    const handleLogin = () => {
+        if (!token) navigate('/login');
+    }
+
+    const showDrawer = () => {
+        setVisible(true);
+    };
+
+    const onClick = (e) => {
+        console.log('click ', e);
+        if (e.key == "logout") {
+            localStorage.removeItem("token")
+        } else {
+            navigate('/' + e.key);
+        }
+        setVisible(false);
+    };
     return (
         <div className="header-wrapper">
             <div className="header-container">
@@ -80,11 +85,20 @@ const Header = () => {
                             <p>play</p>
                         </div>
                     </div>
-                    <div className="hamburger-menu">
-                        <div className="hamburger-option" onClick={showDrawer}>
-                            <GiHamburgerMenu />
+                    {token === null ? (
+                        <div>
+                            <button
+                                className="login-button"
+                                onClick={handleLogin}
+                            >Login</button>
                         </div>
-                    </div>
+                    ) :
+                        <div className="hamburger-menu">
+                            <div className="hamburger-option" onClick={showDrawer}>
+                                <GiHamburgerMenu />
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             <Drawer

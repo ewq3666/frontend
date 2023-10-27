@@ -11,13 +11,12 @@ const ContestCard = () => {
 
   const navigate = useNavigate();
   const [contestData, setContestData] = useState([]);
-  console.log(contestData, "data is this");
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(END_POINTS.contest);
         setContestData(response.data);
-        console.log(response.data, "contest data");
+        // console.log(response.data, "contest data");
       } catch (error) {
         console.error(error);
       }
@@ -31,7 +30,7 @@ const ContestCard = () => {
   const [result, setResult] = useState({})
 
   const currentTime = moment();
-  const targetDateTime = moment('2023-10-28 11:30 PM', 'YYYY-MM-DD HH:mm A');
+  const targetDateTime = moment('2023-11-12 11:30 PM', 'YYYY-MM-DD HH:mm A');
   // const targetDateTime = moment(`${contestData.date} ${contestData.time}`, 'YYYY-MM-DD HH:mm A');
 
   const duration = moment.duration(targetDateTime.diff(currentTime));
@@ -53,12 +52,12 @@ const ContestCard = () => {
     return () => {
       clearInterval(timer);
     };
-  }, [targetDateTime]);
+  }, []);
 
   const handleJoinBtn = () => {
 
     const token = localStorage.getItem('token');
-    console.log(token, "hey iam toekn");
+    // console.log(token, "hey iam toekn");
     if (!token) navigate('/login');
 
   };
@@ -95,8 +94,6 @@ const ContestCard = () => {
                     <button
                       onClick={handleJoinBtn}
                       className="join-button"
-                    // className={`join-button ${isDisabled ? 'disabled' : ''}`}
-                    // disabled={isDisabled}
                     >Join
                     </button>
                   </div>
