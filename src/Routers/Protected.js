@@ -11,7 +11,7 @@ const Protected = (props) => {
     let token = localStorage.getItem("token")
     useEffect(() => {
         if (!token) {
-            // navigate("/login")
+            navigate("/login")
         }
     }, [token])
 
