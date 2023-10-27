@@ -8,7 +8,7 @@ function App() {
     <div>
       <Router />
       <>{console.log("www",window.location)}</>
-      <Payment/>
+      
     </div>
   );
 }
