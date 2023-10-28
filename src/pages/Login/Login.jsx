@@ -4,13 +4,15 @@ import { END_POINTS } from '../../api/domain';
 import { Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { addUsers } from '../../store/actions/reducerActions';
 import { Form, Input, Button, notification } from 'antd';
 import * as Notifications from "../../assets/messages.js";
 import axios from "axios";
 import './styles.scss';
 
 const Login = () => {
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isBtnLoading, setIsBtnLoading] = useState(false);
 
@@ -22,11 +24,11 @@ const Login = () => {
       console.log(res?.data.result.token);
       if (res) {
         localStorage.setItem("token", res?.data.result.token)
+        let userInfo = await axios.get(END_POINTS.userInfo,{headers:{authorization: res?.data.result.token}})
+        dispatch(addUsers(userInfo.data.result))
         Notifications.loginSuccessMessage();
-        console.log("res", res)
-        let userInfo = await axios.get(END_POINTS.userInfo, res?.data.result.token)
         setIsBtnLoading(false);
-        console.log("userInfo", userInfo)
+        // userInfo.data.result
         navigate('/')
       }
     } catch (error) {
