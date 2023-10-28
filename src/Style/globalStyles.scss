@@ -5,6 +5,16 @@
     font-family: 'Rubik', sans-serif;
 }
 
+.layout-main-container {
+    width: 769px;
+    margin: 0px auto;
+}
+@media screen and (max-width: 480px) {
+    .layout-main-container {
+        width: 100%;
+    }
+}
+
 // ############################# Input Start #############################
 .ant-form-item-explain-error {
     color: #ff4d4f;
@@ -143,8 +153,18 @@
 .ant-drawer-content-wrapper {
     display: flex;
     justify-content: center;
+    .ant-drawer-content {
+        width: 769px;
+    }
     .ant-drawer-header-title {
         text-align: center;
+    }
+}
+@media screen and (max-width: 480px) {
+    .ant-drawer-content-wrapper {
+        .ant-drawer-content {
+            width: 100%;
+        }
     }
 }
 // ############################# Drawer End #############################

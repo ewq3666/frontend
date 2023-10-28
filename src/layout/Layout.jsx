@@ -6,7 +6,7 @@ import Header from './Header/Header';
 const Layout = () => {
 
     return (
-        <div className="Main-container">
+        <div className="layout-main-container">
             <Helmet>
                 <meta name="robots" content="noindex" />
                 <title>EWQ - The Premier Platform for Paid Quizzes and Earnings </title>

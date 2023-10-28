@@ -82,7 +82,7 @@ const Header = () => {
                         </div>
                         <div className="user-name">
                             <h4>Ajay Kharat</h4>
-                            <p>play</p>
+                            <p>Participate, Play, and Pocket Real Money!</p>
                         </div>
                     </div>
                     {token === null ? (
