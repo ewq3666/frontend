@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer, Menu } from 'antd';
+import { Avatar, Drawer, Menu } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { AiOutlineRight, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
@@ -75,19 +75,22 @@ const Header = () => {
         setVisible(false);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         setUserData(userInfo);
-        console.log("userInfo",userInfo)
-    },[userInfo])
+        console.log("userInfo", userInfo)
+    }, [userInfo])
 
     return (
         <div className="header-wrapper">
             <div className="header-container">
                 <div className="header-option">
                     <div className="user-info">
-                        <div className="user-avtar">
+                        {/* <div className="user-avtar">
                             AK
-                        </div>
+                        </div> */}
+                        <Avatar onClick={() => navigate('/')} className="user-avtar" style={{ backgroundColor: "red", verticalAlign: 'middle' }} size="large" >
+                            {userData?.name?.slice(0, 2)}
+                        </Avatar>
                         <div className="user-name">
                             <h4>{token ? userData?.name : "Guest User"}</h4>
                             <p>Participate, Play, and Pocket Real Money!</p>
@@ -112,7 +115,7 @@ const Header = () => {
             <Drawer
                 title={
                     <div className='menu-title'>
-                        <div className='menu-logo'>
+                        <div className='menu-logo' onClick={() => { navigate('/'); setVisible(false) }}>
                             <img src={logo} alt="" />
                         </div>
                         <IoMdClose onClick={() => setVisible(false)} />

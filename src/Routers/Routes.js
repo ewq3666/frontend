@@ -13,6 +13,7 @@ import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Layout from "../layout/Layout";
 import Protected from "./Protected";
 import Transaction from "../pages/Transaction/Transaction";
+import QuizApp from "../quize/Quize";
 
 export const routes = [
     {
@@ -33,7 +34,10 @@ export const routes = [
             {
                 path: "myprofile",
                 element: <Protected Component={MyProfile} />
-
+            },
+            {
+                path: "quize",
+                element: <Protected Component={QuizApp} />
             },
 
         ]
