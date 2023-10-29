@@ -9,7 +9,6 @@ import { MdOutlineAttachEmail } from "react-icons/md";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { IoMdClose, IoIosLogOut } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import { getFirstTwoLetters, capitalizeEachWord } from "../../Helper/utility"
 import logo from "../../assets/images/WhatsApp Image 2023-10-02 at 9.14.09 PM (1).jpeg";
 import "./styles.scss";
 
@@ -78,7 +77,7 @@ const Header = () => {
 
     useEffect(() => {
         setUserData(userInfo);
-        // console.log("userInfo", userInfo)
+        console.log("userInfo", userInfo)
     }, [userInfo])
 
     return (
@@ -86,11 +85,14 @@ const Header = () => {
             <div className="header-container">
                 <div className="header-option">
                     <div className="user-info">
-                        <div className="user-avtar">
-                            {getFirstTwoLetters(userData?.name)}
-                        </div>
+                        {/* <div className="user-avtar">
+                            AK
+                        </div> */}
+                        <Avatar onClick={() => navigate('/')} className="user-avtar" style={{ backgroundColor: "red", verticalAlign: 'middle' }} size="large" >
+                            {userData?.name?.slice(0, 2)}
+                        </Avatar>
                         <div className="user-name">
-                            <h4>{token ? capitalizeEachWord(userData?.name) : "Guest User"}</h4>
+                            <h4>{token ? userData?.name : "Guest User"}</h4>
                             <p>Participate, Play, and Pocket Real Money!</p>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Radio, message } from 'antd';
 import "./quize.scss"
+import { useNavigate } from 'react-router-dom';
 const { Meta } = Card;
 
 const questions = [
@@ -40,6 +41,7 @@ const QuizApp = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [timeLeft, setTimeLeft] = useState(5);
+    const navigate = useNavigate()
 
     useEffect(() => {
         let timer;
@@ -65,6 +67,7 @@ const QuizApp = () => {
             setTimeLeft(5);
         } else {
             message.success('Quiz completed! Submitting...');
+            navigate('/submit')
             // Handle submitting the quiz here
         }
     };
