@@ -5,7 +5,7 @@ export const END_POINTS={
      signup : `${api}/signup`,
      login  :`${api}/login`,
      handleDuplicateEmail  :`${api}/email`,
-     userInfo  :`${api}/getUser`,
+     userInfo  :`${api}/user`,
      verify  :`${api}/verify`,
      orders  :`${api}/orders`,
      contest  :`${api}/admin/contest`,

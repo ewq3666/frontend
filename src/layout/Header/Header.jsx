@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Drawer, Menu } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useSelector } from 'react-redux';
 import { AiOutlineRight, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
 import { RiWallet3Line } from "react-icons/ri";
 import { CiBank } from "react-icons/ci";
@@ -12,9 +13,10 @@ import logo from "../../assets/images/WhatsApp Image 2023-10-02 at 9.14.09 PM (1
 import "./styles.scss";
 
 const Header = () => {
-
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
+    const [userData, setUserData] = useState({});
+    let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
     const menuArr = [
         {
             key: "myprofile",
@@ -72,6 +74,12 @@ const Header = () => {
         }
         setVisible(false);
     };
+
+    useEffect(()=>{
+        setUserData(userInfo);
+        console.log("userInfo",userInfo)
+    },[userInfo])
+
     return (
         <div className="header-wrapper">
             <div className="header-container">
@@ -81,7 +89,7 @@ const Header = () => {
                             AK
                         </div>
                         <div className="user-name">
-                            <h4>Ajay Kharat</h4>
+                            <h4>{token ? userData?.name : "Guest User"}</h4>
                             <p>Participate, Play, and Pocket Real Money!</p>
                         </div>
                     </div>

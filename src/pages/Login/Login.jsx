@@ -1,59 +1,49 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
+import { Helmet } from "react-helmet";
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { END_POINTS } from '../../api/domain';
-import { Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
-import { CheckCircleOutlined } from '@ant-design/icons';
 import { Form, Input, Button, notification } from 'antd';
+import { addUsers } from '../../store/actions/reducerActions';
 import * as Notifications from "../../assets/messages.js";
 import axios from "axios";
 import './styles.scss';
 
 const Login = () => {
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isBtnLoading, setIsBtnLoading] = useState(false);
 
+  // Login form submit function
   const onFinish = async (values) => {
-    console.log('Received values:', values);
     try {
       setIsBtnLoading(true);
+      // API call for login
       let res = await axios.post(END_POINTS.login, values)
-      console.log(res?.data.result.token);
       if (res) {
+        // Set token into localstorage
         localStorage.setItem("token", res?.data.result.token)
+        // API call for get user information
+        let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: res?.data.result.token } })
+        dispatch(addUsers(userInfo.data.result))
         Notifications.loginSuccessMessage();
-        console.log("res", res)
-        let userInfo = await axios.get(END_POINTS.userInfo, res?.data.result.token)
         setIsBtnLoading(false);
-        console.log("userInfo", userInfo)
+        // Navigate user after logging
         navigate('/')
       }
     } catch (error) {
-      console.log(error);
       if (error?.response?.data.msg) {
-        notification.error({ message: error.response.data.msg })
+        Notifications.passwordNotMatch();
         setIsBtnLoading(false);
       }
       else {
-        notification.error({ message: "something went wrong" })
+        Notifications.emailNotRegisterd();
         setIsBtnLoading(false);
       }
     }
   };
 
-  // const setUserData = async () => {
-  //   try {
-  //     const res = await axios.get('https://backendupdated.vercel.app/api/user');
-  //     dispatch(res.data.result);
-  //   }
-  //   catch (error) {
-  //     console.log(error, "failed to get data")
-  //   }
-  // }
-  // useEffect(() => {
-  //   setUserData()
-  // }, []);
   return (
     <div className="login-container">
       <Helmet>
@@ -81,11 +71,9 @@ const Login = () => {
             <Input.Password placeholder="Enter your password" />
           </Form.Item>
 
-          {/* <Form.Item style={{ textAlign: 'right' }}> */}
-          <div className="forgot-password-option">
+          {/* <div className="forgot-password-option">
             <a href="#">Forgot password?</a>
-          </div>
-          {/* </Form.Item> */}
+          </div> */}
 
           <Form.Item>
             <Button htmlType="submit" loading={isBtnLoading}>
