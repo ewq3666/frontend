@@ -59,6 +59,7 @@ const ContestCard = () => {
     const token = localStorage.getItem('token');
     // console.log(token, "hey iam toekn");
     if (!token) navigate('/login');
+    navigate('/quize')
 
   };
 
