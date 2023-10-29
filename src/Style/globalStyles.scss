@@ -87,6 +87,31 @@
             text-align: center;
         }
     }
+    .common-yellow-button {
+        background: var(--is-warning-color);
+        border-radius: 36px;
+        height: 42px;
+        width: 230px;
+        box-shadow: 1px 3px 33px 4px rgba(233,189,36,0.57);
+        -webkit-box-shadow: 1px 3px 33px 4px rgba(233,189,36,0.57);
+        -moz-box-shadow: 1px 3px 33px 4px rgba(233,189,36,0.57);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            color: var(--is-quaternary-text-color);
+            font-size: 16px;
+            font-weight: 700;
+            margin-right: 8px;
+            margin-top: -3px;
+        }
+        span {
+            color: var(--is-quaternary-text-color);
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+        }
+    }
 
     .common-empty-button {
         order: none !important;

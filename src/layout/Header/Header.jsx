@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer, Menu } from 'antd';
+import { Avatar, Drawer, Menu } from 'antd';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { AiOutlineRight, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
@@ -113,7 +113,7 @@ const Header = () => {
             <Drawer
                 title={
                     <div className='menu-title'>
-                        <div className='menu-logo'>
+                        <div className='menu-logo' onClick={() => { navigate('/'); setVisible(false) }}>
                             <img src={logo} alt="" />
                         </div>
                         <IoMdClose onClick={() => setVisible(false)} />
