@@ -132,7 +132,7 @@ const ContestCard = () => {
                   <div className="contest-card__mid-entryfee">
                     <span>
                       ENTRY FEE: <BsCurrencyRupee className='icon' />{values.entryFee}
-                    </span>
+                      </span>
                   </div>
                 </div>
                 <div className="contest-card__bottom">
