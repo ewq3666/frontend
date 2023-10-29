@@ -8,5 +8,6 @@ export const END_POINTS={
      userInfo  :`${api}/user`,
      verify  :`${api}/verify`,
      orders  :`${api}/orders`,
+     addmoney  :`${api}/addmoney`,
      contest  :`${api}/admin/contest`,
 }
