@@ -2,6 +2,7 @@
     width: 769px;
 
     .wallet-section-main-container {
+        padding-top: 8px;
         .balence-box {
             margin-top: 22px;
             display: flex;
@@ -19,24 +20,37 @@
             }
 
             button {
-                height: 36px;
+                height: 42px;
                 margin-top: 16px;
-                background: rgba(0, 128, 0, 0.85);
                 border-radius: 16px;
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
                 backdrop-filter: blur(12.2px);
                 -webkit-backdrop-filter: blur(12.2px);
-                box-shadow: 1px 3px 33px 4px rgba(0, 128, 0, 0.57);
-                -webkit-box-shadow: 1px 3px 33px 4px rgba(0, 128, 0, 0.57);
-                -moz-box-shadow: 1px 3px 33px 4px rgba(0, 128, 0, 0.57);
                 padding: 0px 22px;
                 border: 1px solid rgba(10, 181, 50, 0.96);
                 display: flex;
                 align-items: center;
 
                 span {
-                    color: var(--is-quaternary-text-color);
+                    color: rgba(0, 128, 0, 0.85);
                     font-weight: 600;
+                }
+
+                .plus-icon {
+                    padding-right: 12px;
+                    font-size: 22px;
+                    font-weight: 500;
+                }
+            }
+            button:hover,
+            button:active {
+                background: rgba(0, 128, 0, 0.85);
+                box-shadow: 1px 3px 33px 4px rgba(0, 128, 0, 0.57);
+                -webkit-box-shadow: 1px 3px 33px 4px rgba(0, 128, 0, 0.57);
+                -moz-box-shadow: 1px 3px 33px 4px rgba(0, 128, 0, 0.57);
+
+                span {
+                    color: var(--is-quaternary-text-color);
                 }
 
                 .plus-icon {
@@ -48,7 +62,7 @@
         }
 
         .wallet-divider {
-            border-width: 2px 0 0 !important;
+            border-width: 3.5px 0 0 !important;
             margin: 32px 0 !important;
         }
 
@@ -67,13 +81,39 @@
                     font-size: 12px;
                 }
             }
-
-            button {
-                background: var(--is-warning-color);
+            .Withdraw-btn {
+                height: 42px;
+                margin-top: 16px;
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(12.2px);
+                -webkit-backdrop-filter: blur(12.2px);
+                padding: 0px 22px;
                 border: 1px solid var(--is-warning-color);
+                display: flex;
+                align-items: center;
+
+                span {
+                    color: var(--is-warning-color);
+                    font-weight: 600;
+                }
+
+                .plus-icon {
+                    padding-right: 12px;
+                    font-size: 22px;
+                    font-weight: 500;
+                }
+            }
+
+            button:hover,
+            button:active {
+                background: var(--is-warning-color);
                 box-shadow: 1px 3px 33px 4px rgba(233, 189, 36, 0.57);
                 -webkit-box-shadow: 1px 3px 33px 4px rgba(233, 189, 36, 0.57);
                 -moz-box-shadow: 1px 3px 33px 4px rgba(233, 189, 36, 0.57);
+                span {
+                    color: var(--is-quaternary-text-color);
+                }
             }
         }
     }
