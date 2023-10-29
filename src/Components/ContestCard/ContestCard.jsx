@@ -11,7 +11,14 @@ const ContestCard = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
+  console.log(contestData, "data is this");
+  contestData.result?.map((val) => {
+    let dd = moment(val.date);
+    console.log(dd.format("DDMMM"), "sdlds")
+  })
+
   const [contestTimer, setContestTimer] = useState([]);
+  console.log(contestTimer, "time diff")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,11 +58,12 @@ const ContestCard = () => {
     };
   }, [contestData]);
 
-  const Countdown = ({ days, hours, minutes, seconds }) => {
+  const Countdown = ({ days, hours, minutes, seconds, index }) => {
     if (days === 1) {
       return <p>Tomorrow</p>;
     } else if (days > 1) {
-      return <p>{moment().format('DDMMM')}</p>;
+      const formatted = moment(contestData.result[index].date).format("DDMMM");
+      return <p>{formatted}</p>;
     } else if (days > 0) {
       return <p>{days}d {hours}h {minutes}m {seconds}s</p>;
     } else if (hours > 0) {
@@ -64,6 +72,7 @@ const ContestCard = () => {
       return <p>{minutes}m {seconds}s</p>;
     }
   };
+
 
   const handleJoinBtn = () => {
     const token = localStorage.getItem('token');
@@ -89,9 +98,10 @@ const ContestCard = () => {
                         hours={contestTimer[index].hours}
                         minutes={contestTimer[index].minutes}
                         seconds={contestTimer[index].seconds}
+                        index={index}
                       />
                     </p>
-                    <p className='custom-time'>{moment(values.time, 'HH:mm A').format("HH:mm")}</p>
+                    <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
                   </div>
                   <div className="contest-card__header-right">
                     <button
