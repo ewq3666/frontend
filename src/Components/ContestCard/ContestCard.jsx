@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Progress, Result } from 'antd';
+import { Card, Button, Progress } from 'antd';
 import './contestcard.scss';
 import { BsCurrencyRupee } from 'react-icons/bs';
 import moment from 'moment';
@@ -8,15 +8,16 @@ import { END_POINTS } from '../../api/domain';
 import { useNavigate } from "react-router-dom";
 
 const ContestCard = () => {
-
   const navigate = useNavigate();
+  const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
+  const [contestTimer, setContestTimer] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(END_POINTS.contest);
         setContestData(response.data);
-        // console.log(response.data, "contest data");
       } catch (error) {
         console.error(error);
       }
@@ -25,46 +26,53 @@ const ContestCard = () => {
     fetchData();
   }, []);
 
-  const [progress, setProgress] = useState(80)
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [result, setResult] = useState({})
-
-  const currentTime = moment();
-  const targetDateTime = moment('2023-11-12 11:30 PM', 'YYYY-MM-DD HH:mm A');
-  // const targetDateTime = moment(`${contestData.date} ${contestData.time}`, 'YYYY-MM-DD HH:mm A');
-
-  const duration = moment.duration(targetDateTime.diff(currentTime));
-
-  const daysDiff = duration.days();
-  const hoursDiff = duration.hours();
-  const minutesDiff = duration.minutes();
-  const secondsDiff = duration.seconds();
-
   useEffect(() => {
     const timer = setInterval(() => {
-      setResult({
-        days: daysDiff,
-        hours: hoursDiff,
-        minutes: minutesDiff,
-        seconds: secondsDiff
+      const currentTime = moment();
+      const updatedContestTimer = contestData.result?.map((contest) => {
+        const targetDateTime = moment(`${contest.date} ${contest.time}`, 'YYYY-MM-DD HH:mm A');
+        const duration = moment.duration(targetDateTime.diff(currentTime));
+        const daysDiff = duration.days();
+        const hoursDiff = duration.hours();
+        const minutesDiff = duration.minutes();
+        const secondsDiff = duration.seconds();
+        return {
+          days: daysDiff,
+          hours: hoursDiff,
+          minutes: minutesDiff,
+          seconds: secondsDiff,
+          time: contest.time
+        };
       });
+      setContestTimer(updatedContestTimer);
     }, 1000);
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [contestData]);
+
+  const Countdown = ({ days, hours, minutes, seconds }) => {
+    if (days === 1) {
+      return <p>Tomorrow</p>;
+    } else if (days > 1) {
+      return <p>{moment().format('DDMMM')}</p>;
+    } else if (days > 0) {
+      return <p>{days}d {hours}h {minutes}m {seconds}s</p>;
+    } else if (hours > 0) {
+      return <p>{hours}h {minutes}m {seconds}s</p>;
+    } else {
+      return <p>{minutes}m {seconds}s</p>;
+    }
+  };
 
   const handleJoinBtn = () => {
-
     const token = localStorage.getItem('token');
-    // console.log(token, "hey iam toekn");
     if (!token) navigate('/login');
-
   };
 
   return (
     <>
-      {result.hours > 0 || result.minutes > 0 || result.seconds > 0 ? (
+      {contestTimer.length > 0 ? (
         <>
           {contestData.result?.map((values, index) => {
             return (
@@ -76,19 +84,14 @@ const ContestCard = () => {
                   </div>
                   <div className="contest-card__header-mid">
                     <p className='countdown-box'>
-                      {result.days === 1 ? (
-                        <p>Tomorrow</p>
-                      ) : result.days > 1 ? (
-                        <p>{targetDateTime.format('DDMMM')}</p>
-                      ) : result.days > 0 ? (
-                        <p> {result.days}d {result.hours}h {result.minutes}m {result.seconds}s</p>
-                      ) : result.hours > 0 ? (
-                        <p>{result.hours}h {result.minutes}m {result.seconds}s</p>
-                      ) : (
-                        <p>{result.minutes}m {result.seconds}s</p>
-                      )}
+                      <Countdown
+                        days={contestTimer[index].days}
+                        hours={contestTimer[index].hours}
+                        minutes={contestTimer[index].minutes}
+                        seconds={contestTimer[index].seconds}
+                      />
                     </p>
-                    <p className='custom-time'>{targetDateTime.format('h:mm A')}</p>
+                    <p className='custom-time'>{moment(values.time, 'HH:mm A').format("HH:mm")}</p>
                   </div>
                   <div className="contest-card__header-right">
                     <button
@@ -124,10 +127,9 @@ const ContestCard = () => {
                 </div>
               </div>
             )
-          })
-          }
+          })}
         </>
-      ) : ""}
+      ) : <h1>Join Next Contest</h1>}
     </>
   );
 };
