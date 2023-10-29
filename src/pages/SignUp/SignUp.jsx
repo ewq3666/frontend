@@ -51,6 +51,7 @@ const SignUp = () => {
           notification.error({ message: 'please enter email' })
         }
       }
+
     } catch (error) {
 
     }

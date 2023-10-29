@@ -14,6 +14,7 @@ import Layout from "../layout/Layout";
 import Protected from "./Protected";
 import Transaction from "../pages/Transaction/Transaction";
 import QuizApp from "../quize/Quize";
+import Submit from "../Components/Submit/Submit";
 
 export const routes = [
     {
@@ -38,6 +39,10 @@ export const routes = [
             {
                 path: "quize",
                 element: <Protected Component={QuizApp} />
+            },
+            {
+                path: "submit",
+                element: <Protected Component={Submit} />
             },
 
         ]
