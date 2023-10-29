@@ -12,13 +12,9 @@ const ContestCard = () => {
   const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
   console.log(contestData, "data is this");
-  contestData.result?.map((val) => {
-    let dd = moment(val.date);
-    console.log(dd.format("DDMMM"), "sdlds")
-  })
 
   const [contestTimer, setContestTimer] = useState([]);
-  console.log(contestTimer, "time diff")
+  console.log(contestTimer, "time diff");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,7 +69,6 @@ const ContestCard = () => {
     }
   };
 
-
   const handleJoinBtn = () => {
     const token = localStorage.getItem('token');
     if (!token) navigate('/login');
@@ -84,6 +79,12 @@ const ContestCard = () => {
       {contestTimer.length > 0 ? (
         <>
           {contestData.result?.map((values, index) => {
+            // Calculate the total seconds remaining
+            const totalSeconds = (contestTimer[index].days * 24 * 60 * 60) + 
+              (contestTimer[index].hours * 60 * 60) + 
+              (contestTimer[index].minutes * 60) + 
+              contestTimer[index].seconds;
+            
             return (
               <div className="contest-card" key={index}>
                 <div className="contest-card__header">
@@ -92,34 +93,42 @@ const ContestCard = () => {
                     <span className='contest-card__header-left__amount'><BsCurrencyRupee className='icon' />{values.price}</span>
                   </div>
                   <div className="contest-card__header-mid">
-                    <p className='countdown-box'>
-                      <Countdown
-                        days={contestTimer[index].days}
-                        hours={contestTimer[index].hours}
-                        minutes={contestTimer[index].minutes}
-                        seconds={contestTimer[index].seconds}
-                        index={index}
-                      />
-                    </p>
+                    {totalSeconds <= 0 ? (
+                      <p>Completed</p>
+                    ) : (
+                      <p className='countdown-box'>
+                        <Countdown
+                          days={contestTimer[index].days}
+                          hours={contestTimer[index].hours}
+                          minutes={contestTimer[index].minutes}
+                          seconds={contestTimer[index].seconds}
+                          index={index}
+                        />
+                      </p>
+                    )}
                     <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
                   </div>
                   <div className="contest-card__header-right">
-                    <button
-                      onClick={handleJoinBtn}
-                      className="join-button"
-                    >Join
-                    </button>
+                    {totalSeconds <= 0 ? (
+                      <button disabled>Completed</button>
+                    ) : (
+                      <button
+                        onClick={handleJoinBtn}
+                        className="join-button"
+                      >Join
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="contest-card__mid">
                   <div className="contest-card__mid-category">
                     <span>
-                      Category : {values.name}
+                      Category: {values.name}
                     </span>
                   </div>
                   <div className="contest-card__mid-entryfee">
                     <span>
-                      ENTRY FEE : <BsCurrencyRupee className='icon' />{values.entryFee}
+                      ENTRY FEE: <BsCurrencyRupee className='icon' />{values.entryFee}
                     </span>
                   </div>
                 </div>
