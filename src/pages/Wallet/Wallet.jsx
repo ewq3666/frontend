@@ -83,7 +83,7 @@ const Wallet = () => {
                     <h3><FaRupeeSign /> 2000</h3>
                     <Button
                         className="Withdraw-btn"
-                        onClick={() => addAmountFunction(false, true)}
+                        // onClick={() => addAmountFunction(false, true)}
                     >
                         <span className='plus-icon'><FaRupeeSign /></span>
                         Withdrawal Amount
