@@ -31,3 +31,13 @@ export const emailNotRegisterd = () => {
     className: "success-notification"
   });
 } 
+export const paymentAddSuccessFully = (name, amount) => {
+  notification.success({
+    message: 'Money Added Successfully',
+    description: `Hello ${name}, you've successfully added ${amount} to your account. Your balance is now updated. Enjoy playing quizzes and earning rewards!`,
+    icon: <CheckCircleOutlined style={{ color: '#52c41a' }} />,
+    placement: 'top',
+    // duration: 1000,
+    className: "success-notification"
+  });
+}

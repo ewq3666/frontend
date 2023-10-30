@@ -23,14 +23,20 @@ const Wallet = () => {
         setIsModalOpen(true);
     }
 
-    const onFinish = (fieldValue) => {
-        setIsBtnLoading(true);
-        console.log("fieldValue", fieldValue)
-        const amount = parseInt(fieldValue.amount);
-        console.log("userInfo",userInfo)
-        const handlePayment1 = handlePayment(amount,userInfo);
-        console.log("handlePayment1",handlePayment1)
-        setIsBtnLoading(false);
+    const onFinish = async(fieldValue) => {
+        try {
+            setIsBtnLoading(true);
+            console.log("fieldValue", fieldValue)
+            const amount = parseInt(fieldValue.amount);
+            console.log("userInfo", userInfo)
+            handlePayment(amount, userInfo);
+            setIsBtnLoading(false);
+            setIsAddAmount(false);
+            setIsWithdrawRequest(false);
+            setIsModalOpen(false);
+        } catch (error) {
+            console.log("catch error")
+        }
     }
 
 
