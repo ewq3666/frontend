@@ -18,7 +18,7 @@ export const passwordNotMatch = () => {
     icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
     placement: 'top',
     // duration: 1000,
-    className: "success-notification"
+    className: "success-notification error-notification"
   });
 }
 export const emailNotRegisterd = () => {
@@ -28,6 +28,16 @@ export const emailNotRegisterd = () => {
     icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
     placement: 'top',
     // duration: 1000,
-    className: "success-notification"
+    className: "success-notification error-notification"
   });
 } 
+export const paymentAddSuccessFully = (name, amount) => {
+  notification.success({
+    message: 'Money Added Successfully',
+    description: `Hello ${name}, you've successfully added ${amount}.00 to your account. Your balance is now updated. Enjoy playing quizzes and earning rewards!`,
+    icon: <CheckCircleOutlined style={{ color: '#52c41a' }} />,
+    placement: 'top',
+    // duration: 1000,
+    className: "success-notification"
+  });
+}

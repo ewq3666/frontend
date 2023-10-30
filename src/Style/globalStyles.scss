@@ -87,6 +87,39 @@
             text-align: center;
         }
     }
+    .common-blue-btn {
+        height: 42px;
+        margin-top: 16px;
+        border-radius: 5px;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+        backdrop-filter: blur(12.2px);
+        -webkit-backdrop-filter: blur(12.2px);
+        padding: 0px 22px;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(0deg, #004dff 0%, #004dff 100%);
+
+        span {
+            color: var(--is-quaternary-text-color);
+            font-weight: 600;
+        }
+
+        .plus-icon,
+        svg {
+            padding-right: 12px;
+            font-size: 22px;
+            font-weight: 500;
+        }
+    }
+    .common-blue-btn:hover,
+    .common-blue-btn:active {
+        box-shadow: 4px 4px 6px 0 rgba(255,255,255,.5),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+                    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+                    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+    }
 
     .common-empty-button {
         order: none !important;
@@ -177,16 +210,36 @@
 .success-notification {
     padding: 16px !important;
     .ant-notification-notice-icon {
-        margin-top: 6px;
+        // margin-top: 6px;
+        svg {
+            color: var(--is-green-text-color);
+        }
     }
     .ant-notification-notice-message {
-        font-size: 22px;
-        font-weight: 700;
         margin-bottom: 0px !important;
+        color: var(--is-green-text-color) !important;
+        font-weight: 700;
+        font-size: 18px;
     }
     .ant-notification-notice-description {
         font-size: 14px;
         font-weight: 500;
+        margin-top: 6px;
+        font-weight: 700;
+    }
+    .ant-notification-notice-close {
+        color: var(--is-red-color) !important;
+        font-size: 20px;
+    }
+}
+.error-notification {
+    .ant-notification-notice-icon {
+        svg {
+            color: var(--is-red-color) !important;
+        }
+    }
+    .ant-notification-notice-message {
+        color: var(--is-red-color) !important;
     }
 }
 // ############################# Success notification css End #############################
