@@ -210,16 +210,36 @@
 .success-notification {
     padding: 16px !important;
     .ant-notification-notice-icon {
-        margin-top: 6px;
+        // margin-top: 6px;
+        svg {
+            color: var(--is-green-text-color);
+        }
     }
     .ant-notification-notice-message {
-        font-size: 22px;
-        font-weight: 700;
         margin-bottom: 0px !important;
+        color: var(--is-green-text-color) !important;
+        font-weight: 700;
+        font-size: 18px;
     }
     .ant-notification-notice-description {
         font-size: 14px;
         font-weight: 500;
+        margin-top: 6px;
+        font-weight: 700;
+    }
+    .ant-notification-notice-close {
+        color: var(--is-red-color) !important;
+        font-size: 20px;
+    }
+}
+.error-notification {
+    .ant-notification-notice-icon {
+        svg {
+            color: var(--is-red-color) !important;
+        }
+    }
+    .ant-notification-notice-message {
+        color: var(--is-red-color) !important;
     }
 }
 // ############################# Success notification css End #############################

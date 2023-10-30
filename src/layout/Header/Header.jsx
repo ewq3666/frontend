@@ -91,7 +91,8 @@ const Header = () => {
                         </Avatar>
                         <div className="user-name">
                             <h4>{token ? userData?.name : "Guest User"}</h4>
-                            <p>Participate, Play, and Pocket Real Money!</p>
+                            {/* <p>Participate, Play, and Pocket Real Money!</p> */}
+                            <p>Play quizzes, earn money</p>
                         </div>
                     </div>
                     {token === null ? (
