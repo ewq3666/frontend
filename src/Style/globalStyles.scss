@@ -87,6 +87,39 @@
             text-align: center;
         }
     }
+    .common-blue-btn {
+        height: 42px;
+        margin-top: 16px;
+        border-radius: 5px;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+        backdrop-filter: blur(12.2px);
+        -webkit-backdrop-filter: blur(12.2px);
+        padding: 0px 22px;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(0deg, #004dff 0%, #004dff 100%);
+
+        span {
+            color: var(--is-quaternary-text-color);
+            font-weight: 600;
+        }
+
+        .plus-icon,
+        svg {
+            padding-right: 12px;
+            font-size: 22px;
+            font-weight: 500;
+        }
+    }
+    .common-blue-btn:hover,
+    .common-blue-btn:active {
+        box-shadow: 4px 4px 6px 0 rgba(255,255,255,.5),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .5), 
+                    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+                    inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+    }
 
     .common-empty-button {
         order: none !important;
