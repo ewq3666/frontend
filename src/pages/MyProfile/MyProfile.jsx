@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import "./styles.scss";
-import axios from 'axios';
 import { getFirstTwoLetters, capitalizeEachWord } from "../../Helper/utility"
-// import { END_POINTS } from '../../api/domain';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUsers} from '../../store/actions/reducerActions';
+import { useSelector } from 'react-redux';
 
 const MyProfile = () => {
 
-    const dispatch = useDispatch()
-    let result = useSelector((state) => state.eventReducer);
-    console.log(result, "yeah we get result");
-
-    const token = localStorage.getItem('token');
+    let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
     const [userData, setUserData] = useState([]);
-
     const awardsData = [
         {
             path: require("../../assets/images/winner.png"),
@@ -34,28 +26,16 @@ const MyProfile = () => {
         },
     ];
 
-    const fetchUser = async () => {
-        try {
-            const res = await axios.get('https://backendupdated.vercel.app/api/user', { headers: { Authorization: token } });
-            const user = res.data.result;
-            setUserData([user]);
-            dispatch(addUsers([user]));
-            console.log(res,"datatatata");
-        }
-        catch (error) {
-            console.log(error, "Not geeting users data");
-        }
-    }
     useEffect(() => {
-        fetchUser()
-    }, []);
+        setUserData([userInfo])
+    }, [userInfo]);
 
     return (
         <>
             <div className='main-container'>
                 <div className="container">
-                    {userData.length > 0 ? (
-                        userData.map((ele, index) => (
+                    {true? (
+                        userData?.map((ele, index) => (
                             <div className="profile-card" key={index}>
                                 <div className="profile-card__header">
                                     <div className="profile-card__header-logo">
