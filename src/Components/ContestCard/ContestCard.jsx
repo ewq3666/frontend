@@ -14,7 +14,9 @@ const ContestCard = () => {
   console.log(contestData, "data is this");
 
   const [contestTimer, setContestTimer] = useState([]);
-  console.log(contestTimer, "time diff");
+  // console.log(contestTimer, "time diff");
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,10 +57,20 @@ const ContestCard = () => {
   }, [contestData]);
 
   const Countdown = ({ days, hours, minutes, seconds, index }) => {
-    if (days === 1) {
+    const contest = contestData.result[index]; // Get the specific contest data
+    let diff = null;
+  
+    if (contest) {
+      const contestDate = moment(contest.date).format('YYYY-MM-DD');
+      const customDate = moment(contestDate);
+      const today = moment().format('YYYY-MM-DD');
+      diff = customDate.diff(today, 'days');
+    }
+  
+    if (diff === 1) {
       return <p>Tomorrow</p>;
-    } else if (days > 1) {
-      const formatted = moment(contestData.result[index].date).format("DDMMM");
+    } else if (diff > 1) {
+      const formatted = moment(contest.date).format("DDMMM");
       return <p>{formatted}</p>;
     } else if (days > 0) {
       return <p>{days}d {hours}h {minutes}m {seconds}s</p>;
@@ -68,26 +80,24 @@ const ContestCard = () => {
       return <p>{minutes}m {seconds}s</p>;
     }
   };
-
+  
   const handleJoinBtn = () => {
     const token = localStorage.getItem('token');
-    if(token) {navigate("/")}
-    
+    if (token) { navigate("/") }
     else navigate('/login');
-  
   };
 
   return (
     <>
-      {contestTimer.length > 0 ? (
+      {contestTimer?.length > 0 ? (
         <>
           {contestData.result?.map((values, index) => {
             // Calculate the total seconds remaining
-            const totalSeconds = (contestTimer[index].days * 24 * 60 * 60) + 
-              (contestTimer[index].hours * 60 * 60) + 
-              (contestTimer[index].minutes * 60) + 
+            const totalSeconds = (contestTimer[index].days * 24 * 60 * 60) +
+              (contestTimer[index].hours * 60 * 60) +
+              (contestTimer[index].minutes * 60) +
               contestTimer[index].seconds;
-            
+
             return (
               <div className="contest-card" key={index}>
                 <div className="contest-card__header">
@@ -132,7 +142,7 @@ const ContestCard = () => {
                   <div className="contest-card__mid-entryfee">
                     <span>
                       ENTRY FEE: <BsCurrencyRupee className='icon' />{values.entryFee}
-                      </span>
+                    </span>
                   </div>
                 </div>
                 <div className="contest-card__bottom">

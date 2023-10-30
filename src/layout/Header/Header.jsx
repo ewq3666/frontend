@@ -86,9 +86,12 @@ const Header = () => {
             <div className="header-container">
                 <div className="header-option">
                     <div className="user-info">
-                        <div className="user-avtar">
-                            {getFirstTwoLetters(userData?.name)}
-                        </div>
+                        {/* <div className="user-avtar">
+                            AK
+                        </div> */}
+                        <Avatar onClick={() => navigate('/')} className="user-avtar" style={{ backgroundColor: "red", verticalAlign: 'middle' }} size="large" >
+                            {userData?.name?.slice(0, 2)}
+                        </Avatar>
                         <div className="user-name">
                             <h4>{token ? capitalizeEachWord(userData?.name) : "Guest User"}</h4>
                             <p>Participate, Play, and Pocket Real Money!</p>
