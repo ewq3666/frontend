@@ -13,18 +13,27 @@
             width: 375px;
             border: 2px soild rgb(68, 60, 60);
             margin-top: 2rem;
-            padding: 1rem;
+            // padding: 1rem;
             border-radius: 1rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             &__header {
+                height: 4rem;
                 display: flex;
                 align-items: center;
+                background: #e3b6b6;
+                border-radius: 1rem 1rem 0 0;
+                padding: 1rem 1rem 0 1rem;
+                .flex-container {
+                    margin-top: 3rem;
+                }
                 &-logo {
+                    padding: 2rem;
                     width: 4rem;
                     height: 4rem;
                     padding: 1.5rem;
                     border-radius: 5rem;
                     background: #877171;
+                    border: 2px solid rgb(255, 255, 255);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -53,7 +62,7 @@
             &__userdata {
                 display: flex;
                 flex-direction: row;
-                margin: 1rem 1rem 0 1rem;
+                margin: 2rem 1rem 0.5rem 1.5rem;
                 align-items: flex-start;
                 p {
                     color: #a7a0a0;

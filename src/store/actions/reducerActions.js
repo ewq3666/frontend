@@ -4,3 +4,7 @@ export const addUsers = (userData) => {
         payload: userData,
     };
 };
+export const updateProfile = (userData) => ({
+    type: 'UPDATE_PROFILE',
+    payload: userData,
+  })

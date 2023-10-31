@@ -7,6 +7,7 @@ const MyProfile = () => {
 
     let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
     const [userData, setUserData] = useState([]);
+    console.log(userData);
     const awardsData = [
         {
             path: require("../../assets/images/winner.png"),
@@ -34,26 +35,28 @@ const MyProfile = () => {
         <>
             <div className='main-container'>
                 <div className="container">
-                    {true? (
+                    {true ? (
                         userData?.map((ele, index) => (
                             <div className="profile-card" key={index}>
                                 <div className="profile-card__header">
-                                    <div className="profile-card__header-logo">
-                                        <p className='name'>
-                                            {getFirstTwoLetters(ele.name)}
-                                        </p>
-                                    </div>
-                                    <div className="profile-card__header-title">
-                                        <p className='username'>
-                                            {capitalizeEachWord(ele.name)}
-                                        </p>
-                                        <p className='user-level'>Level<b>:</b> 14</p>
+                                    <div className='flex-container'>
+                                        <div className="profile-card__header-logo">
+                                            <p className='name'>
+                                                {getFirstTwoLetters(ele.name)}
+                                            </p>
+                                            {/* <p className='username'>
+                                                {capitalizeEachWord(ele.name)}
+                                            </p> */}
+                                        </div>
+                                        <div className="profile-card__header-title">
+                                            {/* <p className='user-level'>Level<b>:</b> 14</p> */}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="profile-card__userdata">
                                     <div>
                                         <p>Email <span>{ele.user_email}</span></p>
-                                        <p>Mobile <span>{ele.mobile}</span></p>
+                                        <p>Address <span>{ele.upi}</span></p>
                                         <p>Address <span>{ele.district}</span></p>
                                     </div>
                                 </div>

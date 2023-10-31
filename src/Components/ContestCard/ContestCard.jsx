@@ -11,13 +11,9 @@ const ContestCard = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
-  console.log(contestData, "data is this");
-
+  // console.log(contestData, "data is this");
   const [contestTimer, setContestTimer] = useState([]);
   // console.log(contestTimer, "time diff");
-
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -97,7 +93,6 @@ const ContestCard = () => {
               (contestTimer[index].hours * 60 * 60) +
               (contestTimer[index].minutes * 60) +
               contestTimer[index].seconds;
-
             return (
               <div className="contest-card" key={index}>
                 <div className="contest-card__header">
