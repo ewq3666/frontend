@@ -29,7 +29,6 @@ const SignUp = () => {
     try {
       console.log(form.current);
       const userEmail = signUpForm.getFieldValue('user_email');
-      // console.log("email",email)
       let res = await axios.post(END_POINTS.handleDuplicateEmail, { "email": userEmail })
       console.log("res", res.data.registered)
       if (!res.data?.registered) {

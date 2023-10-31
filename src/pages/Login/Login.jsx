@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import axios from "axios";
+import { Form, Button } from 'antd';
 import { Helmet } from "react-helmet";
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { END_POINTS } from '../../api/domain';
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, notification } from 'antd';
-import { addUsers } from '../../store/actions/reducerActions';
+import { HiOutlineUserCircle } from 'react-icons/hi2';
 import * as Notifications from "../../assets/messages.js";
-import axios from "axios";
+import { addUsers } from '../../store/actions/reducerActions';
+import CommonInput from '../../Components/CommonInput/CommonInput';
+import { loginFormField } from '../../assets/commonData/commonData';
 import './styles.scss';
 
 const Login = () => {
@@ -51,37 +54,24 @@ const Login = () => {
         <title>Login to Your Account | EWQ </title>
         <meta name="description" content="Explore EWQ, the ultimate destination for paid quizzes and rewarding knowledge seekers. Participate in engaging quizzes, earn rewards, and enrich your learning experience. Join EWQ today!"></meta>
       </Helmet>
-      <div className="login-box">
+
+      <div className="login-container__box">
+        <div className="login-container__box-user-icon">
+          <HiOutlineUserCircle/>
+        </div>
         <h1>Login</h1>
-        <Form name="login-form" onFinish={onFinish} className='login-form-wrapper'>
-          <Form.Item
-            name="user_email"
-            rules={[
-              { required: true, message: 'Please enter your email.' },
-              { type: 'email', message: 'Invalid email address.' },
-            ]}
-          >
-            <Input placeholder="Enter your Email" />
-          </Form.Item>
+        <Form name="login-form" onFinish={onFinish} className='login-container__box__form-wrapper'>
+          {loginFormField.map((data, index)=> {return (
+            <CommonInput props={data} index={index}/>
+          )})}
 
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: 'Please enter your password' }]}
-          >
-            <Input.Password placeholder="Enter your password" />
-          </Form.Item>
-
-          {/* <div className="forgot-password-option">
-            <a href="#">Forgot password?</a>
-          </div> */}
-
-          <Form.Item>
+          <div className="login-container__box__form-wrapper-btn">
             <Button htmlType="submit" loading={isBtnLoading}>
               Login
             </Button>
-          </Form.Item>
+          </div>
         </Form>
-        <div className="signup-option">
+        <div className="login-container__box-signup-option">
           <h3>Don't have an account ? <NavLink to="/signup">Sign-Up Now!</NavLink></h3>
         </div>
       </div>
