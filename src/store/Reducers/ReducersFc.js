@@ -9,8 +9,16 @@ export const ReducerFc = (state = initialState, action) => {
         ...state,
         userData: [...state.userData, action.payload],
       };
-      default:
-        return state;
+    case "UPDATE_PROFILE":
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          ...action.payload,
+        },
+      };
+    default:
+      return state;
   }
 };
 
