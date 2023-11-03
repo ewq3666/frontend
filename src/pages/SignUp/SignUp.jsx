@@ -1,13 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import axios from "axios";
-import { Form, Input, Button, Row, Col, notification, Drawer } from 'antd';
-import { UserOutlined, MailOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import { END_POINTS } from '../../api/domain';
 import { useNavigate } from 'react-router-dom';
+import { HiOutlineUserCircle } from 'react-icons/hi2';
+import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Button, notification, Drawer } from 'antd';
+import { signupFormFields } from '../../assets/commonData/commonData';
+import CommonInput from '../../Components/CommonInput/CommonInput';
+import * as Notifications from "../../assets/messages.js";
+import "../../Components/CommonInput/styles.scss";
 import OtpInput from 'react-otp-input';
-import './styles.scss';
 import emailjs from '@emailjs/browser';
+import "../Login/styles.scss";
+import axios from "axios";
+import './styles.scss';
 
 const SignUp = () => {
   const [signUpForm] = Form.useForm();
@@ -17,7 +23,7 @@ const SignUp = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const [data, setdata] = useState()
   const [emailSent, setemailSent] = useState(false)
-  const [emailVerified, setemailVerified] = useState(false)
+  // const [emailVerified, setemailVerified] = useState(false)
   const [otp, setotp] = useState()
   const [userOtp, setUserOtp] = useState()
   const formref = useRef()
@@ -25,52 +31,59 @@ const SignUp = () => {
     return Math.floor(100000 + Math.random() * 900000);
   }
 
+  // Check duplicate Email and send OTP
   const sendEmail = async (e) => {
     try {
-      console.log(form.current);
       const userEmail = signUpForm.getFieldValue('user_email');
+      // API call for check is email exist or not 
       let res = await axios.post(END_POINTS.handleDuplicateEmail, { "email": userEmail })
-      console.log("res", res.data.registered)
       if (!res.data?.registered) {
         if (userEmail) {
-          console.log("otp send")
+          console.log("fff")
+          // Send OTP
           let cotp = generateRandomSixDigitNumber()
           document.getElementById('message').innerHTML = cotp
           setotp(cotp)
+          console.log("hhhhh")
           emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
             .then((result) => {
-              console.log("aa:", result.text);
+              console.log("ggg",result)
               setemailSent(true)
-              notification.open({ message: 'otp sent' })
-            }, (error) => {
-              console.log("error", error.text);
-            });
+              Notifications.otpSendSuccessfully();
+            }, (error) => {console.log("error",error)});
         }
         else {
-          notification.error({ message: 'please enter email' })
+          // notification.error({ message: 'please enter email' })
         }
+      } else {
+        Notifications.emailAlreadyExist();
       }
-
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
-
-
+  // Set data
   const onFinish = async (values) => {
     setdata(values)
     console.log('Received values:', values);
   };
 
-
+  // Signup function called
   useEffect(() => {
     console.log("emailSent", emailSent, userOtp, otp);
     if (userOtp == otp && emailSent) {
+      console.log("true condition")
+      Notifications.otpMatched();
       registerUser()
+      setemailSent(false);
+    } else {
+      if(userOtp?.length > 5 && emailSent) {
+        Notifications.incorrectOtp();
+      }
+      console.log("false condition",otp)
     }
   }, [emailSent, sendEmail])
 
+  // Sign up function
   const registerUser = async () => {
     try {
       const payload = {
@@ -84,16 +97,12 @@ const SignUp = () => {
         district: signUpForm.getFieldValue('district') ? signUpForm.getFieldValue('district') : ""
       }
       let res = await axios.post(END_POINTS.signup, payload)
-      console.log(res.data);
       if (res) {
-        notification.open({
-          message: res.data.message
-        })
+        Notifications.signUpSuccess();
         setIsBtnLoading(false);
         navigate('/login');
       }
     } catch (error) {
-      console.log(error);
       if (error.response.data.msg) {
         notification.error({ message: error.response.data.msg })
         setIsBtnLoading(false);
@@ -105,150 +114,82 @@ const SignUp = () => {
     }
   }
 
-  // console.log(formref.current.input.value);
   return (
-    <div className="registration-container">
-      <div className="registration-box">
+    <div className="login-container">
+      <div className="login-container__box signup-box">
+        <div className="login-container__box-user-icon">
+          <HiOutlineUserCircle />
+        </div>
         <h1>Sign Up</h1>
-        <Form name="registration-form" onFinish={onFinish} className='Signup-form-wrapper' form={signUpForm}>
-          <Row gutter={16}>
-            <Col xs={24} sm={24} md={12}>
-              <Form.Item
-                name="name"
-                rules={[{ required: true, message: 'Please enter your name' }]}
-              >
-                <Input
-                  prefix={<UserOutlined className="input-icon" />}
-                  placeholder="Name"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={12}>
-              <Form.Item
-                name="user_email"
-                rules={[
-                  { required: true, message: 'Please enter your email' },
-                  { type: 'email', message: 'Invalid email address' },
-                ]}
-              >
-                <Input
-                  ref={formref} prefix={<MailOutlined className="input-icon" />}
-                  placeholder="Email"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
+        <Form name="registration-form" onFinish={onFinish} className='login-container__box__form-wrapper' form={signUpForm}>
+          {signupFormFields.map((data, index) => {
+            return (
+              <>
+                {
+                  data.type == "email" ?
+                    (
+                      <Form.Item
+                        name="user_email"
+                        rules={[
+                          { required: true, message: 'Please enter your email' },
+                          { type: 'email', message: 'Invalid email address' },
+                        ]}
+                        className="loginInput"
+                      >
+                        <Input
+                          ref={formref} prefix={<MailOutlined className="loginInput__input-icon" />}
+                          placeholder="Email"
+                          className='loginInput__input'
+                        />
+                      </Form.Item>
+                    )
+                  : data.type == "confirmPassword" ?
+                    (
+                      <Form.Item
+                        name="confirmPassword"
+                        dependencies={['password']}
+                        hasFeedback
+                        rules={[
+                          { required: true, message: 'Please confirm your password' },
+                          ({ getFieldValue }) => ({
+                            validator(_, value) {
+                              if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                              }
+                              return Promise.reject(new Error('The two passwords do not match'));
+                            },
+                          }),
+                        ]}
+                        className="loginInput"
+                      >
+                        <Input.Password
+                          prefix={<LockOutlined className="loginInput__input-icon" />}
+                          placeholder="Confirm Password"
+                          className='loginInput__input'
+                        />
+                      </Form.Item>
+                    )
+                  :
+                    <CommonInput props={data} index={index} />
+                }
+              </>
+            )
+          })}
 
-          <Row gutter={16}>
-            <Col xs={24} sm={24} md={12}>
-              <Form.Item
-                name="upi"
-                rules={[{ required: true, message: 'Please enter your UPI ID' }]}
-              >
-                <Input
-                  prefix={<UserOutlined className="input-icon" />}
-                  placeholder="Your UPI ID"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={12}>
-              <Form.Item
-                name="phone"
-                rules={[
-                  { required: true, message: 'Please enter your phone number' },
-                  { pattern: /^\d{10}$/, message: 'Invalid phone number' },
-                ]}
-              >
-                <Input
-                  prefix={<MobileOutlined className="input-icon" />}
-                  placeholder="Phone Number"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: 'Please enter your password' }]}
-          >
-            <Input.Password
-              prefix={<LockOutlined className="input-icon" />}
-              placeholder="Password"
-            />
-          </Form.Item>
-
-          <Form.Item
-            name="confirmPassword"
-            dependencies={['password']}
-            hasFeedback
-            rules={[
-              { required: true, message: 'Please confirm your password' },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error('The two passwords do not match'));
-                },
-              }),
-            ]}
-          >
-            <Input.Password
-              prefix={<LockOutlined className="input-icon" />}
-              placeholder="Confirm Password"
-            />
-          </Form.Item>
-
-          <Form.Item name="referal">
-            <Input
-              prefix={<UserOutlined className="input-icon" />}
-              placeholder="Referral (Optional)"
-            />
-          </Form.Item>
-
-          <Row gutter={16}>
-            <Col xs={24} sm={24} md={12}>
-              <Form.Item
-                name="state"
-                rules={[{ required: true, message: 'Please enter your state' }]}
-              >
-                <Input
-                  prefix={<UserOutlined className="input-icon" />}
-                  placeholder="Your State"
-                />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={24} md={12}>
-              <Form.Item name="district">
-                <Input
-                  prefix={<UserOutlined className="input-icon" />}
-                  placeholder="District (Optional)"
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Form.Item>
-
-            <Button type="primary" onClick={sendEmail} htmlType="submit" style={{ width: '100%', margin: '1rem 0' }} loading={isBtnLoading}>
+          <div className="login-container__box__form-wrapper-btn">
+            <Button onClick={sendEmail} loading={isBtnLoading}>
               Sign Up
             </Button>
-            {
-              emailSent &&
-              <input type="number" placeholder='enter otp' onChange={(e) => setUserOtp(e.target.value)} />
-            }
-            {/* <Button type="primary" htmlType="submit" style={{ width: '100%' }} loading={isBtnLoading}>
-              Sign-Up
-            </Button> */}
-          </Form.Item>
+          </div>
         </Form>
-        <form onSubmit={sendEmail} ref={form} className='hide-for'>
+        <form onSubmit={sendEmail} ref={form} className='hide-'>
           <div>
             <label htmlFor="user_email">Email:</label>
             <input
               type="email"
               id="user_email"
               name="user_email"
-              value={data?.user_email}
+              value={formref.current?.input?.value}
               required
             />
           </div>
@@ -264,7 +205,7 @@ const SignUp = () => {
           <button type="submit">Submit</button>
         </form>
 
-        <div className="signup-option">
+        <div className="login-container__box-signup-option">
           <h3>You have an account ? <NavLink to="/login">Login Now!</NavLink></h3>
         </div>
 
@@ -274,6 +215,7 @@ const SignUp = () => {
           placement="bottom"
           width={500}
           open={emailSent}
+          // open={true}
           className="Otp-drawer"
         >
           <OtpInput
@@ -281,7 +223,6 @@ const SignUp = () => {
             value={userOtp}
             onChange={setUserOtp}
             numInputs={6}
-            // renderSeparator={<span>-</span>}
             renderInput={(props) => <input {...props} />}
           />
           <div className="button-box">
