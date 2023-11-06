@@ -177,19 +177,19 @@ const SignUp = () => {
           })}
 
           <div className="login-container__box__form-wrapper-btn">
-            <Button onClick={sendEmail} loading={isBtnLoading}>
+            <Button onClick={sendEmail} loading={isBtnLoading} >
               Sign Up
             </Button>
           </div>
         </Form>
-        <form onSubmit={sendEmail} ref={form} className='hide-'>
+        <form onSubmit={sendEmail} ref={form} className='hide-form'>
           <div>
             <label htmlFor="user_email">Email:</label>
             <input
               type="email"
               id="user_email"
               name="user_email"
-              value={formref.current?.input?.value}
+              value={data?.user_email}
               required
             />
           </div>
