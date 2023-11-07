@@ -10,7 +10,7 @@ const CommonInput = ({ props, index }) => {
                     <Form.Item
                         name={props.name}
                         rules={props.rules}
-                        className={"loginInput"}
+                        className="loginInput"
                     >
                         {props.type == "password" ?
                             <Input.Password 
@@ -32,6 +32,7 @@ const CommonInput = ({ props, index }) => {
                 (
                     <Form.Item
                         name={props.name}
+                        className="loginInput"
                     >
                         <Input 
                             placeholder={props.placeholder} 

@@ -1,106 +1,36 @@
-.registration-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: var(--is-blue-gradient);
-    .registration-box {
-      background: var(--is-primary-background-color);
-      width: 400px;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      h1 {
-        margin: 16px 0px 32px 0px;
-      }
-      form {
-        input {
-          margin-bottom: 15px;
-        }
-        .ant-input-affix-wrapper  {
-          padding: 4px 6px !important;
-          .ant-input-prefix {
-            margin-inline-end: 2px !important;
-            // input {
-            //   padding: 4px 4px 4px 0px !important;
-            // }
-          }
-        }
-      }
-      a {
-        color: #0070f3;
-      }
-      .input-icon {
-        font-size: 16px;
-        margin-right: 8px;
-        color: #c1c1c1;
-      
-        input {
-          color: #000;
-        }
-    
-        input:focus + & {
-          color: #000;
-        }
-      }
-      .Signup-form-wrapper {
-        .ant-form-item {
-          margin-bottom: 32px !important;
-          input {
-            margin-bottom: 0px !important;
-            padding: 4px 4px 4px 0px !important;
-          }
-          .ant-input-password {
-            input {
-              padding: 4px 4px 4px 0px !important;
-            }
-          }
-        }
-        button {
-          height: 36px !important;
-          background: var(--is-theme-color);
-          width: 100%;
-          span {
-            font-weight: bold;
-            font-size: 16px;
-            color: var(--is-quaternary-text-color);
-          }
-        }
-      }
-      .signup-option {
-        h3 {
-          font-size: 14px;
-          color: var(--is-dark-black-color);
-          font-weight: 500;
-          a {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--is-theme-color);
-          }
-        }
-      }
-      .hide-form {
-        display: none;
-      }
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .registration-container {
-      height: 100%;
-      .registration-box {
-        width: 100%;
-        padding: 10px;
-      }
-    }
-  }
+.hide-form {
+  display: none;
+}
 
-.Otp-drawer {
-  max-width: 480px;
-  width: 100%;
-  .anticon-close {
-    display: none !important;
+.signup-box {
+  width: 780px;
+  .login-container__box__form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    .loginInput,
+    .login-container__box__form-wrapper-btn {
+      width: 310px;
+      margin: 0px 30px 32px 30px;
+    }
   }
 }
-  
+
+@media (max-width: 768px) {
+  .signup-box {
+    width: 100%;
+    padding-top: 16px;
+    box-shadow: none;
+    .login-container__box__form-wrapper {
+      flex-wrap: nowrap;
+      flex-direction: column;
+      .loginInput,
+      .login-container__box__form-wrapper-btn {
+        margin: 0px 0px 32px 0px;
+        width: 100%;
+      }
+    }
+    .login-container__box-signup-option {
+      padding-bottom: 32px;
+    }
+  }
+}
