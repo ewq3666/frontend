@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Progress, Result } from 'antd';
-import './contestcard.scss';
+import { Progress } from 'antd';
 import { BsCurrencyRupee } from 'react-icons/bs';
-import moment from 'moment';
-import axios from 'axios';
-import { END_POINTS } from '../../api/domain';
+import contestAPI from '../../services/Contest';
 import { useNavigate } from "react-router-dom";
 import Loader from '../Loader/Loader';
+import './contestcard.scss';
+import moment from 'moment';
+
+const contestApi = new contestAPI();
 
 const ContestCard = () => {
-
   const navigate = useNavigate();
   const [contestData, setContestData] = useState([]);
   const [loading, setloading] = useState(true)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(END_POINTS.contest);
+        const response = await contestApi.getAllContest();
         setContestData(response.data);
         setloading(false)
-        // console.log(response.data, "contest data");
       } catch (error) {
         console.error(error);
         setloading(false)
