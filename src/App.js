@@ -2,12 +2,15 @@ import { useEffect } from "react";
 import { Router } from "./Routers/Router";
 import { useDispatch } from 'react-redux';
 import { END_POINTS } from './api/domain';
-import { addUsers } from './store/actions/reducerActions';
+import { contestList, addUsers } from './store/actions/reducerActions';
 import axios from "axios";
 import "./Style/theme.css";
 import "./Style/globalStyles.scss";
 import QuizComponent from "./quize/Quize";
 import QuizApp from "./quize/Quize";
+import contestAPI from './services/Contest';
+
+const contestApi = new contestAPI();
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +22,12 @@ function App() {
       let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: token } })
       dispatch(addUsers(userInfo.data.result))
     }
+    const getContestList = async() => {
+      const response = await contestApi.getAllContest();
+      dispatch(contestList(response.data.result))
+      // response.data
+    }
+    getContestList();
   }, [])
 
   return (

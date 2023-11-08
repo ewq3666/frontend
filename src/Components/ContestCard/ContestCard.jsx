@@ -75,7 +75,7 @@ const ContestCard = () => {
         <>
           {contestData.result?.map((values, index) => {
             return (
-              <div className="contest-card" key={index}>
+              <div className="contest-card" key={index} onClick={()=>navigate(`/contest-details/${values._id}`)}>
                 <div className="contest-card__header">
                   <div className="contest-card__header-left">
                     <span className='contest-card__header-left__title'>Prize Pool</span>

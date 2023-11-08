@@ -4,3 +4,10 @@ export const addUsers = (userData) => {
         payload: userData,
     };
 };
+
+export const contestList = (contestData) => {
+    return {
+        type: "GET_CONTEST_LIST",
+        payload: contestData,
+    };
+};

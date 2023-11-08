@@ -1,5 +1,6 @@
 const initialState = {
   userData: [],
+  contestList: []
 };
 
 export const ReducerFc = (state = initialState, action) => {
@@ -9,8 +10,13 @@ export const ReducerFc = (state = initialState, action) => {
         ...state,
         userData: [...state.userData, action.payload],
       };
-      default:
-        return state;
+    case "GET_CONTEST_LIST":
+      return {
+        ...state,
+        contestList: [...state.contestList, action.payload],
+      }
+    default:
+      return state;
   }
 };
 

@@ -15,6 +15,7 @@ import Protected from "./Protected";
 import Transaction from "../pages/Transaction/Transaction";
 import QuizApp from "../quize/Quize";
 import Submit from "../Components/Submit/Submit";
+import ContestDetails from "../Components/ContestDetails/ContestDetails";
 
 export const routes = [
     {
@@ -32,6 +33,10 @@ export const routes = [
             //     element: <ForgotPassword />
 
             // },
+            {
+                path: "contest-details/:id",
+                element: <ContestDetails />
+            },
             {
                 path: "myprofile",
                 element: <Protected Component={MyProfile} />
