@@ -39,11 +39,16 @@ const ContestDetails = () => {
             <div className="contest-details__card">
                 <div className="contest-details__card-top">
                     <div className="contest-category">
-                        Category: {contestData?.name}
+                        <span>Category: </span>
+                        {contestData?.name}
                     </div>
                     <div className="contest-date">
-                        <span>Date: 12/11/2023 </span>
-                        <span>Time: {contestData?.time}</span>
+                        <span>Date: </span>
+                        12/11/2023 
+                    </div>
+                    <div className="contest-time">
+                        <span>Time: </span>
+                        {contestData?.time}
                     </div>
                 </div>
                 <div className="contest-details__card-middle">
@@ -60,7 +65,13 @@ const ContestDetails = () => {
                     </div>
                 </div>
             </div>
-            <Tabs defaultActiveKey="1" items={items} />
+            <div className="contest-details__tab-section">
+                <Tabs 
+                    defaultActiveKey="1" 
+                    items={items} 
+                    className='contest-details__tab-section-tab'
+                />
+            </div>
             <>{console.log("contestList", contestList)}</>
         </div>
     );

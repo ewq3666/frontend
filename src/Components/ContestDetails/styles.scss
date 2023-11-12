@@ -1,24 +1,23 @@
 .contest-details {
-    padding: 32px 16px;
+    padding: 32px 0px;
     &__card{
-        padding-bottom: 32px;
+        padding: 0px 16px 32px 16px;
         &-top {
             display: flex;
             justify-content: space-between;
             color: var(--is-secondary-background-color);
             font-size: 16px;
             font-weight: 600;
-            .contest-date {
+            .contest-category,
+            .contest-date,
+            .contest-time {
                 display: flex;
                 flex-direction: column;
-                span:last-child{
-                    margin-top: 12px;
-                }
             }
         }
         &-middle {
             font-family: 'Poppins', sans-serif;
-            margin: 8px 0px 16px 0px;
+            margin: 32px 0px 8px 0px;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -42,10 +41,29 @@
         }
         &-bottom {
             button {
-                width: 80%;
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+        }
+    }
+    &__tab-section {
+        // padding: 0px 16px 0px 16px;
+        &-tab {
+            .ant-tabs-nav-list {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                .ant-tabs-tab {
+                    width: 33.33%;
+                    display: flex;
+                    justify-content: center;
+                    .ant-tabs-tab-btn {
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
+                }
             }
         }
     }
