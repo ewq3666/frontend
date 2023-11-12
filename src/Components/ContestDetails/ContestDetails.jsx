@@ -4,33 +4,52 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FaRupeeSign } from 'react-icons/fa';
 import './styles.scss';
+import Winnings from '../Winnings';
+import Instructions from '../Instructions';
+import Leaderboard from '../../pages/Leaderboard';
 
 const ContestDetails = () => {
     const { id } = useParams();
     let contestList = useSelector((state) => state.ReducerFc?.contestList[0]);
     const [contestData, setContestData] = useState({});
+    const [formattedDate, setFormattedDate] = useState('');
+    const [formattedTime, setFormattedTime] = useState('');
 
     useEffect(() => {
         const contestData = contestList?.find((item) => item._id == id);
         setContestData(contestData);
-        console.log("contestData", contestData)
+        // console.log("contestData", contestData)
+        // const dateString = '2023-10-04T00:00:00.000Z';
+        const dateObject = new Date(contestData?.date);
+      
+        // Formatting date
+        setFormattedDate(`${dateObject.getDate()}/${dateObject.getMonth() + 1}/${dateObject.getFullYear()}`);
+      
+        // Formatting time
+        const hours = dateObject.getHours();
+        const minutes = dateObject.getMinutes();
+        const amOrPm = hours >= 12 ? 'PM' : 'AM';
+        const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+        setFormattedTime(`${String(formattedHours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}${amOrPm}`);
+      
+        console.log("dataaaa,date",formattedDate,formattedTime)
     }, [])
 
     const items = [
         {
             key: '1',
             label: 'Winnings',
-            children: 'Content of Tab Pane 1',
+            children: <Winnings/>,
         },
         {
             key: '2',
             label: 'Leaderboard',
-            children: 'Content of Tab Pane 2',
+            children: <Leaderboard/>,
         },
         {
             key: '3',
             label: 'Instructions',
-            children: 'Content of Tab Pane 3',
+            children: <Instructions/>,
         },
     ];
 
@@ -44,11 +63,11 @@ const ContestDetails = () => {
                     </div>
                     <div className="contest-date">
                         <span>Date: </span>
-                        12/11/2023 
+                        {formattedDate}
                     </div>
                     <div className="contest-time">
                         <span>Time: </span>
-                        {contestData?.time}
+                        {formattedTime}
                     </div>
                 </div>
                 <div className="contest-details__card-middle">

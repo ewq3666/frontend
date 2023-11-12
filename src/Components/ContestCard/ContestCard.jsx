@@ -52,9 +52,11 @@ const ContestCard = () => {
         seconds: secondsDiff
       });
     }, 1000);
+
     return () => {
       clearInterval(timer);
     };
+
   }, []);
 
   const handleJoinBtn = () => {
