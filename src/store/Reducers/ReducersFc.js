@@ -15,6 +15,14 @@ export const ReducerFc = (state = initialState, action) => {
         ...state,
         contestList: [...state.contestList, action.payload],
       }
+    case "UPDATE_PROFILE":
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          ...action.payload,
+        },
+      };
     default:
       return state;
   }

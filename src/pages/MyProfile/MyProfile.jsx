@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import "./styles.scss";
-import axios from 'axios';
 import { getFirstTwoLetters, capitalizeEachWord } from "../../Helper/utility"
-// import { END_POINTS } from '../../api/domain';
-import { useDispatch, useSelector } from 'react-redux';
-import { addUsers} from '../../store/actions/reducerActions';
+import { useSelector } from 'react-redux';
 
 const MyProfile = () => {
 
-    const dispatch = useDispatch()
-    let result = useSelector((state) => state.eventReducer);
-    console.log(result, "yeah we get result");
-
-    const token = localStorage.getItem('token');
+    let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
     const [userData, setUserData] = useState([]);
-
+    console.log(userData);
     const awardsData = [
         {
             path: require("../../assets/images/winner.png"),
@@ -34,46 +27,36 @@ const MyProfile = () => {
         },
     ];
 
-    const fetchUser = async () => {
-        try {
-            const res = await axios.get('https://backendupdated.vercel.app/api/user', { headers: { Authorization: token } });
-            const user = res.data.result;
-            setUserData([user]);
-            dispatch(addUsers([user]));
-            console.log(res,"datatatata");
-        }
-        catch (error) {
-            console.log(error, "Not geeting users data");
-        }
-    }
     useEffect(() => {
-        fetchUser()
-    }, []);
+        setUserData([userInfo])
+    }, [userInfo]);
 
     return (
         <>
             <div className='main-container'>
                 <div className="container">
-                    {userData.length > 0 ? (
-                        userData.map((ele, index) => (
+                    {true ? (
+                        userData?.map((ele, index) => (
                             <div className="profile-card" key={index}>
                                 <div className="profile-card__header">
-                                    <div className="profile-card__header-logo">
-                                        <p className='name'>
-                                            {getFirstTwoLetters(ele.name)}
-                                        </p>
-                                    </div>
-                                    <div className="profile-card__header-title">
-                                        <p className='username'>
-                                            {capitalizeEachWord(ele.name)}
-                                        </p>
-                                        <p className='user-level'>Level<b>:</b> 14</p>
+                                    <div className='flex-container'>
+                                        <div className="profile-card__header-logo">
+                                            <p className='name'>
+                                                {getFirstTwoLetters(ele.name)}
+                                            </p>
+                                            {/* <p className='username'>
+                                                {capitalizeEachWord(ele.name)}
+                                            </p> */}
+                                        </div>
+                                        <div className="profile-card__header-title">
+                                            {/* <p className='user-level'>Level<b>:</b> 14</p> */}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="profile-card__userdata">
                                     <div>
                                         <p>Email <span>{ele.user_email}</span></p>
-                                        <p>Mobile <span>{ele.mobile}</span></p>
+                                        <p>Address <span>{ele.upi}</span></p>
                                         <p>Address <span>{ele.district}</span></p>
                                     </div>
                                 </div>
