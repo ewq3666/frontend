@@ -8,19 +8,45 @@
         .ant-menu {
             background-color: transparent;
         }
-        .ant-menu-item  {
+        // .ant-menu-item  {
+        //     border-radius: 0px;
+        //     background: aliceblue;
+        //     margin: 5px 0px;
+        //     padding: 0px;
+        //     span {
+        //         color: var(--is-theme-color);
+        //         font-size: 16px;
+        //         font-weight: 700;
+        //         display: flex;
+        //         align-items: center ;
+        //         justify-content: space-between ;
+        //         padding: 0px 12px;
+        //     }
+        // }
+        .ant-menu-item {
             border-radius: 0px;
-            background: aliceblue;
-            margin: 5px 0px;
+            background: #ffffff;
+            margin: 16px 0px;
             padding: 0px;
+            box-shadow: -1px 3px 14px -8px rgba(0,0,255,0.34);
+            -webkit-box-shadow: -1px 3px 14px -8px rgba(0,0,255,0.34);
+            -moz-box-shadow: -1px 3px 14px -8px rgba(0,0,255,0.34);
+            height: 48px !important;
+            padding: 4px 12px 0px 12px;
             span {
-                color: var(--is-theme-color);
-                font-size: 16px;
-                font-weight: 700;
+                color: #000000;
+                font-size: 14px;
+                font-weight: 800;
                 display: flex;
-                align-items: center ;
-                justify-content: space-between ;
-                padding: 0px 12px;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0px 4px;
+                span:first-child {
+                    svg {
+                        margin: 0px 12px 0px 6px;
+                        font-size: 22px;
+                    }
+                }
             }
         }
     }

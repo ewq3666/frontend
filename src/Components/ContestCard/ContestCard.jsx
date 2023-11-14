@@ -123,7 +123,7 @@ const ContestCard = (props) => {
                   (contestTimer[index]?.minutes * 60) +
                   contestTimer[index]?.seconds;
                 return (
-                  <div className="contest-card" key={index} onClick={() => navigate(`/contest-details/${values._id}`)}>
+                  <div className="contest-card" key={index} onClick={() => totalSeconds <= 0 ? "" : navigate(`/contest-details/${values._id}`)}>
                     <div className="contest-card__header">
                       <div className="contest-card__header-category">
                         <span>
