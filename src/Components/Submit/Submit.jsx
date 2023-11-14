@@ -8,7 +8,7 @@ const Submit = () => {
     const navigate = useNavigate()
     return (
         <div className="thank-you">
-            <img src="ewq_logo.jpg" alt="" />
+            <img src="ewq_logo.png" alt="" />
             <h1>THANK YOU </h1>
             <h2>FOR YOUR TIME!</h2>
             <br />
@@ -19,4 +19,4 @@ const Submit = () => {
     );
 };
 
-export default Submit;
+export default Submit; 

@@ -123,7 +123,7 @@ const Header = () => {
                 title={
                     <div className='menu-title'>
                         <div className='menu-logo' onClick={() => { navigate('/'); setVisible(false) }}>
-                            {/* <img src={logo} alt="" /> */} Quize Pull
+                            {/* <img src={logo} alt="" /> */} Quize Pool
                         </div>
                         <IoMdClose onClick={() => setVisible(false)} />
                     </div>
