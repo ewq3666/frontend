@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { Router } from "./Routers/Router";
 import { useDispatch } from 'react-redux';
 import { END_POINTS } from './api/domain';
-import { contestList, addUsers } from './store/actions/reducerActions';
+import { contestList, addUsers, userBalance } from './store/actions/reducerActions';
 import axios from "axios";
 import "./Style/theme.css";
 import "./Style/globalStyles.scss";
 import QuizComponent from "./quize/Quize";
 import QuizApp from "./quize/Quize";
 import contestAPI from './services/Contest';
+import paymentAPI from "./services/Payment.js";
 
 const contestApi = new contestAPI();
 
@@ -21,6 +22,9 @@ function App() {
     if (token) {
       let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: token } })
       dispatch(addUsers(userInfo.data.result))
+      if(userInfo.data.result) {
+        getBalence(userInfo.data.result._id)
+      }
     }
     const getContestList = async() => {
       const response = await contestApi.getAllContest();
@@ -29,6 +33,17 @@ function App() {
     }
     getContestList();
   }, [])
+  
+  const getBalence = async(name)=> {
+    try {
+      const money = await axios.get(END_POINTS.getBalence+name, { headers: { authorization: token } });
+      if(money.data?.balance) {
+        dispatch(userBalance(money.data.balance))
+      }
+    } catch (error) {
+      console.log("error",error)
+    }
+  }
 
   return (
     <div>

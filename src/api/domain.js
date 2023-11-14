@@ -10,4 +10,5 @@ export const END_POINTS={
      orders  :`${api}/orders`,
      addmoney  :`${api}/addmoney`,
      contest  :`${api}/admin/contest`,
+     getBalence  :`${api}/balance/`,
 }

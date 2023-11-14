@@ -16,4 +16,11 @@ export default class paymentAPI{
     addMoneyApi(payload){
         return Api.request("/addmoney",payload,"POST");
     }
+
+    // Add money 
+    getBalence(id){
+        console.log(id,"nnn")
+        const payload = {};
+        return Api.request(`/balance/${id}`,payload,"GET");
+    }
 }
