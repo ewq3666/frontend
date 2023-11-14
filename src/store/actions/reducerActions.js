@@ -15,3 +15,8 @@ export const updateProfile = (userData) => ({
     type: 'UPDATE_PROFILE',
     payload: userData,
   })
+
+export const userBalance = (balance) => ({
+    type: 'USER_BALENCE',
+    payload: balance,
+  })

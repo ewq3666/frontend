@@ -1,5 +1,7 @@
 import * as Notifications from "../assets/messages.js";
 import paymentAPI from "../services/Payment.js";
+import { END_POINTS } from "../api/domain";
+import axios from "axios";
 
 const paymentApi = new paymentAPI();
 
@@ -25,7 +27,9 @@ const initPayment = (orderData,userInfo,amount) => {
 		order_id: orderData.id,
 		handler: async (response) => {
 			try {
-				const { data } = await paymentApi.paymentOrder(response);
+				const orderUrl = END_POINTS.orders;
+				// const { data } = await paymentApi.paymentOrder(response);
+				const { data } = await axios.post(orderUrl, { amount: amount });
 				if(data) {
 					addMoneyApi(orderData,userInfo,amount)
 				}

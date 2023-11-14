@@ -1,6 +1,7 @@
 const initialState = {
   userData: [],
-  contestList: []
+  contestList: [],
+  balance: []
 };
 
 export const ReducerFc = (state = initialState, action) => {
@@ -22,6 +23,11 @@ export const ReducerFc = (state = initialState, action) => {
           ...state.userData,
           ...action.payload,
         },
+      };
+    case "USER_BALENCE":
+      return {
+        ...state,
+        balance: action.payload,
       };
     default:
       return state;
