@@ -12,6 +12,7 @@ import "./styles.scss";
 const Wallet = () => {
     const navigate = useNavigate();
     let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
+    let balenceInfo = useSelector((state) => state.ReducerFc?.balance);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAddAmount, setIsAddAmount] = useState(false);
     const [isWithdrawRequest, setIsWithdrawRequest] = useState(false);
@@ -58,7 +59,7 @@ const Wallet = () => {
                 {/* Add Balence */}
                 <div className="balence-box">
                     <h3>Current Balence:</h3>
-                    <h3><FaRupeeSign /> 2000</h3>
+                    <h3><FaRupeeSign /> {balenceInfo}</h3>
                     <div className="button-box">
                         <Button
                             className="common-blue-btn"
@@ -74,7 +75,7 @@ const Wallet = () => {
                 {/* Withdraw Amount */}
                 <div className="balence-box withdrawal-box">
                     <h3>Available Amount for Withdrawal:</h3>
-                    <h3><FaRupeeSign /> 2000</h3>
+                    <h3><FaRupeeSign /> {balenceInfo}</h3>
                     <div className="button-box">
                         <Button
                             className="common-blue-btn add-money-button"
