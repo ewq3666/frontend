@@ -1,36 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Progress } from 'antd';
-import './contestcard.scss';
-import { BsCurrencyRupee } from 'react-icons/bs';
-import moment from 'moment';
-import axios from 'axios';
+import { Button, Spin } from 'antd';
 import { END_POINTS } from '../../api/domain';
 import { useNavigate } from "react-router-dom";
+import { BsCurrencyRupee } from 'react-icons/bs';
+import moment from 'moment';
+import './contestcard.scss';
+import axios from 'axios';
 
-const ContestCard = () => {
+const ContestCard = (props) => {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(80);
+  // const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
-  // console.log(contestData, "data is this");
   const [contestTimer, setContestTimer] = useState([]);
-  // console.log(contestTimer, "time diff");
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Featch contest data
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(END_POINTS.contest);
-        setContestData(response.data);
+
+        if (response.data) {
+          if (props.filterValue == "completed") {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const filtered = response.data.result.filter(record => new Date(record.date) <= yesterday);
+            setContestData(filtered);
+          } else if (props.filterValue == "upcomming") {
+            const today = new Date();
+            const filtered = response.data.result.filter(record => new Date(record.date) >= today);
+            setContestData(filtered);
+          } else if (props.filterValue == "All") {
+            setContestData(response.data.result);
+          } else {
+            const todayStart = new Date();
+            todayStart.setHours(0, 0, 0, 0);
+            const todayEnd = new Date();
+            todayEnd.setHours(23, 59, 59, 999);
+            const filtered = response.data.result.filter(record => new Date(record.date) >= todayStart && new Date(record.date) <= todayEnd);
+            setContestData(filtered);
+          }
+        }
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.error(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [props.filterValue]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       const currentTime = moment();
-      const updatedContestTimer = contestData.result?.map((contest) => {
+      const updatedContestTimer = contestData.map((contest) => {
         const targetDateTime = moment(`${contest.date} ${contest.time}`, 'YYYY-MM-DD HH:mm A');
         const duration = moment.duration(targetDateTime.diff(currentTime));
         const daysDiff = duration.days();
@@ -53,7 +78,7 @@ const ContestCard = () => {
   }, [contestData]);
 
   const Countdown = ({ days, hours, minutes, seconds, index }) => {
-    const contest = contestData.result[index]; // Get the specific contest data
+    const contest = contestData[index]; // Get the specific contest data
     let diff = null;
 
     if (contest) {
@@ -85,47 +110,51 @@ const ContestCard = () => {
 
   return (
     <>
-      {contestTimer?.length > 0 ? (
+      {isLoading ?
+        <Spin size="large" className='contest-spin' />
+        :
         <>
-          {contestData.result?.map((values, index) => {
-            // Calculate the total seconds remaining
-            const totalSeconds = (contestTimer[index].days * 24 * 60 * 60) +
-              (contestTimer[index].hours * 60 * 60) +
-              (contestTimer[index].minutes * 60) +
-              contestTimer[index].seconds;
-            return (
-              <div className="contest-card" key={index} onClick={() => navigate(`/contest-details/${values._id}`)}>
-                <div className="contest-card__header">
-                  <div className="contest-card__header-category">
-                    <span>
-                      Category: {values.name}
-                    </span>
-                  </div>
-                  <div className="contest-card__header-entryfee">
-                    <span>
-                      Joinning: <BsCurrencyRupee className='icon' />{values.price}
-                    </span>
-                  </div>
-                </div>
-                <div className="contest-card__mid">
-                  {totalSeconds <= 0 ? (
-                    <p className='countdown-box countdown-box-completed'>Completed</p>
-                  ) : (
-                    <p className='countdown-box'>
-                      <Countdown
-                        days={contestTimer[index].days}
-                        hours={contestTimer[index].hours}
-                        minutes={contestTimer[index].minutes}
-                        seconds={contestTimer[index].seconds}
-                        index={index}
-                      />
-                    </p>
-                  )}
-                  <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
+          {contestTimer?.length > 0 ? (
+            <>
+              {contestData.map((values, index) => {
+                // Calculate the total seconds remaining
+                const totalSeconds = (contestTimer[index]?.days * 24 * 60 * 60) +
+                  (contestTimer[index]?.hours * 60 * 60) +
+                  (contestTimer[index]?.minutes * 60) +
+                  contestTimer[index]?.seconds;
+                return (
+                  <div className="contest-card" key={index} onClick={() => navigate(`/contest-details/${values._id}`)}>
+                    <div className="contest-card__header">
+                      <div className="contest-card__header-category">
+                        <span>
+                          Category: {values.name}
+                        </span>
+                      </div>
+                      <div className="contest-card__header-entryfee">
+                        <span>
+                          Joinning: <BsCurrencyRupee className='icon' />{values.price}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="contest-card__mid">
+                      {totalSeconds <= 0 ? (
+                        <p className='countdown-box countdown-box-completed'>Completed</p>
+                      ) : (
+                        <p className='countdown-box'>
+                          <Countdown
+                            days={contestTimer[index]?.days}
+                            hours={contestTimer[index]?.hours}
+                            minutes={contestTimer[index]?.minutes}
+                            seconds={contestTimer[index]?.seconds}
+                            index={index}
+                          />
+                        </p>
+                      )}
+                      <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
 
-                </div>
-                <div className="contest-card__bottom">
-                  {/* <Progress
+                    </div>
+                    <div className="contest-card__bottom">
+                      {/* <Progress
                     className='progress-bar'
                     percent={progress}
                     showInfo={false}
@@ -136,39 +165,39 @@ const ContestCard = () => {
                     <span className='title-second'><b>{values.students} students</b></span>
                   </div> */}
 
-                  <div className="contest-card__bottom-left">
-                    <span className='contest-card__bottom-left__title'>Prize Pool</span>
-                    <span className='contest-card__bottom-left__amount'><BsCurrencyRupee className='icon' />5000</span>
-                  </div>
-                  <div className="contest-card__bottom-right">
-                    <p className='contest-date'>Date: {moment(values.date).format('DD-MM-YYYY')}</p>
-                    {totalSeconds <= 0 ? (
-                      <div className="button-box">
-                        <Button
-                          className="common-blue-btn add-money-button completed-btn"
-                        // onClick={() => navigate("/mycontest")}
-                        >
-                          {/* <span className='withdrawal-svg'><FaRupeeSign /></span> */}
-                          View Contest
-                        </Button>
+                      <div className="contest-card__bottom-left">
+                        <span className='contest-card__bottom-left__title'>Prize Pool</span>
+                        <span className='contest-card__bottom-left__amount'><BsCurrencyRupee className='icon' />5000</span>
                       </div>
-                    ) : (
-                      <div className="button-box">
-                        <Button
-                          className="common-blue-btn add-money-button"
-                          onClick={() => handleJoinBtn}
-                        >
-                          Join Contest
-                        </Button>
+                      <div className="contest-card__bottom-right">
+                        <p className='contest-date'>Date: {moment(values.date).format('DD-MM-YYYY')}</p>
+                        {totalSeconds <= 0 ? (
+                          <div className="button-box">
+                            <Button
+                              className="common-blue-btn add-money-button completed-btn"
+                            >
+                              View Contest
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="button-box">
+                            <Button
+                              className="common-blue-btn add-money-button"
+                              onClick={() => handleJoinBtn}
+                            >
+                              Join Contest
+                            </Button>
+                          </div>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
-                </div>
-              </div>
-            )
-          })}
+                )
+              })}
+            </>
+          ) : <Spin size="large" className='contest-spin' />}
         </>
-      ) : <h1>Join Next Contest</h1>}
+      }
     </>
   );
 };
