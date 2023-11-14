@@ -31,6 +31,8 @@ const ContestCard = (props) => {
             const today = new Date();
             const filtered = response.data.result.filter(record => new Date(record.date) >= today);
             setContestData(filtered);
+            
+            
           } else if (props.filterValue == "All") {
             setContestData(response.data.result);
           } else {
@@ -39,7 +41,7 @@ const ContestCard = (props) => {
             const todayEnd = new Date();
             todayEnd.setHours(23, 59, 59, 999);
             const filtered = response.data.result.filter(record => new Date(record.date) >= todayStart && new Date(record.date) <= todayEnd);
-            setContestData(filtered);
+            setContestData(...contestData, filtered);
           }
         }
         setIsLoading(false);
@@ -102,11 +104,6 @@ const ContestCard = (props) => {
     }
   };
 
-  const handleJoinBtn = () => {
-    const token = localStorage.getItem('token');
-    if (token) { navigate("/") }
-    else navigate('/login');
-  };
 
   return (
     <>
@@ -176,14 +173,13 @@ const ContestCard = (props) => {
                             <Button
                               className="common-blue-btn add-money-button completed-btn"
                             >
-                              View Contest
+                              Completed
                             </Button>
                           </div>
                         ) : (
                           <div className="button-box">
                             <Button
                               className="common-blue-btn add-money-button"
-                              onClick={() => handleJoinBtn}
                             >
                               Join Contest
                             </Button>

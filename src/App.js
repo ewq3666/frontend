@@ -26,6 +26,7 @@ function App() {
         getBalence(userInfo.data.result._id)
       }
     }
+    
     const getContestList = async() => {
       const response = await contestApi.getAllContest();
       dispatch(contestList(response.data.result))

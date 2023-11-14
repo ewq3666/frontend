@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Tabs } from 'antd';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaRupeeSign } from 'react-icons/fa';
 import './styles.scss';
 import Winnings from '../Winnings';
@@ -9,9 +9,12 @@ import Instructions from '../Instructions';
 import Leaderboard from '../../pages/Leaderboard';
 
 const ContestDetails = () => {
+    const navigate = useNavigate();
     const { id } = useParams();
     let contestList = useSelector((state) => state.ReducerFc?.contestList[0]);
+    let balanceInfo = useSelector((state) => state.ReducerFc?.balance);
     const [contestData, setContestData] = useState({});
+    const [userBalance, setUserBalance] = useState();
     const [formattedDate, setFormattedDate] = useState('');
     const [formattedTime, setFormattedTime] = useState('');
 
@@ -35,6 +38,14 @@ const ContestDetails = () => {
         console.log("dataaaa,date",formattedDate,formattedTime)
     }, [])
 
+    useEffect(() => {
+        if(balanceInfo) {
+            setUserBalance(balanceInfo);
+        }
+    }, [balanceInfo])
+
+
+
     const items = [
         {
             key: '1',
@@ -52,6 +63,21 @@ const ContestDetails = () => {
             children: <Instructions/>,
         },
     ];
+
+    const handleJoinBtn = () => {
+        console.log("llll")
+        const token = localStorage.getItem('token');
+        if (token) { 
+            console.log("jjjjj",contestData)
+            if(userBalance >= contestData.price) {
+                navigate("/quize") 
+            } else {
+                navigate("/wallet") 
+            }
+        } else {
+            navigate('/login')
+        };
+      };
 
     return (
         <div className="contest-details">
@@ -78,6 +104,7 @@ const ContestDetails = () => {
                 <div className="button-box">
                         <Button
                             className="common-blue-btn add-money-button"
+                            onClick={handleJoinBtn}
                         >
                             Join Contest
                         </Button>

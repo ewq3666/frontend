@@ -72,6 +72,7 @@ const Header = () => {
         console.log('click ', e);
         if (e.key == "logout") {
             localStorage.removeItem("token")
+            navigate('/');
         } else {
             navigate('/' + e.key);
         }
