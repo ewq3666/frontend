@@ -55,14 +55,14 @@ const ContestCard = () => {
   const Countdown = ({ days, hours, minutes, seconds, index }) => {
     const contest = contestData.result[index]; // Get the specific contest data
     let diff = null;
-  
+
     if (contest) {
       const contestDate = moment(contest.date).format('YYYY-MM-DD');
       const customDate = moment(contestDate);
       const today = moment().format('YYYY-MM-DD');
       diff = customDate.diff(today, 'days');
     }
-  
+
     if (diff === 1) {
       return <p>Tomorrow</p>;
     } else if (diff > 1) {
@@ -76,7 +76,7 @@ const ContestCard = () => {
       return <p>{minutes}m {seconds}s</p>;
     }
   };
-  
+
   const handleJoinBtn = () => {
     const token = localStorage.getItem('token');
     if (token) { navigate("/") }
@@ -94,54 +94,38 @@ const ContestCard = () => {
               (contestTimer[index].minutes * 60) +
               contestTimer[index].seconds;
             return (
-              <div className="contest-card" key={index} onClick={()=>navigate(`/contest-details/${values._id}`)}>
+              <div className="contest-card" key={index} onClick={() => navigate(`/contest-details/${values._id}`)}>
                 <div className="contest-card__header">
-                  <div className="contest-card__header-left">
-                    <span className='contest-card__header-left__title'>Prize Pool</span>
-                    <span className='contest-card__header-left__amount'><BsCurrencyRupee className='icon' />{values.price}</span>
-                  </div>
-                  <div className="contest-card__header-mid">
-                    {totalSeconds <= 0 ? (
-                      <p>Completed</p>
-                    ) : (
-                      <p className='countdown-box'>
-                        <Countdown
-                          days={contestTimer[index].days}
-                          hours={contestTimer[index].hours}
-                          minutes={contestTimer[index].minutes}
-                          seconds={contestTimer[index].seconds}
-                          index={index}
-                        />
-                      </p>
-                    )}
-                    <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
-                  </div>
-                  <div className="contest-card__header-right">
-                    {totalSeconds <= 0 ? (
-                      <button disabled>Completed</button>
-                    ) : (
-                      <button
-                        onClick={handleJoinBtn}
-                        className="join-button"
-                      >Join
-                      </button>
-                    )}
-                  </div>
-                </div>
-                <div className="contest-card__mid">
-                  <div className="contest-card__mid-category">
+                  <div className="contest-card__header-category">
                     <span>
                       Category: {values.name}
                     </span>
                   </div>
-                  <div className="contest-card__mid-entryfee">
+                  <div className="contest-card__header-entryfee">
                     <span>
-                      ENTRY FEE: <BsCurrencyRupee className='icon' />{values.entryFee}
+                      Joinning: <BsCurrencyRupee className='icon' />{values.price}
                     </span>
                   </div>
                 </div>
+                <div className="contest-card__mid">
+                  {totalSeconds <= 0 ? (
+                    <p className='countdown-box countdown-box-completed'>Completed</p>
+                  ) : (
+                    <p className='countdown-box'>
+                      <Countdown
+                        days={contestTimer[index].days}
+                        hours={contestTimer[index].hours}
+                        minutes={contestTimer[index].minutes}
+                        seconds={contestTimer[index].seconds}
+                        index={index}
+                      />
+                    </p>
+                  )}
+                  <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
+
+                </div>
                 <div className="contest-card__bottom">
-                  <Progress
+                  {/* <Progress
                     className='progress-bar'
                     percent={progress}
                     showInfo={false}
@@ -150,6 +134,34 @@ const ContestCard = () => {
                   <div className="contest-card__bottom-title">
                     <span className='title-first'><b>{values.joinStudents} student left</b> </span>
                     <span className='title-second'><b>{values.students} students</b></span>
+                  </div> */}
+
+                  <div className="contest-card__bottom-left">
+                    <span className='contest-card__bottom-left__title'>Prize Pool</span>
+                    <span className='contest-card__bottom-left__amount'><BsCurrencyRupee className='icon' />5000</span>
+                  </div>
+                  <div className="contest-card__bottom-right">
+                    <p className='contest-date'>Date: {moment(values.date).format('DD-MM-YYYY')}</p>
+                    {totalSeconds <= 0 ? (
+                      <div className="button-box">
+                        <Button
+                          className="common-blue-btn add-money-button completed-btn"
+                        // onClick={() => navigate("/mycontest")}
+                        >
+                          {/* <span className='withdrawal-svg'><FaRupeeSign /></span> */}
+                          View Contest
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="button-box">
+                        <Button
+                          className="common-blue-btn add-money-button"
+                          onClick={() => handleJoinBtn}
+                        >
+                          Join Contest
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
