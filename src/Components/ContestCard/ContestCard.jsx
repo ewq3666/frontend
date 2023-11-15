@@ -18,21 +18,23 @@ const ContestCard = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const currentDate = new Date();
         setIsLoading(true);
         const response = await axios.get(END_POINTS.contest);
 
         if (response.data) {
           if (props.filterValue == "completed") {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            const filtered = response.data.result.filter(record => new Date(record.date) <= yesterday);
-            setContestData(filtered);
+            const oldQuizzes = response.data.result.filter((quiz) => {
+              const quizDateTime = moment(`${quiz.date} ${quiz.time}`, 'YYYY-MM-DD HH:mm');
+              return quizDateTime.isBefore(currentDate);
+            });
+            setContestData(oldQuizzes);
           } else if (props.filterValue == "upcomming") {
-            const today = new Date();
-            const filtered = response.data.result.filter(record => new Date(record.date) >= today);
-            setContestData(filtered);
-            
-            
+            const upcomingQuizzes = response.data.result.filter((quiz) => {
+              const quizDateTime = moment(`${quiz.date} ${quiz.time}`, 'YYYY-MM-DD HH:mm');
+              return quizDateTime.isSameOrAfter(currentDate);
+            });
+            setContestData(upcomingQuizzes);
           } else if (props.filterValue == "All") {
             setContestData(response.data.result);
           } else {
