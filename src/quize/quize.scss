@@ -127,3 +127,20 @@
   }
 
 }
+
+.rounded-camera-container {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: fixed;
+  z-index: 1;
+  right: 10px;
+}
+
+.rounded-camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
