@@ -1,45 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoMdClose } from "react-icons/io";
 import { BsBank2 } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import { FaRupeeSign } from "react-icons/fa";
+import { Tabs } from 'antd';
 import "./styles.scss";
+import Withdraw from './WithdrawTransaction/Withdraw';
+import AddMoney from './AddMoneyTransaction/AddMoney';
 
 const Transaction = () => {
     const navigate = useNavigate();
 
-    const arr = [
+    const items = [
         {
-            transactionId: 1,
-            type: "whithdrawal",
-            amount: 1000,
-            date: "2/2/2002",
+            key: '1',
+            label: 'Withdraw',
+            children: <Withdraw />,
         },
         {
-            transactionId: 2,
-            type: "deposite",
-            amount: 100,
-            date: "21/3/2002",
+            key: '2',
+            label: 'Deposite',
+            children: <AddMoney />,
         },
-        {
-            transactionId: 3,
-            type: "deposite",
-            amount: 100,
-            date: "15/3/2002",
-        },
-        {
-            transactionId: 4,
-            type: "whithdrawal",
-            amount: 1100,
-            date: "5/3/2002",
-        },
-        {
-            transactionId: 5,
-            type: "deposite",
-            amount: 100,
-            date: "2/2/2002",
-        },
-    ]
+    ];
 
     const goBack = () => {
         navigate('/');
@@ -55,26 +38,17 @@ const Transaction = () => {
                 </div>
                 <div className="transaction-section-main-container">
                     <div className="balence-box">
-                        <h3>Total Balence:</h3>
+                        <h3>Total Balance:</h3>
                         <h3><FaRupeeSign /> 2000</h3>
                     </div>
                     <div className="transaction-history">
                         <h4>Transaction History:</h4>
-                        <div className="transaction-table">
-                            {arr.map((data, index) => {
-                                return (
-                                    <div className="Transaction-row" key={index}>
-                                        <p>
-                                            <span>Transaction type: {data.type}</span>
-                                            <span>Date: {data.date}</span>
-                                        </p>
-                                        <p>
-                                            <span>Total Amount: </span>
-                                            <span className={data.type == "whithdrawal" ? "whithdrawal-amount" : "deposite-amount"}>{data.amount}</span>
-                                        </p>
-                                    </div>
-                                )
-                            })}
+                        <div className="contest-details__tab-section">
+                            <Tabs
+                                defaultActiveKey="1"
+                                items={items}
+                                className='contest-details__tab-section-tab'
+                            />
                         </div>
                     </div>
                 </div>

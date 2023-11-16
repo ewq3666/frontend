@@ -44,8 +44,6 @@ const ContestDetails = () => {
         }
     }, [balanceInfo])
 
-
-
     const items = [
         {
             key: '1',
