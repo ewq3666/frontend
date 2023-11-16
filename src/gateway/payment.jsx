@@ -1,15 +1,16 @@
-import axios from "axios";
-import { END_POINTS } from "../api/domain";
 import * as Notifications from "../assets/messages.js";
-import { async } from "q";
+import paymentAPI from "../services/Payment.js";
+import { END_POINTS } from "../api/domain";
+import axios from "axios";
+
+const paymentApi = new paymentAPI();
 
 export const handlePayment = async (amount,userInfo) => {
-	console.log("amount",amount)
-	console.log("userinfo 2",userInfo)
 	try {
-		const orderUrl = END_POINTS.orders;
-		const { data } = await axios.post(orderUrl, { amount: amount });
-		console.log("data",data);
+		const payload = {
+			amount: amount
+		}
+		const { data } = await paymentApi.paymentOrder(payload);
 		initPayment(data.data,userInfo,amount);
 	} catch (error) {
 		console.log(error);
@@ -26,11 +27,10 @@ const initPayment = (orderData,userInfo,amount) => {
 		order_id: orderData.id,
 		handler: async (response) => {
 			try {
-				const verifyUrl = END_POINTS.verify;
-				const { data } = await axios.post(verifyUrl, response);
-				console.log("data 2",data);
+				const orderUrl = END_POINTS.orders;
+				// const { data } = await paymentApi.paymentOrder(response);
+				const { data } = await axios.post(orderUrl, { amount: amount });
 				if(data) {
-					
 					addMoneyApi(orderData,userInfo,amount)
 				}
 			} catch (error) {
@@ -53,10 +53,7 @@ const addMoneyApi = async(orderData, userInfo,amount) => {
 			orderId: orderData.id,
 			amount: amount
 		}
-		console.log("calling API")
-
-		const { data } = await axios.post(END_POINTS.addmoney, payload);
-		console.log("data add money:",data);
+		const { data } = await paymentApi.addMoneyApi(payload);
 		if(data) {
 			Notifications.paymentAddSuccessFully(userInfo.name,amount)
 		}

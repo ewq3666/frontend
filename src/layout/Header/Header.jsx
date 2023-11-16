@@ -17,7 +17,9 @@ const Header = () => {
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const [userData, setUserData] = useState({});
+    const [balance, setBalance] = useState();
     let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
+    let userBalance = useSelector((state) => state.ReducerFc?.balance);
     const menuArr = [
         {
             key: "myprofile",
@@ -70,6 +72,7 @@ const Header = () => {
         console.log('click ', e);
         if (e.key == "logout") {
             localStorage.removeItem("token")
+            navigate('/');
         } else {
             navigate('/' + e.key);
         }
@@ -79,7 +82,9 @@ const Header = () => {
     useEffect(() => {
         setUserData(userInfo);
         console.log("userInfo", userInfo)
-    }, [userInfo])
+        setBalance(userBalance);
+        console.log("userBalence", userBalance)
+    }, [userInfo,userBalance])
 
     return (
         <div className="header-wrapper">
@@ -105,7 +110,7 @@ const Header = () => {
                     ) :
                         <div className="hamburger-menu">
                             <div className="hamburger-option" onClick={()=>navigate('/wallet')}>
-                                0 <RiWallet3Line />
+                                {balance} <RiWallet3Line />
                             </div>
                             <div className="hamburger-option" onClick={showDrawer}>
                                 <GiHamburgerMenu />
@@ -118,7 +123,7 @@ const Header = () => {
                 title={
                     <div className='menu-title'>
                         <div className='menu-logo' onClick={() => { navigate('/'); setVisible(false) }}>
-                            <img src={logo} alt="" />
+                            {/* <img src={logo} alt="" /> */} Quize Pool
                         </div>
                         <IoMdClose onClick={() => setVisible(false)} />
                     </div>

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button, Card, Radio, message } from 'antd';
 import "./quize.scss"
 import { useNavigate } from 'react-router-dom';
+import Webcam from 'react-webcam';
 const { Meta } = Card;
 
 const questions = [
@@ -38,6 +39,7 @@ const questions = [
 ];
 
 const QuizApp = () => {
+    const webcamRef = useRef(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [timeLeft, setTimeLeft] = useState(5);
@@ -54,6 +56,29 @@ const QuizApp = () => {
         }
         return () => clearTimeout(timer);
     }, [timeLeft, currentQuestion]);
+
+    useEffect(() => {
+        const startCamera = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                if (webcamRef.current) {
+                    webcamRef.current.srcObject = stream;
+                }
+            } catch (error) {
+                console.error('Error accessing webcam:', error);
+            }
+        };
+
+        startCamera();
+
+        // Cleanup function to stop the camera when the component is unmounted
+        return () => {
+            const tracks = webcamRef.current?.srcObject?.getTracks();
+            if (tracks) {
+                tracks.forEach(track => track.stop());
+            }
+        };
+    }, []);
 
     const handleNext = () => {
         // if (selectedAnswer === null) {
@@ -74,6 +99,14 @@ const QuizApp = () => {
 
     return (
         <div className="quiz-container" style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <div className="rounded-camera-container">
+                <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    mirrored={true}
+                    className="rounded-camera-video"
+                />
+            </div>
             <Card>
                 <div className="quiz-container__time">
                     <span style={{ marginLeft: '10px' }}>
