@@ -55,14 +55,14 @@ const ContestCard = () => {
   const Countdown = ({ days, hours, minutes, seconds, index }) => {
     const contest = contestData.result[index]; // Get the specific contest data
     let diff = null;
-  
+
     if (contest) {
       const contestDate = moment(contest.date).format('YYYY-MM-DD');
       const customDate = moment(contestDate);
       const today = moment().format('YYYY-MM-DD');
       diff = customDate.diff(today, 'days');
     }
-  
+
     if (diff === 1) {
       return <p>Tomorrow</p>;
     } else if (diff > 1) {
@@ -72,11 +72,13 @@ const ContestCard = () => {
       return <p>{days}d {hours}h {minutes}m {seconds}s</p>;
     } else if (hours > 0) {
       return <p>{hours}h {minutes}m {seconds}s</p>;
-    } else {
+    } else if (minutes > 0) {
       return <p>{minutes}m {seconds}s</p>;
+    } else {
+      return <p>{seconds}s</p>;
     }
   };
-  
+
   const handleJoinBtn = () => {
     const token = localStorage.getItem('token');
     if (token) { navigate("/") }
