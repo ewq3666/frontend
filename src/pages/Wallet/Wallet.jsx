@@ -11,7 +11,6 @@ import "./styles.scss";
 import axios from "axios"
 import { END_POINTS } from '../../api/domain';
 import { alreadyPendingWithdrawalRequest, insufficientBalence, withdrawalRequestSend } from '../../assets/messages.js';
-
 const Wallet = () => {
     const navigate = useNavigate();
     let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
