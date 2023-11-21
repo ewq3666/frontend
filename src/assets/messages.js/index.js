@@ -93,3 +93,32 @@ export const paymentAddSuccessFully = (name, amount) => {
     className: "success-notification"
   });
 }
+export const withdrawalRequestSend = (amount) => {
+  notification.success({
+    message: 'Withdrawal request send successfully',
+    description: `Withdrawal request for ${amount} successfully processed. Your funds will be transferred shortly. Thank you!`,
+    icon: <CheckCircleOutlined style={{ color: '#52c41a' }} />,
+    placement: 'top',
+    // duration: 1000,
+    className: "success-notification"
+  });
+}
+export const insufficientBalence = () => {
+  notification.success({
+    message: 'Insufficient amount',
+    description: `Sorry, your withdrawal request cannot be processed due to insufficient amount. Please ensure a minimum balance of 50 rupees in your account before making a withdrawal. Thank you.`,
+    icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
+    placement: 'top',
+    className: "success-notification error-notification"
+  });
+}
+
+export const alreadyPendingWithdrawalRequest = () => {
+  notification.success({
+    message: 'already pending withdrawal request',
+    description: `We're sorry, but there is already a pending withdrawal request for your account. Thank you for your understanding.`,
+    icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
+    placement: 'top',
+    className: "success-notification error-notification"
+  });
+}
