@@ -48,7 +48,7 @@ const ContestDetails = () => {
         {
             key: '1',
             label: 'Winnings',
-            children: <Winnings/>,
+            children: <Winnings winnings={contestData.winnings}/>,
         },
         {
             key: '2',
