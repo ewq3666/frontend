@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { END_POINTS } from './domain';
 import WinningsPopover from './WinningsPopover';
+import { Modal, notification } from "antd"
 
 const ContestManager = () => {
   const [contests, setContests] = useState([]);
@@ -14,8 +15,20 @@ const ContestManager = () => {
   const [totalWinning, settotalWinning] = useState([])
   const [showPopover, setShowPopover] = useState(false); // State to control popover visibility
   const [popoverData, setPopoverData] = useState([]); // State to store popover data
+  const [contestId, setcontestId] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     // Fetch contests from the API
     axios.get(END_POINTS.contest)
@@ -28,11 +41,12 @@ const ContestManager = () => {
     setwinnings((prev) => ({ ...prev, [name]: value }))
     console.log(e.target.name);
   }
-  const addContest = (e) => {
+  const addContest = async (e) => {
     e.preventDefault();
 
     // Send a POST request to add a new contest
-    axios.post(END_POINTS.contest, { name, price, date, time, winnings: totalWinning })
+
+    await axios.post(END_POINTS.contest, { name, price, date, time, winnings: totalWinning })
       .then(response => {
         setContests([...contests, response.data]);
         setName('');
@@ -40,12 +54,14 @@ const ContestManager = () => {
         setDate('');
         setTime('');
       })
-      .catch(error => console.error(error));
+      .catch(error => notification.error({ message: 'something went wrong' }));
   };
 
-  const handleWinningsClick = (winnings) => {
+  const handleWinningsClick = (winnings, id) => {
     setPopoverData(winnings); // Set popover data
     setShowPopover(true); // Show popover
+    setcontestId(id)
+    showModal()
   };
 
   const handleClosePopover = () => {
@@ -102,11 +118,13 @@ const ContestManager = () => {
             <br />
             <label>amount:</label>
             <input type="number" placeholder='amount' value={winnings.amount} name='amount' onChange={(e) => winningAdd(e)} />
-            <button onClick={addWinning}>Add Winning</button>
+            <button onClick={addWinning} type='button'>Add Winning</button>
           </div>
-            <WinningsPopover
-              winningsData={totalWinning}
-            />
+          <WinningsPopover
+            winningsData={totalWinning}
+            settotalWinning={settotalWinning}
+            totalWinning={totalWinning}
+          />
         </div>
         <button type="submit">Add Contest</button>
       </form>
@@ -135,19 +153,19 @@ const ContestManager = () => {
                     <button onClick={() => deleteContest(contest._id)}>Delete</button>
                   </td>
                   <td>
-                    <button onClick={() => handleWinningsClick(contest.winnings)}>Winnings</button>
-                    {showPopover && (
-                      <WinningsPopover
-                        winningsData={contest.winnings}
-                        onClose={handleClosePopover}
-                      />
-                    )}
+                    <button onClick={() => handleWinningsClick(contest.winnings, contest._id)}>Winnings</button>
                   </td>
                 </tr>
               )) : ""}
         </tbody>
       </table>
-
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <WinningsPopover
+          winningsData={contests.find((item)=>item._id == contestId)?.winnings}
+          onClose={handleClosePopover}
+          showBtn={false}
+        />
+      </Modal>
     </div>
   );
 };
