@@ -7,8 +7,10 @@ import { Tabs } from 'antd';
 import "./styles.scss";
 import Withdraw from './WithdrawTransaction/Withdraw';
 import AddMoney from './AddMoneyTransaction/AddMoney';
+import { useSelector } from 'react-redux';
 
 const Transaction = () => {
+    let balenceInfo = useSelector((state) => state.ReducerFc?.balance);
     const navigate = useNavigate();
 
     const items = [
@@ -39,7 +41,7 @@ const Transaction = () => {
                 <div className="transaction-section-main-container">
                     <div className="balence-box">
                         <h3>Total Balance:</h3>
-                        <h3><FaRupeeSign /> 2000</h3>
+                        <h3><FaRupeeSign /> {balenceInfo}</h3>
                     </div>
                     <div className="transaction-history">
                         <h4>Transaction History:</h4>
