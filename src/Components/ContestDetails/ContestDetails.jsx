@@ -66,9 +66,10 @@ const ContestDetails = () => {
         console.log("llll")
         const token = localStorage.getItem('token');
         if (token) { 
-            console.log("jjjjj",contestData)
-            if(userBalance >= contestData.price) {
-                navigate("/quize") 
+            console.log("jjjjj",contestData,userBalance)
+            if(parseInt(userBalance) > parseInt(contestData.price)) {
+                const data = { contestId: contestData._id };
+                navigate("/quize",{state:{contestId: contestData._id}}) 
             } else {
                 navigate("/wallet") 
             }
