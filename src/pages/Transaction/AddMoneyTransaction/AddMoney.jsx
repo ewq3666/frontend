@@ -3,6 +3,8 @@ import { Table } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { MdCurrencyRupee } from "react-icons/md";
+
 const AddMoney = () => {
 
     const [depositeData, setDepositeData] = useState([]);
@@ -42,6 +44,11 @@ const AddMoney = () => {
             title: 'Amount',
             dataIndex: 'amount',
             key: 'amount',
+            render: (amount) => 
+                <div>
+                    <MdCurrencyRupee style={{ marginTop: 4, fontWeight: 900 }} />
+                     {amount}
+                </div>
         },
         {
             title: 'Date',
