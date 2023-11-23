@@ -42,7 +42,7 @@ export const routes = [
                 element: <Protected Component={MyProfile} />
             },
             {
-                path: "quize",
+                path: "quize/:id",
                 element: <Protected Component={QuizApp} />
             },
             {

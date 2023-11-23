@@ -18,31 +18,35 @@ function App() {
   const token = localStorage.getItem('token');
 
   // If User Already logged then take that user data
-  useEffect(async () => {
+  useEffect(() => {
+
     if (token) {
-      let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: token } })
-      dispatch(addUsers(userInfo.data.result))
-      if(userInfo.data.result) {
-        getBalence(userInfo.data.result._id)
+      const userDetails = async () => {
+        let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: token } })
+        dispatch(addUsers(userInfo.data.result))
+        if (userInfo.data.result) {
+          getBalence(userInfo.data.result._id)
+        }
       }
+      userDetails()
     }
-    
-    const getContestList = async() => {
+
+    const getContestList = async () => {
       const response = await contestApi.getAllContest();
       dispatch(contestList(response.data.result))
       // response.data
     }
     getContestList();
   }, [])
-  
-  const getBalence = async(name)=> {
+
+  const getBalence = async (name) => {
     try {
-      const money = await axios.get(END_POINTS.getBalence+name, { headers: { authorization: token } });
-      if(money.data?.balance) {
+      const money = await axios.get(END_POINTS.getBalence + name, { headers: { authorization: token } });
+      if (money.data?.balance) {
         dispatch(userBalance(money.data.balance))
       }
     } catch (error) {
-      console.log("error",error)
+      console.log("error", error)
     }
   }
 

@@ -11,5 +11,6 @@ export const END_POINTS = {
      addmoney: `${api}/addmoney`,
      contest: `${api}/admin/contest`,
      getBalence: `${api}/balance/`,
-     widthdrawRequest: `${api}/withdraw-request`
+     widthdrawRequest: `${api}/withdraw-request`,
+     joinContest: `${api}/joincontest`,
 }
