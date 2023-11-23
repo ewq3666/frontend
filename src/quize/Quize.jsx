@@ -90,6 +90,7 @@ const QuizApp = () => {
                 tracks.forEach(track => track.stop());
             }
         };
+        
     }, []);
 
     const handleNext = () => {
