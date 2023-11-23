@@ -10,7 +10,7 @@ import { handlePayment } from '../../gateway/payment';
 import "./styles.scss";
 import axios from "axios"
 import { END_POINTS } from '../../api/domain';
-
+import { alreadyPendingWithdrawalRequest, insufficientBalence, withdrawalRequestSend } from '../../assets/messages.js';
 const Wallet = () => {
     const navigate = useNavigate();
     let userInfo = useSelector((state) => state.ReducerFc?.userData[0]);
@@ -19,6 +19,7 @@ const Wallet = () => {
     const [isAddAmount, setIsAddAmount] = useState(false);
     const [isWithdrawRequest, setIsWithdrawRequest] = useState(false);
     const [isBtnLoading, setIsBtnLoading] = useState(false);
+    const [isWBtnLoading, setIsWBtnLoading] = useState(false);
     const user = useSelector((state) => state.ReducerFc)
     console.log(user, "user")
     const addAmountFunction = (amount, Withdraw) => {
@@ -51,24 +52,30 @@ const Wallet = () => {
     const token = localStorage.getItem('token');
 
     const requestWithdrawal = async () => {
+        console.log(user.userData[0]);
         try {
-            await axios.post(`${END_POINTS.widthdrawRequest}`,
-                {
-                    userId: user.userData[0]._id,
-                    amount: balenceInfo,
-                    username: user.userData[0].name
-                },
-                { headers: { authorization: token } }
-            ).then((res)=>console.log(res))
+            setIsWBtnLoading(true)
+            if(balenceInfo > 50 ) {
+                await axios.post(`${END_POINTS.widthdrawRequest}`,
+                    {
+                        userId: user.userData[0]._id,
+                        amount: balenceInfo,
+                        username: user.userData[0].name
+                    },
+                    { headers: { authorization: token } }
+                )
+                withdrawalRequestSend(balenceInfo)
+            } else {
+                insufficientBalence();
+            }
+            setIsWBtnLoading(false)
         } catch (error) {
-            console.log(error,"error");
             if (error.response.data.alreadyRequsted) {
-                notification.error({ message: error.response.data.message })
+                // notification.error({ message: error.response.data.message })
+                alreadyPendingWithdrawalRequest()
             }
-            if (error.response.data) {
-                
-                notification.error({ message: error.response.data.message })
-            }
+            console.log(error);
+            setIsWBtnLoading(false)
         }
     }
     return (
@@ -111,7 +118,7 @@ const Wallet = () => {
                     </div>
                 </div>
                 <p className="withdrawal-note">
-                    NOTE: Please note that the withdrawal limit is <FaRupeeSign />500. You can request a withdrawal when your earnings reach this amount.
+                    NOTE: Please note that the withdrawal limit is <FaRupeeSign />50. You can request a withdrawal when your earnings reach this amount.
                 </p>
                 <Divider dashed className='wallet-divider' />
             </div>
@@ -166,9 +173,9 @@ const Wallet = () => {
                         </div>
                         : isWithdrawRequest ?
                             <div className='withdrawal-request'>
-                                <p>You're just one step away from cashing in your earnings! Please complete the withdrawal request form, and we'll process your funds shortly</p>
+                                <p>You're just one step away from cashing in your earnings! Please complete the withdrawal request form, and we'll process your funds shortly.</p>
                                 <div className="button-box">
-                                    <Button htmlType="submit" className='common-blue-btn' onClick={() => requestWithdrawal()} >
+                                    <Button htmlType="submit" className='common-blue-btn' onClick={() => requestWithdrawal()} loading={isWBtnLoading} >
                                         Request For Withdrawal
                                     </Button>
                                 </div>

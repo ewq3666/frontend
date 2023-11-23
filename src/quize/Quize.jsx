@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Card, Radio, message } from 'antd';
 import "./quize.scss"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Webcam from 'react-webcam';
+import { useSelector } from 'react-redux';
 const { Meta } = Card;
 
 const questions = [
@@ -39,11 +40,15 @@ const questions = [
 ];
 
 const QuizApp = () => {
+    let contestList = useSelector((state) => state.ReducerFc?.contestList[0]);
     const webcamRef = useRef(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [contestData, setContestData] = useState({});
     const [timeLeft, setTimeLeft] = useState(5);
     const navigate = useNavigate()
+    const location = useLocation();
+    const { yourData } = location.state || {};
 
     useEffect(() => {
         let timer;
@@ -56,6 +61,13 @@ const QuizApp = () => {
         }
         return () => clearTimeout(timer);
     }, [timeLeft, currentQuestion]);
+
+    useEffect(() => {
+        console.log("location?.state?.contestId", location?.state?.contestId)
+        const contestData1 = contestList?.find((item) => item._id == location?.state?.contestId);
+        console.log("contestData:::", contestData1.quizzes, yourData, location, window.location)
+        setContestData(contestData1);
+    }, [contestList])
 
     useEffect(() => {
         const startCamera = async () => {
@@ -86,7 +98,7 @@ const QuizApp = () => {
         //   return;
         // }
 
-        if (currentQuestion < questions.length - 1) {
+        if (currentQuestion < contestData.quizzes.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
             setSelectedAnswer(null);
             setTimeLeft(5);
@@ -98,46 +110,52 @@ const QuizApp = () => {
     };
 
     return (
-        <div className="quiz-container" style={{ maxWidth: '600px', margin: '0 auto' }}>
-            <div className="rounded-camera-container">
-                <Webcam
-                    audio={false}
-                    ref={webcamRef}
-                    mirrored={true}
-                    className="rounded-camera-video"
-                />
-            </div>
-            <Card>
-                <div className="quiz-container__time">
-                    <span style={{ marginLeft: '10px' }}>
-                        {timeLeft}
-                        <br />
-                        seconds
-                    </span>
+        contestData.quizzes ?
+            (
+                <div className="quiz-container" style={{ maxWidth: '600px', margin: '0 auto' }}>
+                    <div className="rounded-camera-container">
+                        <Webcam
+                            audio={false}
+                            ref={webcamRef}
+                            mirrored={true}
+                            className="rounded-camera-video"
+                        />
+                    </div>
+                    <Card>
+                        <div className="quiz-container__time">
+                            <span style={{ marginLeft: '10px' }}>
+                                {timeLeft}
+                                <br />
+                                seconds
+                            </span>
+                        </div>
+                        <>{console.log("contestData?.quizzes", contestData?.quizzes)}</>
+                        <Meta
+                            title={`Question ${currentQuestion + 1}/${contestData?.quizzes?.length}`}
+                            description={contestData?.quizzes[currentQuestion]?.question}
+                        />
+                        <Radio.Group
+                            value={selectedAnswer}
+                            onChange={(e) => setSelectedAnswer(e.target.value)}
+                            style={{ marginTop: '20px' }}
+                            disabled={timeLeft === 0} // Disable Radio buttons when timer reaches zero
+                        >
+                            {contestData?.quizzes[currentQuestion].options.map((option, index) => (
+                                <Radio key={index} value={option}>
+                                    {option}
+                                </Radio>
+                            ))}
+                        </Radio.Group>
+                        <div style={{ marginTop: '20px' }} className='quiz-container__submit'>
+                            <Button type="primary" onClick={handleNext} disabled={timeLeft === 0}>
+                                {currentQuestion === contestData?.quizzes?.length - 1 ? 'Submit' : 'Next'}
+                            </Button>
+                        </div>
+                    </Card>
                 </div>
-                <Meta
-                    title={`Question ${currentQuestion + 1}/${questions.length}`}
-                    description={questions[currentQuestion].question}
-                />
-                <Radio.Group
-                    value={selectedAnswer}
-                    onChange={(e) => setSelectedAnswer(e.target.value)}
-                    style={{ marginTop: '20px' }}
-                    disabled={timeLeft === 0} // Disable Radio buttons when timer reaches zero
-                >
-                    {questions[currentQuestion].options.map((option, index) => (
-                        <Radio key={index} value={option}>
-                            {option}
-                        </Radio>
-                    ))}
-                </Radio.Group>
-                <div style={{ marginTop: '20px' }} className='quiz-container__submit'>
-                    <Button type="primary" onClick={handleNext} disabled={timeLeft === 0}>
-                        {currentQuestion === questions.length - 1 ? 'Submit' : 'Next'}
-                    </Button>
-                </div>
-            </Card>
-        </div>
+            )
+            : ""
+
     );
 };
 
