@@ -57,11 +57,12 @@ const EditProfile = () => {
       <div className="edit-profile-content">
         <div className="common-title yellow-title">
           <div className='left-section' onClick={() => goBack()}> <BiArrowBack /></div>
-          <h1>Setting</h1>
+          <h1>Edit Profile</h1>
           <div className='right-section'> <BiEdit /></div>
         </div>
         <div className="edit-profile-form">
           <Form name="edit-profile-form" onFinish={onFinish} form={form}>
+            <h1>Update Your Details:</h1>
             {editUserFormFields.map((data, index) => {
               return (
                 <CommonInput props={data} index={index} />
