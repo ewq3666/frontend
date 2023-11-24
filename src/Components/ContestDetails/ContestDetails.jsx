@@ -127,7 +127,8 @@ const ContestDetails = () => {
                     </div>
                     <div className="contest-time">
                         <span>Time: </span>
-                        {formattedTime}
+                        {/* {formattedTime} */}
+                        {moment(contestData.date, 'HH:mm A').format("h:mm A")}
                     </div>
                 </div>
                 <div className="contest-details__card-middle">
