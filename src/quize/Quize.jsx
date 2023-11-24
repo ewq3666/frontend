@@ -102,7 +102,7 @@ const QuizApp = () => {
         if (currentQuestion < contestData.quizzes.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
             setSelectedAnswer(null);
-            setTimeLeft(5);
+            setTimeLeft(10);
         } else {
             message.success('Quiz completed! Submitting...');
             navigate('/submit')

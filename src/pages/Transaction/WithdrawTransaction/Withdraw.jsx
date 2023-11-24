@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { END_POINTS } from '../../../api/domain';
 
 const Withdraw = () => {
 
@@ -14,7 +15,7 @@ const Withdraw = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("https://backendupdated.vercel.app/api/withdraw-request/");
+                const response = await axios.get(END_POINTS.getwidthdrawRequest);
                 console.log(response, "withdraw");
                 setWithdrawData(response.data)
             } catch (error) {
