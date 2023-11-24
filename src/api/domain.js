@@ -6,6 +6,7 @@ export const END_POINTS = {
      login: `${api}/login`,
      handleDuplicateEmail: `${api}/email`,
      userInfo: `${api}/user`,
+     userInfoUpdate: `${api}/userInfo`,
      verify: `${api}/verify`,
      orders: `${api}/orders`,
      addmoney: `${api}/addmoney`,
