@@ -30,15 +30,10 @@ const Withdraw = () => {
         orderId: item.orderId,
         amount: item.amount,
         createdAt: item.createdAt,
+        status: item.status,
     }));
 
     const columns = [
-        {
-            title: 'Order ID',
-            dataIndex: 'orderId',
-            key: 'orderId',
-            render: (text) => <a>{text}</a>,
-        },
         {
             title: 'Amount',
             dataIndex: 'amount',
@@ -49,6 +44,12 @@ const Withdraw = () => {
             dataIndex: 'createdAt',
             key: 'createdAt',
             render: (date) => moment(date).format('DD/MM/YYYY'),
+        },
+        {
+            title: 'Status',
+            dataIndex: 'status',
+            key: 'status',
+            // render: (text) => <p>{console.log("text",text)}</p>,
         },
     ];
     return (

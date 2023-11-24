@@ -16,17 +16,18 @@ import axios from "axios";
 import './styles.scss';
 
 const SignUp = () => {
+
   const [signUpForm] = Form.useForm();
   const navigate = useNavigate();
   const form = useRef();
-
-  const [isBtnLoading, setIsBtnLoading] = useState(false);
-  const [data, setdata] = useState()
-  const [emailSent, setemailSent] = useState(false)
-  // const [emailVerified, setemailVerified] = useState(false)
-  const [otp, setotp] = useState()
-  const [userOtp, setUserOtp] = useState()
   const formref = useRef()
+
+  const [otp, setotp] = useState()
+  const [data, setdata] = useState()
+  const [userOtp, setUserOtp] = useState()
+  const [emailSent, setemailSent] = useState(false)
+  const [isBtnLoading, setIsBtnLoading] = useState(false);
+
   function generateRandomSixDigitNumber() {
     return Math.floor(100000 + Math.random() * 900000);
   }
@@ -39,47 +40,40 @@ const SignUp = () => {
       let res = await axios.post(END_POINTS.handleDuplicateEmail, { "email": userEmail })
       if (!res.data?.registered) {
         if (userEmail) {
-          console.log("fff")
           // Send OTP
           let cotp = generateRandomSixDigitNumber()
           document.getElementById('message').innerHTML = cotp
           setotp(cotp)
-          console.log("hhhhh")
           emailjs.sendForm('service_acukyoj', 'template_221j0y3', form.current, 'ZUVtc9uMSFENFge48')
             .then((result) => {
-              console.log("ggg",result)
               setemailSent(true)
               Notifications.otpSendSuccessfully();
-            }, (error) => {console.log("error",error)});
+            }, (error) => {
+              Notifications.somethingWentWrong();
+            });
         }
-        else {
-          // notification.error({ message: 'please enter email' })
-        }
+        else { }
       } else {
         Notifications.emailAlreadyExist();
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   // Set data
   const onFinish = async (values) => {
-    setdata(values)
-    console.log('Received values:', values);
+    setdata(values);
   };
 
   // Signup function called
   useEffect(() => {
-    console.log("emailSent", emailSent, userOtp, otp);
     if (userOtp == otp && emailSent) {
-      console.log("true condition")
       Notifications.otpMatched();
       registerUser()
       setemailSent(false);
     } else {
-      if(userOtp?.length > 5 && emailSent) {
+      if (userOtp?.length > 5 && emailSent) {
         Notifications.incorrectOtp();
       }
-      console.log("false condition",otp)
     }
   }, [emailSent, sendEmail])
 
@@ -143,46 +137,47 @@ const SignUp = () => {
                         />
                       </Form.Item>
                     )
-                  : data.type == "confirmPassword" ?
-                    (
-                      <Form.Item
-                        name="confirmPassword"
-                        dependencies={['password']}
-                        hasFeedback
-                        rules={[
-                          { required: true, message: 'Please confirm your password' },
-                          ({ getFieldValue }) => ({
-                            validator(_, value) {
-                              if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                              }
-                              return Promise.reject(new Error('The two passwords do not match'));
-                            },
-                          }),
-                        ]}
-                        className="loginInput"
-                      >
-                        <Input.Password
-                          prefix={<LockOutlined className="loginInput__input-icon" />}
-                          placeholder="Confirm Password"
-                          className='loginInput__input'
-                        />
-                      </Form.Item>
-                    )
-                  :
-                    <CommonInput props={data} index={index} />
+                    : data.type == "confirmPassword" ?
+                      (
+                        <Form.Item
+                          name="confirmPassword"
+                          dependencies={['password']}
+                          hasFeedback
+                          rules={[
+                            { required: true, message: 'Please confirm your password' },
+                            ({ getFieldValue }) => ({
+                              validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                  return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('The two passwords do not match'));
+                              },
+                            }),
+                          ]}
+                          className="loginInput"
+                        >
+                          <Input.Password
+                            prefix={<LockOutlined className="loginInput__input-icon" />}
+                            placeholder="Confirm Password"
+                            className='loginInput__input'
+                          />
+                        </Form.Item>
+                      )
+                      :
+                      <CommonInput props={data} index={index} />
                 }
               </>
             )
           })}
 
           <div className="login-container__box__form-wrapper-btn">
-            <Button onClick={sendEmail} loading={isBtnLoading} >
+            <Button onClick={sendEmail} loading={isBtnLoading} htmlType='submit'>
               Sign Up
             </Button>
           </div>
         </Form>
-        <form onSubmit={sendEmail} ref={form} className='hide-form'>
+        
+        <form onSubmit={sendEmail} ref={form} className='hide-for'>
           <div>
             <label htmlFor="user_email">Email:</label>
             <input

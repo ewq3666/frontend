@@ -41,7 +41,7 @@ const Transaction = () => {
                 <div className="transaction-section-main-container">
                     <div className="balence-box">
                         <h3>Total Balance:</h3>
-                        <h3><FaRupeeSign /> {balenceInfo}</h3>
+                        <h3><FaRupeeSign /> {balenceInfo?.length > 0 ? balenceInfo : "0"}</h3>
                     </div>
                     <div className="transaction-history">
                         <h4>Transaction History:</h4>

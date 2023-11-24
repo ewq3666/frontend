@@ -31,6 +31,16 @@ export const emailAlreadyExist = () => {
     className: "success-notification error-notification"
   });
 }
+export const somethingWentWrong = () => {
+  notification.success({
+    message: 'Something went wrong.',
+    // description: ' This email address already exists, please use a different email address.',
+    icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
+    placement: 'top',
+    // duration: 1000,
+    className: "success-notification error-notification"
+  });
+}
 
 export const signUpSuccess = () => {
   notification.success({

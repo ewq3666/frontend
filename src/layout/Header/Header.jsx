@@ -110,7 +110,7 @@ const Header = () => {
                     ) :
                         <div className="hamburger-menu">
                             <div className="hamburger-option" onClick={()=>navigate('/wallet')}>
-                                {balance} <RiWallet3Line />
+                                {balance?.length > 0 ? balance : "0"} <RiWallet3Line />
                             </div>
                             <div className="hamburger-option" onClick={showDrawer}>
                                 <GiHamburgerMenu />
