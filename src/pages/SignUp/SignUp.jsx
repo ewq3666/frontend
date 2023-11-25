@@ -177,7 +177,7 @@ const SignUp = () => {
           </div>
         </Form>
         
-        <form onSubmit={sendEmail} ref={form} className='hide-for'>
+        <form onSubmit={sendEmail} ref={form} className='hide-form'>
           <div>
             <label htmlFor="user_email">Email:</label>
             <input
