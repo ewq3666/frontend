@@ -4,6 +4,7 @@ import { END_POINTS } from "../api/domain";
 import axios from "axios";
 
 const paymentApi = new paymentAPI();
+const token = localStorage.getItem('token')
 
 export const handlePayment = async (amount,userInfo) => {
 	try {
