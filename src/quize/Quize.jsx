@@ -42,7 +42,7 @@ const QuizApp = () => {
     const webcamRef = useRef(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [timeLeft, setTimeLeft] = useState(5);
+    const [timeLeft, setTimeLeft] = useState(10);
     const navigate = useNavigate()
 
     useEffect(() => {
