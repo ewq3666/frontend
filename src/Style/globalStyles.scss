@@ -8,9 +8,9 @@
     font-family: 'Rubik', sans-serif;
 }
 
-body {
-    background: #5252f508;
-}
+// body {
+//     background: #5252f508;
+// }
 
 .layout-main-container {
     width: 769px;
@@ -154,9 +154,10 @@ body {
     margin-bottom: 12px;
     // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: #fff;
-    box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
-    -webkit-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
-    -moz-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
+    border-bottom: 1px solid gray;
+    // box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
+    // -webkit-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
+    // -moz-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
     .left-section {
         position: absolute;
         left: 12px;

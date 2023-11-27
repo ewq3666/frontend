@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import { MdCurrencyRupee } from "react-icons/md";
+import { END_POINTS } from '../../../api/domain';
 
 const Withdraw = () => {
 
@@ -15,8 +15,8 @@ const Withdraw = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`https://backendupdated.vercel.app/api/withdraw-requests/${userInfo._id}`);
-                // console.log(response, "withdraw");
+                const response = await axios.get(END_POINTS.getwidthdrawRequest);
+                console.log(response, "withdraw");
                 setWithdrawData(response.data)
             } catch (error) {
                 console.error(error);
@@ -34,12 +34,6 @@ const Withdraw = () => {
     }));
 
     const columns = [
-        {
-            title: 'ID',
-            dataIndex: 'Id',
-            key: 'Id',
-            render: (text) => <a>{text}</a>,
-        },
         {
             title: 'Amount',
             dataIndex: 'amount',
@@ -60,6 +54,7 @@ const Withdraw = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
+            // render: (text) => <p>{console.log("text",text)}</p>,
         },
     ];
     return (

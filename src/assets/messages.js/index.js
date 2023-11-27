@@ -31,6 +31,16 @@ export const emailAlreadyExist = () => {
     className: "success-notification error-notification"
   });
 }
+export const somethingWentWrong = () => {
+  notification.success({
+    message: 'Something went wrong.',
+    // description: ' This email address already exists, please use a different email address.',
+    icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
+    placement: 'top',
+    // duration: 1000,
+    className: "success-notification error-notification"
+  });
+}
 
 export const signUpSuccess = () => {
   notification.success({
@@ -117,6 +127,26 @@ export const alreadyPendingWithdrawalRequest = () => {
   notification.success({
     message: 'already pending withdrawal request',
     description: `We're sorry, but there is already a pending withdrawal request for your account. Thank you for your understanding.`,
+    icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
+    placement: 'top',
+    className: "success-notification error-notification"
+  });
+}
+
+export const userDetailsUpdatedSuccess = () => {
+  notification.success({
+    message: 'Profile Update Successful!',
+    description: `Your user details have been updated successfully. If you have any questions, please reach out to our support team.`,
+    icon: <CheckCircleOutlined style={{ color: '#52c41a' }} />,
+    placement: 'top',
+    // duration: 1000,
+    className: "success-notification"
+  });
+}
+export const editUserError = (Message) => {
+  notification.success({
+    message: 'Error',
+    description: Message,
     icon: <ExclamationCircleOutlined style={{ color: '#FF133D' }} />,
     placement: 'top',
     className: "success-notification error-notification"

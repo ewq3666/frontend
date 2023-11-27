@@ -1,4 +1,5 @@
-import { UserOutlined, MailOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, MailOutlined, PhoneOutlined, MobileOutlined, LockOutlined } from '@ant-design/icons';
+import { GrLocation } from 'react-icons/gr';
 
 // Login form fields
 export const loginFormField = [
@@ -48,7 +49,7 @@ export const signupFormFields = [
                 message: 'Please enter your name.'
             }
         ],
-        placeholder: "Enter your Email",
+        placeholder: "Enter your name",
         fullInput: true,
         icon: UserOutlined
     },
@@ -159,5 +160,95 @@ export const signupFormFields = [
         placeholder: "Enter your referal",
         fullInput: true,
         icon: UserOutlined
+    },
+]
+// Edit user fields
+export const editUserFormFields = [
+    {
+        name: "name",
+        optional: false,
+        type: '',
+        rules: [
+            {
+                required: true,
+                message: 'Please enter your name.'
+            }
+        ],
+        placeholder: "Enter your name",
+        fullInput: true,
+        icon: UserOutlined
+    },
+    {
+        name: "user_email",
+        optional: false,
+        type: 'email',
+        rules: [
+            {
+                required: true,
+                message: 'Please enter your email.'
+            },
+            { 
+                type: 'email', 
+                message: 'Invalid email address.' 
+            },
+        ],
+        placeholder: "Enter your email",
+        fullInput: true,
+        icon: MailOutlined,
+        disable: true
+    },
+    {
+        name: "phone",
+        optional: false,
+        type: '',
+        rules: [
+            { 
+                required: true, 
+                message: 'Please enter your phone number.' 
+            },
+            { 
+                pattern: /^\d{10}$/, 
+                message: 'Invalid phone number.' 
+            },
+          ],
+        placeholder: "Enter your phone number",
+        fullInput: true,
+        icon: PhoneOutlined
+    },
+    {
+        name: "upi",
+        optional: false,
+        type: '',
+        rules: [
+            { 
+                required: true, 
+                message: 'Please enter your UPI ID.' 
+            }
+        ],
+        placeholder: "Enter your UPI ID",
+        fullInput: true,
+        icon: UserOutlined
+    },
+    {
+        name: "state",
+        optional: false,
+        type: '',
+        rules: [
+            { 
+                required: true, 
+                message: 'Please enter your state.' 
+            }
+        ],
+        placeholder: "Enter Your State",
+        fullInput: true,
+        icon: GrLocation
+    },
+    {
+        name: "district",
+        optional: true,
+        type: '',
+        placeholder: "Enter your district (Optional)",
+        fullInput: true,
+        icon: GrLocation
     },
 ]

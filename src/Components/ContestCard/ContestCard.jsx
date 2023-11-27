@@ -195,7 +195,7 @@ const ContestCard = (props) => {
                 )
               })}
             </>
-          ) : <Spin size="large" className='contest-spin' />}
+          ) : "No data."}
         </>
       }
     </>

@@ -4,6 +4,7 @@ import { END_POINTS } from "../api/domain";
 import axios from "axios";
 
 const paymentApi = new paymentAPI();
+const token = localStorage.getItem('token')
 
 export const handlePayment = async (amount,userInfo) => {
 	try {
@@ -56,9 +57,22 @@ const addMoneyApi = async(orderData, userInfo,amount) => {
 		const { data } = await paymentApi.addMoneyApi(payload);
 		if(data) {
 			Notifications.paymentAddSuccessFully(userInfo.name,amount)
+			getBalence(userInfo.name);
+			
 		}
 		
 	} catch (error) {
 		console.log("api error:")
 	}
 }
+
+  const getBalence = async (name) => {
+    try {
+      const money = await axios.get(END_POINTS.getBalence + name, { headers: { authorization: token } });
+      if (money.data?.balance) {
+        dispatch(userBalance(money.data.balance))
+      }
+    } catch (error) {
+      console.log("error", error)
+    }
+  }

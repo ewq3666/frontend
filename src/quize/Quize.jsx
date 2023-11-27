@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Card, Radio, message } from 'antd';
 import "./quize.scss"
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Webcam from 'react-webcam';
 import { useSelector } from 'react-redux';
 const { Meta } = Card;
@@ -42,6 +42,7 @@ const questions = [
 const QuizApp = () => {
     let contestList = useSelector((state) => state.ReducerFc?.contestList[0]);
     const webcamRef = useRef(null);
+    const { id } = useParams()
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [contestData, setContestData] = useState({});
@@ -63,8 +64,8 @@ const QuizApp = () => {
     }, [timeLeft, currentQuestion]);
 
     useEffect(() => {
-        console.log("location?.state?.contestId", location?.state?.contestId)
-        const contestData1 = contestList?.find((item) => item._id == location?.state?.contestId);
+        const contestData1 = contestList?.find((item) => item._id == id);
+        console.log("location?.state?.contestId", id,contestData1)
         console.log("contestData:::", contestData1.quizzes, yourData, location, window.location)
         setContestData(contestData1);
     }, [contestList])
@@ -101,7 +102,7 @@ const QuizApp = () => {
         if (currentQuestion < contestData.quizzes.length - 1) {
             setCurrentQuestion(currentQuestion + 1);
             setSelectedAnswer(null);
-            setTimeLeft(5);
+            setTimeLeft(10);
         } else {
             message.success('Quiz completed! Submitting...');
             navigate('/submit')
@@ -140,7 +141,7 @@ const QuizApp = () => {
                             style={{ marginTop: '20px' }}
                             disabled={timeLeft === 0} // Disable Radio buttons when timer reaches zero
                         >
-                            {contestData?.quizzes[currentQuestion].options.map((option, index) => (
+                            {contestData?.quizzes[currentQuestion]?.options.map((option, index) => (
                                 <Radio key={index} value={option}>
                                     {option}
                                 </Radio>

@@ -1,14 +1,11 @@
 .transaction-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 
     .transaction-content {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        max-width: 500px;
+        max-width: 769px;
+        margin: 0px auto;
         background-color: #ffffff;
         border-radius: 5px;
         text-align: center;
@@ -65,3 +62,11 @@
         }
     }
 }
+
+@media screen and (max-width: 480px) {
+    .transaction-container {
+      .transaction-content {
+        width: 100%;
+      }
+    }
+  }
