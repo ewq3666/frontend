@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { END_POINTS } from '../../../api/domain';
+import { MdCurrencyRupee } from "react-icons/md";
 
 const Withdraw = () => {
 
