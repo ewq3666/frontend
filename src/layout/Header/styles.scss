@@ -85,38 +85,35 @@
 }
 
 .menu-drawer {
-    .ant-drawer-wrapper-body {
-        background: #5252f508;
-    }
+    background: #6a5ae0 !important;
     .ant-drawer-close {
         display: none;
     }
     .ant-drawer-header {
         padding: 0px !important;
+        border: 0px !important;
     }
     .ant-drawer-title {
         text-align: center;
         margin-left: -36px;
         font-size: 22px;
         font-weight: 700;
-        box-shadow: -1px 3px 14px -8px rgba(0, 0, 255, 0.34);
-        -webkit-box-shadow: -1px 3px 14px -8px rgba(0, 0, 255, 0.34);
-        -moz-box-shadow: -1px 3px 14px -8px rgba(0, 0, 255, 0.34);
         padding: 12px;
-        background: #fff;
         .menu-title {
-            margin: 0px 22px 0px 32px;
+            margin: 0px 0px 0px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: #ffffff;
             svg {
-                color: var(--is-red-color);
+                color: #ffffff;
+                font-size: 22px;
             }
             .menu-logo {
-                width: 80%;
+                width: 100%;
                 display: flex;
-                // justify-content: center;
                 align-items: center;
+                justify-content: center;
                 height: 100%;
                 font-size: 18px;
                 font-weight: 800;
@@ -129,11 +126,8 @@
         }
     }
     .ant-drawer-body {
-        padding: 0px 8px !important;
+        padding: 32px 8px 0px 8px !important;
         .ant-drawer-title {
-            box-shadow: -1px 3px 16px -1px rgba(0,0,255,0.34);
-            -webkit-box-shadow: -1px 3px 16px -1px rgba(0,0,255,0.34);
-            -moz-box-shadow: -1px 3px 16px -1px rgba(0,0,255,0.34);
             padding: 12px;
         }
         .drawer-content {
@@ -141,23 +135,25 @@
             flex-direction: column;
             height: 100%;
             text-align: center;
+            border-radius: 32px 32px 0px 0px;
+            background: #ffffff;
+            padding: 16px;
             .ant-menu {
                 background-color: transparent;
             }
             .ant-menu-item {
-                border-radius: 0px;
-                background: #ffffff;
-                margin: 16px 0px;
-                padding: 0px;
-                box-shadow: -1px 3px 14px -8px rgba(0,0,255,0.34);
-                -webkit-box-shadow: -1px 3px 14px -8px rgba(0,0,255,0.34);
-                -moz-box-shadow: -1px 3px 14px -8px rgba(0,0,255,0.34);
+                background: #efeefc;
+                margin-bottom: 16px;
+                height: 54px;
+                display: flex;
+                align-items: center;
                 span {
-                    color: #000000;
+                    color: #7364e2;
                     font-size: 14px;
                     font-weight: 800;
                     display: flex;
-                    justify-content: space-between;
+                    width: 100%;
+                    // justify-content: space-between;
                     align-items: center;
                     padding: 0px 4px;
                     span:first-child {
@@ -165,6 +161,9 @@
                             margin: 0px 12px 0px 6px;
                             font-size: 22px;
                         }
+                    }
+                    span:last-child {
+                        justify-content: flex-end;
                     }
                 }
             }
