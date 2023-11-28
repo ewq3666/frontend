@@ -167,10 +167,17 @@
                     }
                 }
             }
-            .ant-menu-item:last-child {
-                background: beige;
+            // .ant-menu-item:last-child {
+            //     background: beige;
+            //     span {
+            //         color: var(--is-red-color);
+            //     }
+            // }
+            .ant-menu-item:hover,
+            .ant-menu-item:active {
+                background: #6a5ae0 !important;
                 span {
-                    color: var(--is-red-color);
+                    color: #ffffff;
                 }
             }
         }
