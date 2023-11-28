@@ -21,7 +21,7 @@ const Transaction = () => {
         },
         {
             key: '2',
-            label: 'Deposite',
+            label: 'deposit',
             children: <AddMoney />,
         },
     ];
@@ -44,7 +44,7 @@ const Transaction = () => {
                         <h3><FaRupeeSign /> {balenceInfo?.length > 0 ? balenceInfo : "0"}</h3>
                     </div>
                     <div className="transaction-history">
-                        <h4>Transaction History:</h4>
+                        <h4>Transaction History</h4>
                         <div className="contest-details__tab-section">
                             <Tabs
                                 defaultActiveKey="1"

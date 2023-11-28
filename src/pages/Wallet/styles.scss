@@ -1,18 +1,31 @@
 .wallet-container {
     width: 769px;
     margin: 0px auto;
+    background: #6a5ae0;
+    height: 100vh;
+    overflow: hidden;
 
     .wallet-section-main-container {
         padding-top: 8px;
+        background: #ffffff;
+        border-radius: 32px 32px 0px 0px;
+        margin: 0px 16px;
+        height: 100%;
         .balence-box {
-            margin-top: 22px;
+            background: #6a5ae0;
+            margin: 18px 12px 28px 12px;
+            border-radius: 16px;
+            padding: 16px 0px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-
+            color: #ffffff;
+            h3 {
+                font-size: 16px;
+            }
             h3:nth-child(2) {
-                color: var(--is-green-text-color);
+                color: #ffffff;
                 margin-top: 8px;
 
                 svg {
@@ -37,16 +50,12 @@
             }
         }
 
-        .wallet-divider {
-            border-width: 3.5px 0 0 !important;
-            margin: 32px 0 !important;
-        }
-
         .withdrawal-note {
             margin: 16px 16px 0px 16px;
             font-size: 12px;
             line-height: 18px;
-            color: gray;
+            color: #e6e7e8;
+            letter-spacing: 0.7px;
             svg {
                 font-size: 10px;
                 margin-bottom: -1px;

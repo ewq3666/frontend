@@ -6,24 +6,29 @@
         flex-direction: column;
         max-width: 769px;
         margin: 0px auto;
-        background-color: #ffffff;
+        // background-color: #ffffff;
+        background: #6a5ae0;
         border-radius: 5px;
         text-align: center;
         height: 100%;
+        padding: 0px 16px;
 
         .transaction-section-main-container {
+            background: #ffffff;
+            border-radius: 32px 32px 0px 0px;
+            height: 100%;
             .balence-box {
-                height: 100px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                flex-direction: column;
-                h3:last-child {
-                    color: var(--is-green-text-color);
-                    margin-top: 8px;
-                    svg {
-                        font-size: 15px;
-                    }
+                background: #6a5ae0;
+                padding: 16px;
+                border-radius: 16px;
+                margin: 16px;
+                color: #ffffff;
+                svg {
+                    font-size: 14px;
+                    margin: 0px -3px 0px 5px;
                 }
             }
             .transaction-history {

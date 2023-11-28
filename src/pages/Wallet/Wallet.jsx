@@ -93,7 +93,7 @@ const Wallet = () => {
                     <h3><FaRupeeSign /> {balenceInfo?.length > 0 ? balenceInfo : "0"}</h3>
                     <div className="button-box">
                         <Button
-                            className="common-blue-btn"
+                            className="common-blue-btn common-white-btn"
                             onClick={() => addAmountFunction(true, false)}
                         >
                             <span className='plus-icon'>+</span>
@@ -101,7 +101,7 @@ const Wallet = () => {
                         </Button>
                     </div>
                 </div>
-                <Divider dashed className='wallet-divider' />
+                {/* <Divider dashed className='wallet-divider' /> */}
 
                 {/* Withdraw Amount */}
                 <div className="balence-box withdrawal-box">
@@ -109,17 +109,18 @@ const Wallet = () => {
                     <h3><FaRupeeSign /> {balenceInfo?.length > 0 ? balenceInfo : "0"}</h3>
                     <div className="button-box">
                         <Button
-                            className="common-blue-btn add-money-button"
+                            className="common-blue-btn add-money-button common-white-btn"
                             onClick={() => addAmountFunction(false, true)}
                         >
                             <span className='withdrawal-svg'><FaRupeeSign /></span>
                             Withdrawal Amount
                         </Button>
                     </div>
-                </div>
-                <p className="withdrawal-note">
+                    <p className="withdrawal-note">
                     NOTE: Please note that the withdrawal limit is <FaRupeeSign />50. You can request a withdrawal when your earnings reach this amount.
                 </p>
+                </div>
+                
                 <Divider dashed className='wallet-divider' />
             </div>
 

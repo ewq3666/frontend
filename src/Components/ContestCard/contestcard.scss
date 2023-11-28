@@ -2,10 +2,11 @@
     border-radius: 8px;
     // box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     margin: auto;
-    background: #ffffff;
-    box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
-    -webkit-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
-    -moz-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
+    // background: #ffffff;
+    background: #E8E5FA;
+    // box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
+    // -webkit-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
+    // -moz-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
     margin-bottom: 16px;
 
     &__loading {
@@ -57,9 +58,10 @@
         .countdown-box {
             padding: 5px;
             border-radius: 5px;
-            background: #f9f3f3;
+            // background: #f9f3f3;
+            background: #f55874;
             text-align: center;
-            color: red;
+            color: #ffffff;
             font-size: 12px;
             font-weight: 600;
         }
