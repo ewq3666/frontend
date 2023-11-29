@@ -1,65 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Spin } from 'antd';
-import { END_POINTS } from '../../api/domain';
 import { useNavigate } from "react-router-dom";
 import { BsCurrencyRupee } from 'react-icons/bs';
 import moment from 'moment';
 import './contestcard.scss';
-import axios from 'axios';
 
 const ContestCard = (props) => {
+
   const navigate = useNavigate();
-  // const [progress, setProgress] = useState(80);
-  const [contestData, setContestData] = useState([]);
   const [contestTimer, setContestTimer] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Featch contest data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const currentDate = new Date();
-        setIsLoading(true);
-        const response = await axios.get(END_POINTS.contest);
-
-        if (response.data) {
-          if (props.filterValue == "completed") {
-            const oldQuizzes = response.data.result.filter((quiz) => {
-              const quizDateTime = moment(`${quiz.date} ${quiz.time}`, 'YYYY-MM-DD HH:mm');
-              return quizDateTime.isBefore(currentDate);
-            });
-            setContestData(oldQuizzes);
-          } else if (props.filterValue == "upcomming") {
-            const upcomingQuizzes = response.data.result.filter((quiz) => {
-              const quizDateTime = moment(`${quiz.date} ${quiz.time}`, 'YYYY-MM-DD HH:mm');
-              return quizDateTime.isSameOrAfter(currentDate);
-            });
-            setContestData(upcomingQuizzes);
-          } else if (props.filterValue == "All") {
-            setContestData(response.data.result);
-          } else {
-            const todayStart = new Date();
-            todayStart.setHours(0, 0, 0, 0);
-            const todayEnd = new Date();
-            todayEnd.setHours(23, 59, 59, 999);
-            const filtered = response.data.result.filter(record => new Date(record.date) >= todayStart && new Date(record.date) <= todayEnd);
-            setContestData(...contestData, filtered);
-          }
-        }
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [props.filterValue]);
 
   useEffect(() => {
     const timer = setInterval(() => {
       const currentTime = moment();
-      const updatedContestTimer = contestData.map((contest) => {
+      const updatedContestTimer = props.contestData.map((contest) => {
         const targetDateTime = moment(`${contest.date} ${contest.time}`, 'YYYY-MM-DD HH:mm A');
         const duration = moment.duration(targetDateTime.diff(currentTime));
         const daysDiff = duration.days();
@@ -79,10 +33,10 @@ const ContestCard = (props) => {
     return () => {
       clearInterval(timer);
     };
-  }, [contestData]);
+  }, [props.contestData]);
 
   const Countdown = ({ days, hours, minutes, seconds, index }) => {
-    const contest = contestData[index]; // Get the specific contest data
+    const contest = props.contestData[index]; // Get the specific contest data
     let diff = null;
 
     if (contest) {
@@ -111,13 +65,13 @@ const ContestCard = (props) => {
 
   return (
     <>
-      {isLoading ?
+      {props.isLoading ?
         <Spin size="large" className='contest-spin' />
         :
         <>
           {contestTimer?.length > 0 ? (
             <>
-              {contestData.map((values, index) => {
+              {props.contestData.map((values, index) => {
                 // Calculate the total seconds remaining
                 const totalSeconds = (contestTimer[index]?.days * 24 * 60 * 60) +
                   (contestTimer[index]?.hours * 60 * 60) +
