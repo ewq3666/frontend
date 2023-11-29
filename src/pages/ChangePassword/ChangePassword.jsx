@@ -1,13 +1,16 @@
 import React from 'react';
-import { Form, Input, Button, Space } from 'antd';
+import { Form, Button } from 'antd';
 import { ArrowLeftOutlined, LockOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { BiArrowBack } from 'react-icons/bi';
-import { RiLockPasswordFill } from 'react-icons/ri';
+import { BiArrowBack, BiEdit } from 'react-icons/bi';
+import { useForm } from 'antd/lib/form/Form';
+import CommonInput from '../../Components/CommonInput/CommonInput';
+import { changePasswordFields } from '../../assets/commonData/commonData';
 import './styles.scss';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
+  const [form] = useForm();
 
   const onFinish = (values) => {
     console.log('Received values:', values);
@@ -18,66 +21,28 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="change-password-container">
-      <div className="change-password-content">
-         <div className="edit-profile-title">
+    <div className="edit-profile-container">
+      <div className="edit-profile-content">
+        <div className="common-title yellow-title">
           <div className='left-section' onClick={() => goBack()}> <BiArrowBack /></div>
           <h1>Change Password</h1>
-          <div className='right-section'> <RiLockPasswordFill /></div>
+          <div className='right-section'> <BiEdit /></div>
         </div>
-        <div className="change-password-form">
-          <Form name="change-password-form" onFinish={onFinish}>
-            <Form.Item
-              name="oldPassword"
-              rules={[{ required: true, message: 'Please enter your old password' }]}
-              className='common-input'
-            >
-              <Input
-                prefix={<LockOutlined className="input-icon" />}
-                type="password"
-                placeholder="Old Password"
-              />
-            </Form.Item>
-
-            <Form.Item
-              name="newPassword"
-              rules={[{ required: true, message: 'Please enter your new password' }]}
-              className='common-input'
-            >
-              <Input
-                prefix={<LockOutlined className="input-icon" />}
-                type="password"
-                placeholder="New Password"
-              />
-            </Form.Item>
-
-            <Form.Item
-              name="confirmPassword"
-              dependencies={['newPassword']}
-              hasFeedback
-              rules={[
-                { required: true, message: 'Please confirm your password' },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue('newPassword') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error('The two passwords do not match'));
-                  },
-                }),
-              ]}
-              className='common-input'
-            >
-              <Input
-                prefix={<LockOutlined className="input-icon" />}
-                type="password"
-                placeholder="Confirm Password"
-              />
-            </Form.Item>
-
-            <div className="button-box">
+        <div className="edit-profile-form">
+          <Form name="edit-profile-form" onFinish={onFinish} form={form}>
+            <h1>Change Password :</h1>
+            {changePasswordFields.map((data, index) => {
+              return (
+                <CommonInput
+                  props={data}
+                  index={index}
+                />
+              )
+            })}
+            <div className="login-container__box__form-wrapper-btn">
               <Button htmlType="submit" className='common-blue-button'>
-                <RiLockPasswordFill /> Change Password
+                {/* <BiEdit /> */}
+                Save Changes
               </Button>
             </div>
           </Form>

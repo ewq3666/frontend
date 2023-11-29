@@ -62,9 +62,9 @@ export const signupFormFields = [
                 required: true,
                 message: 'Please enter your email.'
             },
-            { 
-                type: 'email', 
-                message: 'Invalid email address.' 
+            {
+                type: 'email',
+                message: 'Invalid email address.'
             },
         ],
         placeholder: "Enter your email",
@@ -76,15 +76,15 @@ export const signupFormFields = [
         optional: false,
         type: '',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your phone number.' 
+            {
+                required: true,
+                message: 'Please enter your phone number.'
             },
-            { 
-                pattern: /^\d{10}$/, 
-                message: 'Invalid phone number.' 
+            {
+                pattern: /^\d{10}$/,
+                message: 'Invalid phone number.'
             },
-          ],
+        ],
         placeholder: "Enter your phone number",
         fullInput: true,
         icon: MobileOutlined
@@ -94,9 +94,9 @@ export const signupFormFields = [
         optional: false,
         type: '',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your UPI ID.' 
+            {
+                required: true,
+                message: 'Please enter your UPI ID.'
             }
         ],
         placeholder: "Enter your UPI ID",
@@ -108,9 +108,9 @@ export const signupFormFields = [
         optional: false,
         type: 'password',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter password.' 
+            {
+                required: true,
+                message: 'Please enter password.'
             }
         ],
         placeholder: "Enter password",
@@ -122,9 +122,9 @@ export const signupFormFields = [
         optional: false,
         type: 'confirmPassword',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your confirmPassword.' 
+            {
+                required: true,
+                message: 'Please enter your confirmPassword.'
             }
         ],
         placeholder: "Enter your confirmPassword",
@@ -136,9 +136,9 @@ export const signupFormFields = [
         optional: false,
         type: '',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your state' 
+            {
+                required: true,
+                message: 'Please enter your state'
             }
         ],
         placeholder: "Enter Your State",
@@ -187,9 +187,9 @@ export const editUserFormFields = [
                 required: true,
                 message: 'Please enter your email.'
             },
-            { 
-                type: 'email', 
-                message: 'Invalid email address.' 
+            {
+                type: 'email',
+                message: 'Invalid email address.'
             },
         ],
         placeholder: "Enter your email",
@@ -202,15 +202,15 @@ export const editUserFormFields = [
         optional: false,
         type: '',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your phone number.' 
+            {
+                required: true,
+                message: 'Please enter your phone number.'
             },
-            { 
-                pattern: /^\d{10}$/, 
-                message: 'Invalid phone number.' 
+            {
+                pattern: /^\d{10}$/,
+                message: 'Invalid phone number.'
             },
-          ],
+        ],
         placeholder: "Enter your phone number",
         fullInput: true,
         icon: PhoneOutlined
@@ -220,9 +220,9 @@ export const editUserFormFields = [
         optional: false,
         type: '',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your UPI ID.' 
+            {
+                required: true,
+                message: 'Please enter your UPI ID.'
             }
         ],
         placeholder: "Enter your UPI ID",
@@ -234,9 +234,9 @@ export const editUserFormFields = [
         optional: false,
         type: '',
         rules: [
-            { 
-                required: true, 
-                message: 'Please enter your state.' 
+            {
+                required: true,
+                message: 'Please enter your state.'
             }
         ],
         placeholder: "Enter Your State",
@@ -252,3 +252,52 @@ export const editUserFormFields = [
         icon: GrLocation
     },
 ]
+// change password fields
+export const changePasswordFields = [
+    {
+        name: "old_password",
+        optional: false,
+        type: '',
+        rules: [
+            {
+                required: true,
+                message: 'Please enter old password.'
+            }
+        ],
+        placeholder: "Old Password",
+        fullInput: true,
+        icon: LockOutlined,
+    },
+    {
+        name: "new_password",
+        optional: false,
+        type: 'password',
+        rules: [
+            {
+                required: true,
+                message: 'Please enter new password.'
+            },
+        ],
+        placeholder: "New Password",
+        fullInput: true,
+        icon: LockOutlined,
+    },
+    {
+        name: "conform_password",
+        optional: false,
+        type: 'password',
+        rules: [
+            {
+                required: true,
+                message: 'Please confirm your password.'
+            },
+            {
+                message: 'Invalid password.'
+            },
+        ],
+        placeholder: "Confirm Password",
+        fullInput: true,
+        icon: LockOutlined
+    },
+]
+
