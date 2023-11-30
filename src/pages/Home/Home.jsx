@@ -3,6 +3,9 @@ import { Carousel, Select } from 'antd';
 import ContestCard from '../../Components/ContestCard/ContestCard';
 import slide1 from "../../assets/images/slide-first.png";
 import slide2 from "../../assets/images/slide-second.png";
+import user1 from "../../assets/images/avatar/user-m-4.png";
+import user2 from "../../assets/images/avatar/user-f-4.png";
+import user3 from "../../assets/images/avatar/user-m-8.png";
 import "./styles.scss";
 
 const { Option } = Select;
@@ -25,20 +28,24 @@ const Home = () => {
     return (
         <div className='home-wrapper'>
             <div className="home-design">
-                <Carousel {...settings}>
-                    <div className="carousel-slide">
-                        <img src={slide1} alt="" />
+                <h2>Top rankers</h2>
+                <div className="home-design__point-stats">
+                    <div className="home-design__point-stats-rank">
+                        <img src={user1} alt="" />
+                        <h3>Rahul</h3>
+                        <h3>400</h3>
                     </div>
-                    <div className="carousel-slide">
-                        <img src={slide2} alt="" />
+                    <div className="home-design__point-stats-rank">
+                        <img src={user2} alt="" />
+                        <h3>Sonal</h3>
+                        <h3>350</h3>
                     </div>
-                    <div className="carousel-slide">
-                        <img src={slide1} alt="" />
+                    <div className="home-design__point-stats-rank">
+                        <img src={user3} alt="" />
+                        <h3>Akshay</h3>
+                        <h3>300</h3>
                     </div>
-                    <div className="carousel-slide">
-                        <img src={slide2} alt="" />
-                    </div>
-                </Carousel>
+                </div>
             </div>
             <div className="home-contest">
                 <duv className="home-select-box">

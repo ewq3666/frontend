@@ -8,9 +8,11 @@ import { CiBank } from "react-icons/ci";
 import { MdOutlineAttachEmail, MdOutlineCurrencyRupee } from "react-icons/md";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { IoMdClose, IoIosLogOut } from "react-icons/io";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
-import logo from "../../assets/images/WhatsApp Image 2023-10-02 at 9.14.09 PM (1).jpeg";
+import userIcon from "../../assets/images/avatar/user-m-7.png";
+// import logo from "../../assets/images/WhatsApp Image 2023-10-02 at 9.14.09 PM (1).jpeg";
 import "./styles.scss";
 
 const Header = () => {
@@ -87,13 +89,11 @@ const Header = () => {
     }, [userInfo,userBalance])
 
     return (
-        <div className="header-wrapper">
+        <div className={"header-wrapper " + (window.location.pathname != "/" ? "hide-header" : "")}>
             <div className="header-container">
                 <div className="header-option">
                     <div className="user-info">
-                        <Avatar onClick={() => navigate('/')} className="user-avtar" style={{ backgroundColor: "red", verticalAlign: 'middle' }} size="large" >
-                            {userData?.name ? userData?.name?.slice(0, 2) : 'GU'}
-                        </Avatar>
+                            <img src={userIcon} alt="" className="user-avtar" />
                         <div className="user-name">
                             <h4>{token ? userData?.name : "Guest User"}</h4>
                             {/* <p>Participate, Play, and Pocket Real Money!</p> */}
@@ -113,7 +113,7 @@ const Header = () => {
                                 {balance?.length > 0 ? balance : "0"} <RiWallet3Line />
                             </div>
                             <div className="hamburger-option" onClick={showDrawer}>
-                                <GiHamburgerMenu />
+                                <BsThreeDotsVertical />
                             </div>
                         </div>
                     }
