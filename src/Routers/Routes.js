@@ -16,6 +16,7 @@ import Transaction from "../pages/Transaction/Transaction";
 import QuizApp from "../quize/Quize";
 import Submit from "../Components/Submit/Submit";
 import ContestDetails from "../Components/ContestDetails/ContestDetails";
+import MainLeaderboard from "../pages/MainLeaderboard";
 
 export const routes = [
     {
@@ -27,12 +28,6 @@ export const routes = [
                 // element: <Home />,
                 element:<Protected Component={Home} />,
             },
-            
-            // {
-            //     path: "forgotpassword",
-            //     element: <ForgotPassword />
-
-            // },
             {
                 path: "contest-details/:id",
                 element: <ContestDetails />
@@ -40,6 +35,10 @@ export const routes = [
             {
                 path: "myprofile",
                 element: <Protected Component={MyProfile} />
+            },
+            {
+                path: "leaderboard",
+                element: <Protected Component={MainLeaderboard} />
             },
             {
                 path: "quize/:id",

@@ -18,7 +18,8 @@
     background: #6a5ae0;
 }
 @media screen and (max-width: 480px) {
-    .layout-main-container {
+    .layout-main-container,
+    .footer-section {
         width: 100%;
     }
 }
@@ -255,3 +256,9 @@
 }
 // ############################# Success notification css End #############################
 
+.footer-space{
+    height: 66px;
+    width: 100%;
+    background: #ffffff;
+    margin-top: -2px;
+}

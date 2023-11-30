@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Helmet } from "react-helmet";
 import Header from './Header/Header';
+import Footer from './Footer';
 
 const Layout = () => {
 
@@ -14,6 +15,8 @@ const Layout = () => {
             </Helmet>
             <Header />
             <Outlet />
+            <div className="footer-space"></div>
+            <Footer/>
         </div>
     )
 }
