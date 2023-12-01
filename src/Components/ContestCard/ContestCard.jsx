@@ -1,60 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Spin } from 'antd';
+import { Button, Progress, Spin } from 'antd';
 import { END_POINTS } from '../../api/domain';
 import { useNavigate } from "react-router-dom";
 import { BsCurrencyRupee } from 'react-icons/bs';
+import { ImTrophy } from "react-icons/im";
 import moment from 'moment';
 import './contestcard.scss';
 import axios from 'axios';
 
 const ContestCard = (props) => {
   const navigate = useNavigate();
-  // const [progress, setProgress] = useState(80);
+  const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
   const [contestTimer, setContestTimer] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   // Featch contest data
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const currentDate = new Date();
-        setIsLoading(true);
-        const response = await axios.get(END_POINTS.contest);
-
-        if (response.data) {
-          if (props.filterValue == "completed") {
-            const oldQuizzes = response.data.result.filter((quiz) => {
-              const quizDateTime = moment(`${quiz.date} ${quiz.time}`, 'YYYY-MM-DD HH:mm');
-              return quizDateTime.isBefore(currentDate);
-            });
-            setContestData(oldQuizzes);
-          } else if (props.filterValue == "upcomming") {
-            const upcomingQuizzes = response.data.result.filter((quiz) => {
-              const quizDateTime = moment(`${quiz.date} ${quiz.time}`, 'YYYY-MM-DD HH:mm');
-              return quizDateTime.isSameOrAfter(currentDate);
-            });
-            setContestData(upcomingQuizzes);
-          } else if (props.filterValue == "All") {
-            setContestData(response.data.result);
-          } else {
-            const todayStart = new Date();
-            todayStart.setHours(0, 0, 0, 0);
-            const todayEnd = new Date();
-            todayEnd.setHours(23, 59, 59, 999);
-            const filtered = response.data.result.filter(record => new Date(record.date) >= todayStart && new Date(record.date) <= todayEnd);
-            setContestData(...contestData, filtered);
-          }
-        }
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [props.filterValue]);
+    setContestData(props.contestData);
+    setIsLoading(props.isLoading)
+  }, [props.contestData,props.isLoading]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -95,7 +60,7 @@ const ContestCard = (props) => {
     if (diff === 1) {
       return <p>Tomorrow</p>;
     } else if (diff > 1) {
-      const formatted = moment(contest.date).format("DDMMM");
+      const formatted = moment(contest.date).format("DD MMM yyyy");
       return <p>{formatted}</p>;
     } else if (days > 0) {
       return <p>{days}d {hours}h {minutes}m {seconds}s</p>;
@@ -107,7 +72,6 @@ const ContestCard = (props) => {
       return <p>{seconds}s</p>;
     }
   };
-
 
   return (
     <>
@@ -128,15 +92,19 @@ const ContestCard = (props) => {
                     <div className="contest-card__header">
                       <div className="contest-card__header-category">
                         <span>
-                          Category: {values.name}
+                         {values.name}
                         </span>
                       </div>
                       <div className="contest-card__header-entryfee">
                         <span>
-                          Joinning: <BsCurrencyRupee className='icon' />{values.price}
+                          Entry: <BsCurrencyRupee className='icon' />{values.price}
                         </span>
                       </div>
                     </div>
+                    <div className="contest-card__bottom-left">
+                        <span className='contest-card__bottom-left__title'>Prize Pool: </span>
+                        <span className='contest-card__bottom-left__amount'> <BsCurrencyRupee className='icon' />5000</span>
+                      </div>
                     <div className="contest-card__mid">
                       {totalSeconds <= 0 ? (
                         <p className='countdown-box countdown-box-completed'>Completed</p>
@@ -155,22 +123,19 @@ const ContestCard = (props) => {
 
                     </div>
                     <div className="contest-card__bottom">
-                      {/* <Progress
-                    className='progress-bar'
-                    percent={progress}
-                    showInfo={false}
-                    strokeColor={{ '50%': '#108ee9', '100%': '#e31f77' }}
-                  />
-                  <div className="contest-card__bottom-title">
-                    <span className='title-first'><b>{values.joinStudents} student left</b> </span>
-                    <span className='title-second'><b>{values.students} students</b></span>
-                  </div> */}
+                        <div className='winning-percentage'>
+                          <ImTrophy/>
+                          <span>70%</span>
+                        </div>
+                        <div className="total-seats">
+                          Total seats : 200
+                        </div>
 
-                      <div className="contest-card__bottom-left">
+                      {/* <div className="contest-card__bottom-left">
                         <span className='contest-card__bottom-left__title'>Prize Pool</span>
                         <span className='contest-card__bottom-left__amount'><BsCurrencyRupee className='icon' />5000</span>
-                      </div>
-                      <div className="contest-card__bottom-right">
+                      </div> */}
+                      {/* <div className="contest-card__bottom-right">
                         <p className='contest-date'>Date: {moment(values.date).format('DD-MM-YYYY')}</p>
                         {totalSeconds <= 0 ? (
                           <div className="button-box">
@@ -189,7 +154,7 @@ const ContestCard = (props) => {
                             </Button>
                           </div>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 )

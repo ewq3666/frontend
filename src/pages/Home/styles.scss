@@ -54,20 +54,31 @@
         }
     }
     .home-contest {
+        margin-top: 32px;
         .home-select-box {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 8px 0px 16px;
+
+            h2 {
+                font-size: 16px;
+                font-weight: 600;
+            }
             .ant-select {
-                width: 100%;
+                width: 160px;
                 .ant-select-selector {
                     border: 0px !important;
                     box-shadow: none !important;
                     background: none !important;
                     span {
-                        font-size: 16px;
-                        font-weight: 700;
+                        font-size: 12px;
+                        font-weight: 600;
                     }
                 }
                 .ant-select-arrow {
-                    font-size: 16px;
+                    font-size: 12px;
                     color: #000;
                 }
             }
