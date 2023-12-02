@@ -17,6 +17,7 @@ import QuizApp from "../quize/Quize";
 import Submit from "../Components/Submit/Submit";
 import ContestDetails from "../Components/ContestDetails/ContestDetails";
 import MainLeaderboard from "../pages/MainLeaderboard";
+import LoginSignup from "../pages/Login/LoginSignup";
 
 export const routes = [
     {
@@ -54,6 +55,10 @@ export const routes = [
     {
         path: "login",
         element: <Login />
+    },
+    {
+        path: "register",
+        element: <LoginSignup />
     },
     {
         path: "signup",

@@ -57,7 +57,7 @@ const Login = () => {
       </Helmet>
 
       <div className="common-title green-title">
-        <div className='left-section' onClick={() => navigate('/')}> <BiArrowBack /></div>
+        <div className='left-section' onClick={() => navigate('/register')}> <BiArrowBack /></div>
         <h1>Login</h1>
       </div>
       <div className="login-container__box">

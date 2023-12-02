@@ -63,7 +63,7 @@ const Header = () => {
     //check for token
     const token = localStorage.getItem('token');
     const handleLogin = () => {
-        if (!token) navigate('/login');
+        if (!token) navigate('/register');
     }
 
     const showDrawer = () => {

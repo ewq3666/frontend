@@ -113,7 +113,7 @@ const SignUp = () => {
     <div className="login-container">
 
       <div className="common-title green-title">
-        <div className='left-section' onClick={() => navigate('/')}> <BiArrowBack /></div>
+        <div className='left-section' onClick={() => navigate('/register')}> <BiArrowBack /></div>
         <h1>Sign up</h1>
       </div>
       <div className="login-container__box signup-box">
