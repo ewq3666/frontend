@@ -1,20 +1,23 @@
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-    background: var(--is-quaternary-background-color);
+    background: #EFEEFC;
+
+    .common-title {
+      color: #000000;
+      h1 {
+        font-size: 22px;
+      }
+    }
 
     &__box {
-      background: var(--is-primary-background-color);
       width: 350px;
-      padding: 20px;
+      padding: 0px 16px;
       border-radius: 5px;
-      // box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      box-shadow: -5px -3px 99px -13px rgba(0,0,0,0.75);
-      -webkit-box-shadow: -5px -3px 99px -13px rgba(0,0,0,0.75);
-      -moz-box-shadow: -5px -3px 99px -13px rgba(0,0,0,0.75);
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      justify-content: space-between;
 
       &-user-icon {
         svg {
@@ -28,64 +31,23 @@
         margin: 0px 0px 32px 0px;
       }
 
-      &__form-wrapper {
-        margin-bottom: 22px;
-        &-btn {
-          button {
+      .button-box {
+        button {
+          width: 100%;
+          height: 48px;
+          span {
+            text-align: center;
             width: 100%;
-            height: 42px;
-            border-radius: 5px;
-            box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
-            backdrop-filter: blur(12.2px);
-            -webkit-backdrop-filter: blur(12.2px);
-            padding: 0px 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(0deg, #004dff 0%, #004dff 100%);
-            span {
-              color: var(--is-quaternary-text-color);
-              font-weight: 700;
-              font-size: 16px;
-            }
           }
         }
       }
 
       &-signup-option {
+        margin-bottom: 32px;
         h3 {
-          font-size: 14px;
+          font-size: 16px;
           color: var(--is-dark-black-color);
           font-weight: 700;
-          a {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--is-theme-color);
-            text-decoration: none;
-          }
-        }
-      }
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .login-container {
-      &__box {
-        width: 100%;
-        padding: 0px 22px;
-        padding-top: 40%;
-        height: 100%;
-        border-radius: 0px;
-        .login-form-wrapper {
-          margin-top: 100px;
-        }
-      }
-      &-signup-option {
-        position: absolute;
-        bottom: 42px;
-        width: 90%;
-        h3 {
-          text-align: center;
         }
       }
     }

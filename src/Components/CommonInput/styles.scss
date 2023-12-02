@@ -1,36 +1,40 @@
 .loginInput {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
+    label {
+        font-size: 16px !important;
+        font-weight: 600;
+        margin-bottom: -6px !important;
+    }
+    label::before {
+        content: "" !important;
+    }
     &__input {
-        padding: 8px;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid var(--is-black-color);
-        border-radius: 0px;
+        padding: 12px 20px;
+        background: #ffffff;
+        border: 2px solid #9d90f8;
+        border-radius: 22px;
         .ant-input-prefix {
             font-size: 21px;
             margin-right: 8px;
             padding-right: 8px;
+            color: #6a5ae0;
         }
         input {
             background: transparent;
+            font-size: 16px !important;
+            font-weight: 500;
+            margin-top: -2px;
         }
     }
     &__input:hover,
     &__input:active,
     .ant-input-affix-wrapper-focused {
-        border-color: var(--is-white-color) !important;
-        border-bottom: 1px solid var(--is-theme-color) !important;
+        border-color: #6a5ae0 !important;
+        // border-bottom: 1px solid var(--is-theme-color) !important;
         box-shadow: none !important;
-        .ant-input-prefix {
-            border-right: 1px solid var(--is-theme-color);
-            svg {
-                color: var(--is-theme-color) !important;
-            }
-        }
     }
     .ant-input-affix-wrapper-status-error {
         .ant-input-prefix {
-            border-right: 1px solid var(--is-danger-color);
             svg {
                 color: var(--is-danger-color) !important;
             }

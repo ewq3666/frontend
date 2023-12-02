@@ -12,6 +12,7 @@ import { addUsers } from '../../store/actions/reducerActions';
 import CommonInput from '../../Components/CommonInput/CommonInput';
 import { loginFormField } from '../../assets/commonData/commonData';
 import './styles.scss';
+import { BiArrowBack } from 'react-icons/bi';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -55,24 +56,30 @@ const Login = () => {
         <meta name="description" content="Explore EWQ, the ultimate destination for paid quizzes and rewarding knowledge seekers. Participate in engaging quizzes, earn rewards, and enrich your learning experience. Join EWQ today!"></meta>
       </Helmet>
 
-      <div className="login-container__box">
-        <div className="login-container__box-user-icon">
-          <HiOutlineUserCircle/>
-        </div>
+      <div className="common-title green-title">
+        <div className='left-section' onClick={() => navigate('/')}> <BiArrowBack /></div>
         <h1>Login</h1>
+      </div>
+      <div className="login-container__box">
         <Form name="login-form" onFinish={onFinish} className='login-container__box__form-wrapper'>
-          {loginFormField.map((data, index)=> {return (
-            <CommonInput props={data} index={index}/>
-          )})}
-
-          <div className="login-container__box__form-wrapper-btn">
-            <Button htmlType="submit" loading={isBtnLoading}>
-              Login
+          {loginFormField.map((data, index) => {
+            return (
+              <CommonInput props={data} index={index} />
+            )
+          })}
+          <div className="button-box">
+            <Button htmlType="submit" className='common-blue-btn' loading={isBtnLoading}>
+            Login
             </Button>
           </div>
         </Form>
         <div className="login-container__box-signup-option">
-          <h3>Don't have an account ? <NavLink to="/signup">Sign-Up Now!</NavLink></h3>
+          <h3>Don't have an account ?</h3>
+          <div className="button-box">
+            <Button  className='common-blue-btn' onClick={() => navigate('/signup')}>
+            Sign Up Now!
+            </Button>
+          </div>
         </div>
       </div>
     </div>

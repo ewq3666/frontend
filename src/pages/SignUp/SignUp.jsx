@@ -14,6 +14,7 @@ import emailjs from '@emailjs/browser';
 import "../Login/styles.scss";
 import axios from "axios";
 import './styles.scss';
+import { BiArrowBack } from 'react-icons/bi';
 
 const SignUp = () => {
 
@@ -110,11 +111,12 @@ const SignUp = () => {
 
   return (
     <div className="login-container">
+
+      <div className="common-title green-title">
+        <div className='left-section' onClick={() => navigate('/')}> <BiArrowBack /></div>
+        <h1>Sign up</h1>
+      </div>
       <div className="login-container__box signup-box">
-        <div className="login-container__box-user-icon">
-          <HiOutlineUserCircle />
-        </div>
-        <h1>Sign Up</h1>
         <Form name="registration-form" onFinish={onFinish} className='login-container__box__form-wrapper' form={signUpForm}>
           {signupFormFields.map((data, index) => {
             return (
@@ -124,6 +126,7 @@ const SignUp = () => {
                     (
                       <Form.Item
                         name="user_email"
+                        label="Email"
                         rules={[
                           { required: true, message: 'Please enter your email' },
                           { type: 'email', message: 'Invalid email address' },
@@ -141,6 +144,7 @@ const SignUp = () => {
                       (
                         <Form.Item
                           name="confirmPassword"
+                          label="Confirm password"
                           dependencies={['password']}
                           hasFeedback
                           rules={[
@@ -170,13 +174,14 @@ const SignUp = () => {
             )
           })}
 
-          <div className="login-container__box__form-wrapper-btn">
-            <Button onClick={sendEmail} loading={isBtnLoading} htmlType='submit'>
+          <div className="button-box">
+            <Button htmlType="submit" className='common-blue-btn' loading={isBtnLoading} onClick={sendEmail}>
               Sign Up
             </Button>
           </div>
         </Form>
-        
+
+        {/*SEND OTP FORM */}
         <form onSubmit={sendEmail} ref={form} className='hide-form'>
           <div>
             <label htmlFor="user_email">Email:</label>
@@ -200,8 +205,17 @@ const SignUp = () => {
           <button type="submit">Submit</button>
         </form>
 
-        <div className="login-container__box-signup-option">
+        {/* <div className="login-container__box-signup-option">
           <h3>You have an account ? <NavLink to="/login">Login Now!</NavLink></h3>
+        </div> */}
+
+        <div className="login-container__box-signup-option">
+          <h3>You have an account ?</h3>
+          <div className="button-box">
+            <Button  className='common-blue-btn' onClick={() => navigate('/login')}>
+            Login Now!
+            </Button>
+          </div>
         </div>
 
         {/* Enter OTP drawer */}

@@ -12,6 +12,7 @@ const CommonInput = ({ props, index }) => {
                         name={props.name}
                         className="loginInput"
                         rules={props.rules}
+                        label={props.placeholder}
                     >
                         <Input
                             placeholder={props.placeholder}
@@ -29,6 +30,7 @@ const CommonInput = ({ props, index }) => {
                             name={props.name}
                             rules={props.rules}
                             className="loginInput"
+                            label={props.label}
                         >
                             {props.type == "password" ?
                                 <Input.Password
@@ -51,6 +53,7 @@ const CommonInput = ({ props, index }) => {
                         <Form.Item
                             name={props.name}
                             className="loginInput"
+                            label={props.label}
                         >
                             <Input
                                 placeholder={props.placeholder}

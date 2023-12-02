@@ -4,33 +4,30 @@
 
 .signup-box {
   width: 780px;
+  height: 130vh;
+  background: #EFEEFC;
   .login-container__box__form-wrapper {
     display: flex;
     flex-wrap: wrap;
-    .loginInput,
-    .login-container__box__form-wrapper-btn {
-      width: 310px;
-      margin: 0px 30px 32px 30px;
+    .button-box {
+      width: 100%;
+      margin-top: -6px;
+      button {
+        width: 100%;
+        height: 48px;
+        span {
+          text-align: center;
+          width: 100%;
+        }
+      }
     }
   }
+
 }
 
 @media (max-width: 768px) {
   .signup-box {
     width: 100%;
-    padding-top: 16px;
     box-shadow: none;
-    .login-container__box__form-wrapper {
-      flex-wrap: nowrap;
-      flex-direction: column;
-      .loginInput,
-      .login-container__box__form-wrapper-btn {
-        margin: 0px 0px 32px 0px;
-        width: 100%;
-      }
-    }
-    .login-container__box-signup-option {
-      padding-bottom: 32px;
-    }
   }
 }

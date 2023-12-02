@@ -10,9 +10,9 @@ const MyContest = () => {
     const navigate = useNavigate();
     let contestList = useSelector((state) => state.ReducerFc?.joinedContestList[0]);
 
-    useEffect(()=>{
-        console.log("contestList:",contestList)
-    },[contestList])
+    useEffect(() => {
+        console.log("contestList:", contestList)
+    }, [contestList])
 
     return (
         <div className="myContest-container">
@@ -22,10 +22,10 @@ const MyContest = () => {
                 <div className='right-section' onClick={() => navigate('/')}> <IoMdClose /></div>
             </div>
             <div className="myContest-content">
-            <h2>My all contest:</h2>
-            <ContestCard 
-                    contestData={contestList} 
-                    isLoading={false} 
+                <h2>My all contest:</h2>
+                <ContestCard
+                    contestData={contestList}
+                    isLoading={false}
                 />
             </div>
         </div>

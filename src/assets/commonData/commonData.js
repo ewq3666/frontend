@@ -17,6 +17,7 @@ export const loginFormField = [
                 message: 'Invalid email address.'
             }
         ],
+        label: "Email",
         placeholder: "Enter your Email",
         fullInput: true,
         icon: MailOutlined
@@ -31,6 +32,7 @@ export const loginFormField = [
                 message: 'Please enter your password'
             }
         ],
+        label: "",
         placeholder: "Enter your password",
         fullInput: true,
         icon: LockOutlined
@@ -49,6 +51,7 @@ export const signupFormFields = [
                 message: 'Please enter your name.'
             }
         ],
+        label: "Name",
         placeholder: "Enter your name",
         fullInput: true,
         icon: UserOutlined
@@ -67,6 +70,7 @@ export const signupFormFields = [
                 message: 'Invalid email address.'
             },
         ],
+        label: "Email",
         placeholder: "Enter your email",
         fullInput: true,
         icon: MailOutlined
@@ -85,24 +89,25 @@ export const signupFormFields = [
                 message: 'Invalid phone number.'
             },
         ],
+        label: "Phone number",
         placeholder: "Enter your phone number",
         fullInput: true,
-        icon: MobileOutlined
+        icon: PhoneOutlined
     },
-    {
-        name: "upi",
-        optional: false,
-        type: '',
-        rules: [
-            {
-                required: true,
-                message: 'Please enter your UPI ID.'
-            }
-        ],
-        placeholder: "Enter your UPI ID",
-        fullInput: true,
-        icon: UserOutlined
-    },
+    // {
+    //     name: "upi",
+    //     optional: false,
+    //     type: '',
+    //     rules: [
+    //         {
+    //             required: true,
+    //             message: 'Please enter your UPI ID.'
+    //         }
+    //     ],
+    //     placeholder: "Enter your UPI ID",
+    //     fullInput: true,
+    //     icon: UserOutlined
+    // },
     {
         name: "password",
         optional: false,
@@ -113,6 +118,7 @@ export const signupFormFields = [
                 message: 'Please enter password.'
             }
         ],
+        label: "Password",
         placeholder: "Enter password",
         fullInput: true,
         icon: LockOutlined
@@ -127,9 +133,10 @@ export const signupFormFields = [
                 message: 'Please enter your confirmPassword.'
             }
         ],
-        placeholder: "Enter your confirmPassword",
+        label: "Confirm password",
+        placeholder: "Enter your confirm password",
         fullInput: true,
-        icon: UserOutlined
+        icon: LockOutlined
     },
     {
         name: "state",
@@ -141,26 +148,28 @@ export const signupFormFields = [
                 message: 'Please enter your state'
             }
         ],
+        label: "State",
         placeholder: "Enter Your State",
         fullInput: true,
-        icon: UserOutlined
+        icon: GrLocation
     },
     {
         name: "district",
         optional: true,
         type: '',
+        label: "District",
         placeholder: "Enter your district",
         fullInput: true,
-        icon: UserOutlined
+        icon: GrLocation
     },
-    {
-        name: "referal",
-        optional: true,
-        type: '',
-        placeholder: "Enter your referal",
-        fullInput: true,
-        icon: UserOutlined
-    },
+    // {
+    //     name: "referal",
+    //     optional: true,
+    //     type: '',
+    //     placeholder: "Enter your referal",
+    //     fullInput: true,
+    //     icon: UserOutlined
+    // },
 ]
 // Edit user fields
 export const editUserFormFields = [
