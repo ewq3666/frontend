@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Progress, Spin } from 'antd';
-import { END_POINTS } from '../../api/domain';
+import {  Spin } from 'antd';
+import { ImTrophy } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { BsCurrencyRupee } from 'react-icons/bs';
-import { ImTrophy } from "react-icons/im";
 import moment from 'moment';
 import './contestcard.scss';
-import axios from 'axios';
 
 const ContestCard = (props) => {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(80);
   const [contestData, setContestData] = useState([]);
   const [contestTimer, setContestTimer] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -130,31 +127,6 @@ const ContestCard = (props) => {
                         <div className="total-seats">
                           Total seats : 200
                         </div>
-
-                      {/* <div className="contest-card__bottom-left">
-                        <span className='contest-card__bottom-left__title'>Prize Pool</span>
-                        <span className='contest-card__bottom-left__amount'><BsCurrencyRupee className='icon' />5000</span>
-                      </div> */}
-                      {/* <div className="contest-card__bottom-right">
-                        <p className='contest-date'>Date: {moment(values.date).format('DD-MM-YYYY')}</p>
-                        {totalSeconds <= 0 ? (
-                          <div className="button-box">
-                            <Button
-                              className="common-blue-btn add-money-button completed-btn"
-                            >
-                              Completed
-                            </Button>
-                          </div>
-                        ) : (
-                          <div className="button-box">
-                            <Button
-                              className="common-blue-btn add-money-button"
-                            >
-                              Join Contest
-                            </Button>
-                          </div>
-                        )}
-                      </div> */}
                     </div>
                   </div>
                 )

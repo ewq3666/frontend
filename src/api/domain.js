@@ -14,4 +14,5 @@ export const END_POINTS = {
      widthdrawRequest: `${api}/withdraw-request`, 
      getwidthdrawRequest: `${api}/withdraw-requests`, 
      joinContest: `${api}/joincontest`,
+     joinedContest: `${api}/getJoinedContest/`,
 }

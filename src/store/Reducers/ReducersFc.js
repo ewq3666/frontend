@@ -2,6 +2,7 @@
 const initialState = {
   userData: [],
   contestList: [],
+  joinedContestList: [],
   balance: []
 };
 
@@ -16,6 +17,11 @@ export const ReducerFc = (state = initialState, action) => {
       return {
         ...state,
         contestList: [...state.contestList, action.payload],
+      }
+    case "GET_JOINED_CONTEST_LIST":
+      return {
+        ...state,
+        joinedContestList: [...state.joinedContestList, action.payload],
       }
     case "UPDATE_PROFILE":
       return {

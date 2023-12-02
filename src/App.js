@@ -1,44 +1,68 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Router } from "./Routers/Router";
 import { useDispatch } from 'react-redux';
 import { END_POINTS } from './api/domain';
-import { contestList, addUsers, userBalance } from './store/actions/reducerActions';
-import axios from "axios";
-import "./Style/theme.css";
-import "./Style/globalStyles.scss";
-import QuizComponent from "./quize/Quize";
-import QuizApp from "./quize/Quize";
+import { contestList, addUsers, userBalance, joinedContestList } from './store/actions/reducerActions';
 import contestAPI from './services/Contest';
-import paymentAPI from "./services/Payment.js";
+import "./Style/globalStyles.scss";
+import "./Style/theme.css";
+import axios from "axios";
 
 const contestApi = new contestAPI();
 
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem('token');
+  const [userData, setUserData] = useState({});
 
   // If User Already logged then take that user data
   useEffect(() => {
 
-    if (token) {
-      const userDetails = async () => {
-        let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: token } })
+    // Get user info
+    const userDetails = async () => {
+      try {
+        let userInfo = await axios.get(END_POINTS.userInfo, { headers: { authorization: token } });
+        setUserData(userInfo.data?.result)
         dispatch(addUsers(userInfo.data.result))
         if (userInfo.data.result) {
-          getBalence(userInfo.data.result._id)
+          getBalence(userInfo.data?.result?._id)
         }
-      }
-      userDetails()
+      } catch (error) { }
     }
 
+    // Get contest list
     const getContestList = async () => {
-      const response = await contestApi.getAllContest();
-      dispatch(contestList(response.data.result))
-      // response.data
+      try {
+        const response = await contestApi.getAllContest();
+        dispatch(contestList(response.data.result));
+      } catch (error) { }
     }
+
     getContestList();
+    if (token) {
+      userDetails();
+    }
   }, [])
 
+  useEffect(() => {
+    // Get join contest 
+    const getJoinContes = async () => {
+      try {
+        if(userData._id) {
+          const response = await axios.get(END_POINTS.joinedContest + userData._id)
+          dispatch(joinedContestList(response.data))
+        }
+      } catch (error) {
+        console.log("error", error)
+      }
+    }
+
+    if (token && userData) {
+      getJoinContes();
+    }
+  }, [userData])
+
+  // Get balence
   const getBalence = async (name) => {
     try {
       const money = await axios.get(END_POINTS.getBalence + name, { headers: { authorization: token } });

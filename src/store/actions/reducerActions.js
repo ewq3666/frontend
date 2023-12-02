@@ -11,6 +11,12 @@ export const contestList = (contestData) => {
         payload: contestData,
     };
 };
+export const joinedContestList = (contestData) => {
+    return {
+        type: "GET_JOINED_CONTEST_LIST",
+        payload: contestData,
+    };
+};
 export const updateProfile = (userData) => ({
     type: 'UPDATE_PROFILE',
     payload: userData,

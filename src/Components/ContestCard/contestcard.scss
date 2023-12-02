@@ -1,14 +1,8 @@
 .contest-card {
     border-radius: 32px;
-    // box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
     margin: auto;
-    // background: #ffffff;
-    // background: #E8E5FA;
-    background: #6a5ae0;
+    background: #9787f8;
     color: #ffffff;
-    // box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
-    // -webkit-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
-    // -moz-box-shadow: -1px 3px 19px -3px rgba(0,0,255,0.34);
     margin-bottom: 16px;
 
     &__loading {
@@ -33,7 +27,7 @@
         align-items: center;
         padding: 8px 12px 8px 12px;
         font-weight: 600;
-        background: #9787f8;
+        background: #6a5ae0;
         border-radius: 12px 12px 0px 0px;
         &-category,
         &-entryfee {
@@ -94,7 +88,7 @@
         display: flex;
         justify-content: space-between;
         margin: 22px 0px 12px 0px;
-        background: #9787f8;
+        background: #6a5ae0;
         padding: 6px 10px;
         border-radius: 0px 0px 12px 12px;
 
@@ -134,26 +128,6 @@
         .total-seats {
             font-size: 14px;  
         }
-
-        // &-right {
-        //     .contest-date {
-        //         font-size: 12px;
-        //         margin-bottom: 2px;
-        //         text-align: center;
-        //     }
-        //     .button-box {
-        //         button {
-        //             margin-top: 0px;
-        //             height: 32px;
-        //             span {
-        //                 font-size: 12px;
-        //             }
-        //         }
-        //         .completed-btn {
-        //             background: #58cc02;
-        //         }
-        //     }
-        // }
     }
 }
 
