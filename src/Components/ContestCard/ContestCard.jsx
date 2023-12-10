@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import {  Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import { ImTrophy } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { BsCurrencyRupee } from 'react-icons/bs';
 import moment from 'moment';
 import './contestcard.scss';
+import winnerLogo from "../../assets/images/winner.png";
+import { useSelector } from 'react-redux';
 
 const ContestCard = (props) => {
+  const token = localStorage.getItem('token');
+  let joinedContestList = useSelector((state) => state.ReducerFc?.joinedContestList[0]);
   const navigate = useNavigate();
   const [contestData, setContestData] = useState([]);
   const [contestTimer, setContestTimer] = useState([]);
@@ -16,7 +20,7 @@ const ContestCard = (props) => {
   useEffect(() => {
     setContestData(props.contestData);
     setIsLoading(props.isLoading)
-  }, [props.contestData,props.isLoading]);
+  }, [props.contestData, props.isLoading]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -70,6 +74,20 @@ const ContestCard = (props) => {
     }
   };
 
+  const checkJoinedContest = (values) => {
+    let aa = false;
+    joinedContestList.map((data, index) => {
+      if (data._id === values) {
+        aa = true;
+        return true;
+      } else {
+        aa = false;
+        return false
+      }
+    })
+    return aa;
+  }
+
   return (
     <>
       {isLoading ?
@@ -89,7 +107,7 @@ const ContestCard = (props) => {
                     <div className="contest-card__header">
                       <div className="contest-card__header-category">
                         <span>
-                         {values.name}
+                          {values.name}
                         </span>
                       </div>
                       <div className="contest-card__header-entryfee">
@@ -98,35 +116,71 @@ const ContestCard = (props) => {
                         </span>
                       </div>
                     </div>
-                    <div className="contest-card__bottom-left">
-                        <span className='contest-card__bottom-left__title'>Prize Pool: </span>
-                        <span className='contest-card__bottom-left__amount'> <BsCurrencyRupee className='icon' />5000</span>
-                      </div>
                     <div className="contest-card__mid">
-                      {totalSeconds <= 0 ? (
-                        <p className='countdown-box countdown-box-completed'>Completed</p>
-                      ) : (
-                        <p className='countdown-box'>
-                          <Countdown
-                            days={contestTimer[index]?.days}
-                            hours={contestTimer[index]?.hours}
-                            minutes={contestTimer[index]?.minutes}
-                            seconds={contestTimer[index]?.seconds}
-                            index={index}
-                          />
-                        </p>
-                      )}
-                      <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
+                      {/* <div className="winner-logo">
+                        <img src={winnerLogo} alt="" />
+                      </div> */}
+                      <div className="contest-countdown">
+                        {totalSeconds <= 0 ? (
+                          <p className='countdown-box countdown-box-completed'>Completed</p>
+                        ) : (
+                          <p className='countdown-box'>
+                            <Countdown
+                              days={contestTimer[index]?.days}
+                              hours={contestTimer[index]?.hours}
+                              minutes={contestTimer[index]?.minutes}
+                              seconds={contestTimer[index]?.seconds}
+                              index={index}
+                            />
+                          </p>
+                        )}
+                        <p className='custom-time'>{moment(values.time, 'HH:mm A').format("h:mm A")}</p>
+                      </div>
 
                     </div>
                     <div className="contest-card__bottom">
-                        <div className='winning-percentage'>
-                          <ImTrophy/>
-                          <span>70%</span>
-                        </div>
-                        <div className="total-seats">
-                          Total seats : 200
-                        </div>
+                      <div className="contest-card__bottom-left">
+                        <span className='contest-card__bottom-left__title'>Prize Pool: </span>
+                        <span className='contest-card__bottom-left__amount'> <BsCurrencyRupee className='icon' />5000</span>
+                      </div>
+
+                      <div className="contest-card__bottom-right">
+                        <p className='contest-date'>Date: {moment(values.date).format('DD-MM-YYYY')}</p>
+                        {totalSeconds <= 0 ? (
+                          <div className="button-box">
+                            <Button
+                              className="common-blue-btn common-green-btn"
+                            >
+                              Completed
+                            </Button>
+                          </div>
+                        ) : checkJoinedContest(values._id) ? (
+                          <div className="button-box">
+                            <Button
+                              className="common-blue-btn"
+                            >
+                              View Contest
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="button-box">
+                            <Button
+                              className="common-blue-btn"
+                            >
+                              Join Contest
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="contest-footer">
+                      <div className='winning-percentage'>
+                        <ImTrophy />
+                        <span>70%</span>
+                      </div>
+                      <div className="total-seats">
+                        Total seats : 200
+                      </div>
                     </div>
                   </div>
                 )

@@ -8,10 +8,13 @@ import user3 from "../../assets/images/avatar/user-m-8.png";
 import moment from 'moment';
 import axios from 'axios';
 import "./styles.scss";
+import { useSelector } from 'react-redux';
 
 const { Option } = Select;
 
 const Home = () => {
+
+    let joinedContestList = useSelector((state) => state.ReducerFc?.joinedContestList[0]);
 
     const [filterValue, setFilterValue] = useState('upcomming');
     const [contestData, setContestData] = useState([]);
@@ -97,9 +100,9 @@ const Home = () => {
                 </duv>
                 {/* Contest Card */}
                 <ContestCard 
-                    filterValue={filterValue} 
                     contestData={contestData} 
                     isLoading={isLoading} 
+                    joinedContestList={joinedContestList}
                 />
             </div>
         </div>

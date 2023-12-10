@@ -138,7 +138,7 @@ const ContestDetails = () => {
                 <div className="contest-details__card-bottom">
                     <div className="button-box">
                         <Button
-                            className="common-blue-btn add-money-button"
+                            className="common-blue-btn common-white-btn"
                             onClick={handleJoinBtn}
                         >
                             Join Contest

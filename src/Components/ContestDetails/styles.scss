@@ -1,5 +1,6 @@
 .contest-details {
-    padding: 32px 0px;
+    // padding: 32px 0px;
+    background: #ffffff;
     &__loader{
         height: 50vh;
         width: 100%;
@@ -8,11 +9,14 @@
         align-items: center;
     }
     &__card{
-        padding: 0px 16px 32px 16px;
+        background: #6a5ae0;
+        padding: 32px 16px 32px 16px;
+        color: #ffffff;
         &-top {
             display: flex;
             justify-content: space-between;
-            color: var(--is-secondary-background-color);
+            // color: var(--is-secondary-background-color);
+            color: #ffffff;
             font-size: 14px;
             .contest-category,
             .contest-date,
@@ -59,6 +63,7 @@
         }
     }
     &__tab-section {
+
         // padding: 0px 16px 0px 16px;
         &-tab {
             .ant-tabs-nav-list {
