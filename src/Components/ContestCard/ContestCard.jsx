@@ -76,7 +76,7 @@ const ContestCard = (props) => {
 
   const checkJoinedContest = (values) => {
     let aa = false;
-    joinedContestList.map((data, index) => {
+    joinedContestList?.map((data, index) => {
       if (data._id === values) {
         aa = true;
         return true;
